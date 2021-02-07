@@ -1,5 +1,5 @@
 # pmd-web-application
-This is my Project for Year 2 Sem 2 ASPJ (Application Security &amp; Project) Module
+Year 2 Sem 2 Semestral Project in Nanyang Polytechnic- Application Security & Project (ITP292)
 
 As part of NYP's Application Security & Project Module, I am tasked to develop a security solution that covers the development of a secure web application using ASP.NET
 
