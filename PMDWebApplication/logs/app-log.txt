@@ -1,0 +1,61 @@
+2020-02-01 21:02:55.7742|WARN|PMDWebApplication.Controllers.AccountController|Invalid Login Attempt|Clerk,User,Doctor|321|===
+2020-02-06 21:46:41.1924|FATAL|PMDWebApplication.Controllers.ErrorController|The entire user database is dropped|User|User|===
+2020-02-01 21:03:06.9184|WARN|PMDWebApplication.Controllers.AccountController|User's account locked out|Clerk,User,Doctor|321|===
+2020-02-01 21:03:56.6848|INFO|PMDWebApplication.Controllers.SystemAdminController|Sysadmin unlocked user : 321 locked account |System Administrator|sysadmin|===
+2020-02-04 20:09:15.1874|WARN|PMDWebApplication.Controllers.AccountController|Invalid Login Attempt|User|lockout|===
+2020-02-06 21:46:21.0175|ERROR|PMDWebApplication.Controllers.ErrorController|ERROR 404 - User navigate to invalid page!|User|User|===
+2020-02-06 21:46:41.1924|ERROR|PMDWebApplication.Controllers.ErrorController|ERROR 404 - User navigate to invalid page!|User|User|===
+2020-02-06 21:46:41.1924|TRACE|PMDWebApplication.Controllers.ErrorController|Value of a is 7|||===
+2020-02-07 16:46:34.6549|INFO|PMDWebApplication.Controllers.SystemAdminController|Sysadmin assigned role of User to jiajun|System Administrator|sysadmin|===
+2020-02-07 17:08:44.7188|INFO|PMDWebApplication.Controllers.SystemAdminController|Sysadmin assigned role of User to jiajun|System Administrator|sysadmin|===
+2020-02-07 17:08:56.7242|INFO|PMDWebApplication.Controllers.SystemAdminController|Sysadmin revoked role of Clerk from fasfsafsa|System Administrator|sysadmin|===
+2020-02-07 17:27:39.4193|INFO|PMDWebApplication.Controllers.SystemAdminController|Sysadmin registered a new user : sysadminaaaaaaa with the role Insurance Admin|System Administrator|sysadmin|===
+2020-02-07 17:31:54.1358|INFO|PMDWebApplication.Controllers.SystemAdminController|Sysadmin assigned role of Admin to lawrence|System Administrator|sysadmin|===
+2020-02-07 17:33:06.9763|INFO|PMDWebApplication.Controllers.SystemAdminController|Sysadmin updated security configurations|System Administrator|sysadmin|===
+2020-02-07 17:33:17.7373|WARN|PMDWebApplication.Controllers.AccountController|Invalid Login Attempt|Clerk,Admin|lawrence|===
+2020-02-07 17:33:22.9556|WARN|PMDWebApplication.Controllers.AccountController|Invalid Login Attempt|Clerk,Admin|lawrence|===
+2020-02-07 17:33:27.4011|WARN|PMDWebApplication.Controllers.AccountController|Invalid Login Attempt|Clerk,Admin|lawrence|===
+2020-02-07 17:33:30.4462|WARN|PMDWebApplication.Controllers.AccountController|Invalid Login Attempt|Clerk,Admin|lawrence|===
+2020-02-07 17:33:35.5619|WARN|PMDWebApplication.Controllers.AccountController|Invalid Login Attempt|Clerk,Admin|lawrence|===
+2020-02-07 17:33:39.9189|WARN|PMDWebApplication.Controllers.AccountController|Invalid Login Attempt|Clerk,Admin|lawrence|===
+2020-02-07 17:33:43.3505|WARN|PMDWebApplication.Controllers.AccountController|Invalid Login Attempt|Clerk,Admin|lawrence|===
+2020-02-07 17:33:47.1559|WARN|PMDWebApplication.Controllers.AccountController|Invalid Login Attempt|Clerk,Admin|lawrence|===
+2020-02-07 17:33:50.7731|WARN|PMDWebApplication.Controllers.AccountController|Invalid Login Attempt|Clerk,Admin|lawrence|===
+2020-02-07 17:33:55.9168|WARN|PMDWebApplication.Controllers.AccountController|Invalid Login Attempt|Clerk,Admin|lawrence|===
+2020-02-07 17:33:59.2310|WARN|PMDWebApplication.Controllers.AccountController|User's account locked out|Clerk,Admin|lawrence|===
+2020-02-07 23:35:02.8035|WARN|PMDWebApplication.Controllers.AccountController|Invalid Login Attempt|System Administrator|sysadmin|===
+2020-02-07 23:36:28.9613|INFO|PMDWebApplication.Controllers.SystemAdminController|Sysadmin deleted user jiajun|System Administrator|sysadmin|===
+2020-02-07 23:36:42.5920|INFO|PMDWebApplication.Controllers.SystemAdminController|Sysadmin deleted user fsasf|System Administrator|sysadmin|===
+2020-02-07 23:40:44.9412|INFO|PMDWebApplication.Controllers.SystemAdminController|Sysadmin deleted user teemo|System Administrator|sysadmin|===
+2020-02-08 10:48:10.1886|INFO|PMDWebApplication.Controllers.SystemAdminController|Sysadmin deleted user lawrence|System Administrator|sysadmin|===
+2020-02-08 10:51:22.7974|INFO|PMDWebApplication.Controllers.SystemAdminController|Sysadmin updated security configurations|System Administrator|sysadmin|===
+2020-02-08 10:56:35.7048|INFO|PMDWebApplication.Controllers.AccountController|User requested for 'forget password'.|User|Tom|===
+2020-02-08 11:06:45.6237|INFO|PMDWebApplication.Controllers.SystemAdminController|Sysadmin unlocked user : 321 locked account |System Administrator|sysadmin|===
+2020-02-08 11:08:20.4959|WARN|PMDWebApplication.Controllers.AccountController|Invalid Login Attempt|Clerk,User,Doctor|321|===
+2020-02-08 11:08:24.5225|WARN|PMDWebApplication.Controllers.AccountController|Invalid Login Attempt|Clerk,User,Doctor|321|===
+2020-02-08 12:38:46.5224|INFO|PMDWebApplication.Controllers.SystemAdminController|Sysadmin registered a new user : jiajun with the role Admin|System Administrator|sysadmin|===
+2020-02-08 12:54:43.6761|WARN|PMDWebApplication.Controllers.AccountController|Invalid Login Attempt|User|12345|===
+2020-02-08 12:55:37.3894|WARN|PMDWebApplication.Controllers.AccountController|Invalid Login Attempt|User|test2|===
+2020-02-08 12:55:44.2750|WARN|PMDWebApplication.Controllers.AccountController|Invalid Login Attempt|User|test2|===
+2020-02-08 12:56:10.0909|WARN|PMDWebApplication.Controllers.AccountController|Invalid Login Attempt|User|jiajun2|===
+2020-02-08 12:56:14.7923|WARN|PMDWebApplication.Controllers.AccountController|Invalid Login Attempt|User|jiajun2|===
+2020-02-08 12:56:25.7566|WARN|PMDWebApplication.Controllers.AccountController|Invalid Login Attempt|User|jiajun2|===
+2020-02-08 12:56:32.2724|WARN|PMDWebApplication.Controllers.AccountController|Invalid Login Attempt|User|jiajun2|===
+2020-02-08 12:56:34.6427|WARN|PMDWebApplication.Controllers.AccountController|User's account locked out|User|jiajun2|===
+2020-02-08 12:57:04.3913|INFO|PMDWebApplication.Controllers.ManageController|User changed his password.|Admin|fasfsafsa|===
+2020-02-08 12:58:00.3826|INFO|PMDWebApplication.Controllers.SystemAdminController|Sysadmin updated security configurations|System Administrator|sysadmin|===
+2020-02-08 14:35:56.8447|WARN|PMDWebApplication.Controllers.AccountController|Invalid Login Attempt|User|12345|===
+2020-02-08 14:36:13.1695|INFO|PMDWebApplication.Controllers.ManageController|User changed his password.|User|test321|===
+2020-02-08 15:25:41.7222|INFO|PMDWebApplication.Controllers.SystemAdminController|Sysadmin assigned role of Insurance Admin to asb|System Administrator|sysadmin|===
+2020-02-10 17:05:52.2046|INFO|PMDWebApplication.Controllers.AccountController|Email Confirmed|User|jiajun|===
+2020-02-10 17:06:56.5142|INFO|PMDWebApplication.Controllers.ManageController|User changed profile picture|User|jiajun|===
+2020-02-10 17:08:54.2498|WARN|PMDWebApplication.Controllers.AccountController|Invalid Login Attempt|User|razan|===
+2020-02-10 17:09:33.9669|WARN|PMDWebApplication.Controllers.AccountController|User's account locked out|User|razan|===
+2020-02-10 17:09:55.4577|INFO|PMDWebApplication.Controllers.SystemAdminController|Sysadmin unlocked user : Razan locked account |System Administrator|sysadmin|===
+2020-02-10 17:10:49.3547|INFO|PMDWebApplication.Controllers.SystemAdminController|Sysadmin assigned role of Instructor to admin|System Administrator|sysadmin|===
+2020-02-10 17:10:56.7138|INFO|PMDWebApplication.Controllers.SystemAdminController|Sysadmin revoked role of Instructor from admin|System Administrator|sysadmin|===
+2020-02-10 17:14:52.6925|INFO|PMDWebApplication.Controllers.SystemAdminController|Sysadmin registered a new user : darren with the role Admin|System Administrator|sysadmin|===
+2020-02-10 17:16:33.2493|INFO|PMDWebApplication.Controllers.ManageController|User changed his password.|Admin|darren|===
+2020-02-10 17:18:44.3377|INFO|PMDWebApplication.Controllers.SystemAdminController|Sysadmin updated security configurations|System Administrator|sysadmin|===
+2020-02-10 17:24:21.0239|ERROR|PMDWebApplication.Controllers.ErrorController|ERROR 404 - User navigate to invalid page!|||===
+2020-02-10 17:24:26.2410|ERROR|PMDWebApplication.Controllers.ErrorController|ERROR 404 - User navigate to invalid page!|||===

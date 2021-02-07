@@ -1,0 +1,285 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="ModelStoreContainer" CdmEntityContainer="dbVervoerEntities">
+    <EntitySetMapping Name="C__MigrationHistory">
+      <EntityTypeMapping TypeName="Model.C__MigrationHistory">
+        <MappingFragment StoreEntitySet="__MigrationHistory">
+          <ScalarProperty Name="MigrationId" ColumnName="MigrationId" />
+          <ScalarProperty Name="ContextKey" ColumnName="ContextKey" />
+          <ScalarProperty Name="Model" ColumnName="Model" />
+          <ScalarProperty Name="ProductVersion" ColumnName="ProductVersion" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AspNetCarts">
+      <EntityTypeMapping TypeName="Model.AspNetCart">
+        <MappingFragment StoreEntitySet="AspNetCart">
+          <ScalarProperty Name="CartId" ColumnName="CartId" />
+          <ScalarProperty Name="ProductId" ColumnName="ProductId" />
+          <ScalarProperty Name="MemberId" ColumnName="MemberId" />
+          <ScalarProperty Name="CartStatusId" ColumnName="CartStatusId" />
+          <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AspNetCartStatus">
+      <EntityTypeMapping TypeName="Model.AspNetCartStatu">
+        <MappingFragment StoreEntitySet="AspNetCartStatus">
+          <ScalarProperty Name="CartStatusId" ColumnName="CartStatusId" />
+          <ScalarProperty Name="CartStatus" ColumnName="CartStatus" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AspNetCategories">
+      <EntityTypeMapping TypeName="Model.AspNetCategory">
+        <MappingFragment StoreEntitySet="AspNetCategory">
+          <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
+          <ScalarProperty Name="CategoryName" ColumnName="CategoryName" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AspNetMessages">
+      <EntityTypeMapping TypeName="Model.AspNetMessage">
+        <MappingFragment StoreEntitySet="AspNetMessage">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Subject" ColumnName="Subject" />
+          <ScalarProperty Name="Message" ColumnName="Message" />
+          <ScalarProperty Name="FromUser" ColumnName="FromUser" />
+          <ScalarProperty Name="DatePosted" ColumnName="DatePosted" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AspNetProducts">
+      <EntityTypeMapping TypeName="Model.AspNetProduct">
+        <MappingFragment StoreEntitySet="AspNetProduct">
+          <ScalarProperty Name="ProductId" ColumnName="ProductId" />
+          <ScalarProperty Name="ProductName" ColumnName="ProductName" />
+          <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+          <ScalarProperty Name="ProductImage" ColumnName="ProductImage" />
+          <ScalarProperty Name="IsFeatured" ColumnName="IsFeatured" />
+          <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+          <ScalarProperty Name="Price" ColumnName="Price" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AspNetRoles">
+      <EntityTypeMapping TypeName="Model.AspNetRole">
+        <MappingFragment StoreEntitySet="AspNetRoles">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Discriminator" ColumnName="Discriminator" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AspNetShippingDetails">
+      <EntityTypeMapping TypeName="Model.AspNetShippingDetail">
+        <MappingFragment StoreEntitySet="AspNetShippingDetails">
+          <ScalarProperty Name="ShippingDetailId" ColumnName="ShippingDetailId" />
+          <ScalarProperty Name="MemberId" ColumnName="MemberId" />
+          <ScalarProperty Name="Adress" ColumnName="Adress" />
+          <ScalarProperty Name="City" ColumnName="City" />
+          <ScalarProperty Name="State" ColumnName="State" />
+          <ScalarProperty Name="Country" ColumnName="Country" />
+          <ScalarProperty Name="ZipCode" ColumnName="ZipCode" />
+          <ScalarProperty Name="OrderId" ColumnName="OrderId" />
+          <ScalarProperty Name="AmountPaid" ColumnName="AmountPaid" />
+          <ScalarProperty Name="PaymentType" ColumnName="PaymentType" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AspNetUserClaims">
+      <EntityTypeMapping TypeName="Model.AspNetUserClaim">
+        <MappingFragment StoreEntitySet="AspNetUserClaims">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="ClaimType" ColumnName="ClaimType" />
+          <ScalarProperty Name="ClaimValue" ColumnName="ClaimValue" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AspNetUserLogins">
+      <EntityTypeMapping TypeName="Model.AspNetUserLogin">
+        <MappingFragment StoreEntitySet="AspNetUserLogins">
+          <ScalarProperty Name="LoginProvider" ColumnName="LoginProvider" />
+          <ScalarProperty Name="ProviderKey" ColumnName="ProviderKey" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AspNetUsers">
+      <EntityTypeMapping TypeName="Model.AspNetUser">
+        <MappingFragment StoreEntitySet="AspNetUsers">
+          <ScalarProperty Name="PasswordGeneratedDate" ColumnName="PasswordGeneratedDate" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="EmailConfirmed" ColumnName="EmailConfirmed" />
+          <ScalarProperty Name="PasswordHash" ColumnName="PasswordHash" />
+          <ScalarProperty Name="SecurityStamp" ColumnName="SecurityStamp" />
+          <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+          <ScalarProperty Name="PhoneNumberConfirmed" ColumnName="PhoneNumberConfirmed" />
+          <ScalarProperty Name="TwoFactorEnabled" ColumnName="TwoFactorEnabled" />
+          <ScalarProperty Name="LockoutEndDateUtc" ColumnName="LockoutEndDateUtc" />
+          <ScalarProperty Name="LockoutEnabled" ColumnName="LockoutEnabled" />
+          <ScalarProperty Name="AccessFailedCount" ColumnName="AccessFailedCount" />
+          <ScalarProperty Name="UserName" ColumnName="UserName" />
+          <ScalarProperty Name="fullname" ColumnName="fullname" />
+          <ScalarProperty Name="Uimg" ColumnName="Uimg" />
+          <ScalarProperty Name="AccessFailDate" ColumnName="AccessFailDate" />
+          <ScalarProperty Name="PasswordLastChangedDate" ColumnName="PasswordLastChangedDate" />
+          <ScalarProperty Name="Age" ColumnName="Age" />
+          <ScalarProperty Name="isVerified" ColumnName="isVerified" />
+          <ScalarProperty Name="PromoCode" ColumnName="PromoCode" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SecurityConfigurations">
+      <EntityTypeMapping TypeName="Model.SecurityConfiguration">
+        <MappingFragment StoreEntitySet="SecurityConfigurations">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Password_Length" ColumnName="Password_Length" />
+          <ScalarProperty Name="RequireNonLetterOrDigit" ColumnName="RequireNonLetterOrDigit" />
+          <ScalarProperty Name="RequireDigit" ColumnName="RequireDigit" />
+          <ScalarProperty Name="RequireLowercase" ColumnName="RequireLowercase" />
+          <ScalarProperty Name="RequireUppercase" ColumnName="RequireUppercase" />
+          <ScalarProperty Name="Password_Attempts" ColumnName="Password_Attempts" />
+          <ScalarProperty Name="LockoutDuration" ColumnName="LockoutDuration" />
+          <ScalarProperty Name="InactiveDuration" ColumnName="InactiveDuration" />
+          <ScalarProperty Name="PasswordExpiry" ColumnName="PasswordExpiry" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="AspNetUserRoles" TypeName="Model.AspNetUserRoles" StoreEntitySet="AspNetUserRoles">
+      <EndProperty Name="AspNetRoles">
+        <ScalarProperty Name="Id" ColumnName="RoleId" />
+      </EndProperty>
+      <EndProperty Name="AspNetUsers">
+        <ScalarProperty Name="Id" ColumnName="UserId" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <EntitySetMapping Name="AspNetReplies">
+      <EntityTypeMapping TypeName="Model.AspNetReply">
+        <MappingFragment StoreEntitySet="AspNetReplies">
+          <ScalarProperty Name="ReplyDateTime" ColumnName="ReplyDateTime" />
+          <ScalarProperty Name="ReplyMessage" ColumnName="ReplyMessage" />
+          <ScalarProperty Name="ReplyFrom" ColumnName="ReplyFrom" />
+          <ScalarProperty Name="MessageId" ColumnName="MessageId" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AspNetCartInsurances">
+      <EntityTypeMapping TypeName="Model.AspNetCartInsurance">
+        <MappingFragment StoreEntitySet="AspNetCartInsurance">
+          <ScalarProperty Name="CartStatusId" ColumnName="CartStatusId" />
+          <ScalarProperty Name="MemberId" ColumnName="MemberId" />
+          <ScalarProperty Name="InsuranceId" ColumnName="InsuranceId" />
+          <ScalarProperty Name="CartId" ColumnName="CartId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AspNetInsurances">
+      <EntityTypeMapping TypeName="Model.AspNetInsurance">
+        <MappingFragment StoreEntitySet="AspNetInsurance">
+          <ScalarProperty Name="InsuranceImage" ColumnName="InsuranceImage" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="Company" ColumnName="Company" />
+          <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
+          <ScalarProperty Name="Price" ColumnName="Price" />
+          <ScalarProperty Name="InsuranceName" ColumnName="InsuranceName" />
+          <ScalarProperty Name="InsuranceId" ColumnName="InsuranceId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="FAQs">
+      <EntityTypeMapping TypeName="Model.FAQ">
+        <MappingFragment StoreEntitySet="FAQ">
+          <ScalarProperty Name="Answer" ColumnName="Answer" />
+          <ScalarProperty Name="Question" ColumnName="Question" />
+          <ScalarProperty Name="Category" ColumnName="Category" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AdminExamQns">
+      <EntityTypeMapping TypeName="Model.AdminExamQn">
+        <MappingFragment StoreEntitySet="AdminExamQns">
+          <ScalarProperty Name="QuestionCategoryID" ColumnName="QuestionCategoryID" />
+          <ScalarProperty Name="NoOfQuestion" ColumnName="NoOfQuestion" />
+          <ScalarProperty Name="StatusOfQuestion" ColumnName="StatusOfQuestion" />
+          <ScalarProperty Name="option4" ColumnName="option4" />
+          <ScalarProperty Name="option3" ColumnName="option3" />
+          <ScalarProperty Name="option2" ColumnName="option2" />
+          <ScalarProperty Name="option1" ColumnName="option1" />
+          <ScalarProperty Name="Question" ColumnName="Question" />
+          <ScalarProperty Name="Qid" ColumnName="Qid" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AdminExamQnsAnswers">
+      <EntityTypeMapping TypeName="Model.AdminExamQnsAnswer">
+        <MappingFragment StoreEntitySet="AdminExamQnsAnswer">
+          <ScalarProperty Name="CorrectAns" ColumnName="CorrectAns" />
+          <ScalarProperty Name="AnswerID" ColumnName="AnswerID" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AdminExamQnsCategories">
+      <EntityTypeMapping TypeName="Model.AdminExamQnsCategory">
+        <MappingFragment StoreEntitySet="AdminExamQnsCategory">
+          <ScalarProperty Name="CategoryQnName" ColumnName="CategoryQnName" />
+          <ScalarProperty Name="CategoryQnID" ColumnName="CategoryQnID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AspNetUserExams">
+      <EntityTypeMapping TypeName="Model.AspNetUserExam">
+        <MappingFragment StoreEntitySet="AspNetUserExam">
+          <ScalarProperty Name="Marks" ColumnName="Marks" />
+          <ScalarProperty Name="ExamAnswerSelected" ColumnName="ExamAnswerSelected" />
+          <ScalarProperty Name="ExamAnswerID" ColumnName="ExamAnswerID" />
+          <ScalarProperty Name="ExamQuestion" ColumnName="ExamQuestion" />
+          <ScalarProperty Name="ExamQuestionID" ColumnName="ExamQuestionID" />
+          <ScalarProperty Name="ExamUserID" ColumnName="ExamUserID" />
+          <ScalarProperty Name="ExamID" ColumnName="ExamID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AspNetUserExamAttempts">
+      <EntityTypeMapping TypeName="Model.AspNetUserExamAttempt">
+        <MappingFragment StoreEntitySet="AspNetUserExamAttempt">
+          <ScalarProperty Name="ExamMarks" ColumnName="ExamMarks" />
+          <ScalarProperty Name="ExamMarksID" ColumnName="ExamMarksID" />
+          <ScalarProperty Name="ExamAnswerSelected" ColumnName="ExamAnswerSelected" />
+          <ScalarProperty Name="ExamQuestion" ColumnName="ExamQuestion" />
+          <ScalarProperty Name="AttemptExamID" ColumnName="AttemptExamID" />
+          <ScalarProperty Name="ExamUserID" ColumnName="ExamUserID" />
+          <ScalarProperty Name="ExamAttemptID" ColumnName="ExamAttemptID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AspNetUserExamCertificates">
+      <EntityTypeMapping TypeName="Model.AspNetUserExamCertificate">
+        <MappingFragment StoreEntitySet="AspNetUserExamCertificate">
+          <ScalarProperty Name="CertificateMarks" ColumnName="CertificateMarks" />
+          <ScalarProperty Name="CertificateExamID" ColumnName="CertificateExamID" />
+          <ScalarProperty Name="CertificateID" ColumnName="CertificateID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Reports">
+      <EntityTypeMapping TypeName="Model.Report">
+        <MappingFragment StoreEntitySet="Report">
+          <ScalarProperty Name="Income" ColumnName="Income" />
+          <ScalarProperty Name="Month" ColumnName="Month" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

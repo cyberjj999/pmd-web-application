@@ -1,0 +1,108 @@
+﻿@model IEnumerable<PMDWebApplication.DB.AdminExamQn>
+
+@{
+    ViewBag.Title = "QuizStart";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>QuizStart</h2>
+
+
+<div class="container">
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="row">
+
+            <div class="container" style="margin:0 auto">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>No.</th>
+                            <th>Question</th>
+                            <th>Options</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+
+                            int i = 1;
+                            <tr>
+
+                                <td>@(i++)</td>
+                                <td>@item.Question</td>
+                                <td>@item.option1</td>
+                                <td>@item.option2</td>
+                                <td>@item.option3</td>
+                                <td>@item.option4</td>
+                                @*<td>
+                        @Html.ActionLink("Submit your test!", "Index", new { Qid = item.Qid })
+                    </td>*@
+
+                            </tr>
+
+                        }
+
+                    </tbody>
+                    @*@foreach (var item in Model)
+        {
+            int i = 1;
+            <tr>
+
+                <td>@(i++)</td>
+                <td>@item.QuestionCategory</td>
+                <td>@item.Question</td>
+                <td>
+                    @Html.ActionLink("Edit", "OnlineTestEdit", new { Qid = item.Qid })
+                    @Html.ActionLink("Delete", "OnlineTestDelete", new { Qid = item.Qid })
+                </td>
+
+            </tr>*@
+                    @*<div class="row">
+
+            <h1>@Html.DisplayFor(x => x.Question)</h1>
+
+        </div>
+
+        <div class="row">
+            <h3>
+                @Html.RadioButtonFor(x => x.option1, new { @class = "form-control" })@Model.option1
+            </h3>
+        </div>
+
+        <div class="row">
+            <h3>
+                @Html.RadioButtonFor(x => x.option2, new { @class = "form-control" })@Model.option2
+            </h3>
+        </div>
+
+        <div class="row">
+            <h3>
+                @Html.RadioButtonFor(x => x.option3, new { @class = "form-control" })@Model.option3
+            </h3>
+        </div>
+
+        <div class="row">
+            <h3>
+                @Html.RadioButtonFor(x => x.option4, new { @class = "form-control" }) @Model.option4
+            </h3>
+        </div>*@
+                    }
+                    <!--<div class="rown">
+        <input type="submit" value="submit" class="btn btn-success" />
+    </div>-->
+
+                </table>
+            </div>
+
+
+        </div>
+
+    }
+
+
+</div>

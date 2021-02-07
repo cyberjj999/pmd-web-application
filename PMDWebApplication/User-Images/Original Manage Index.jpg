@@ -1,0 +1,186 @@
+
+    <div class="container">
+
+        <h2>@ViewBag.Title.</h2>
+
+        <p class="text-success">@ViewBag.StatusMessage</p>
+
+        <h4>Change your account settings</h4>
+        <hr />
+
+        <h4 style="color:green">@TempData["Message"]</h4>
+        <h4 style="color:red">@TempData["ErrorMessage"]</h4>
+
+        @*<p>@RoleManager.GetRoles(User.Identity.GetUserId)</p>*@
+
+
+        @*
+        @if(@User.IsInRole("Doctor")){
+            <p>YOU ARE A DOCTOR</p>
+        }
+        else
+        {
+            <p>You are not a doctor</p>
+        }*@
+
+
+
+
+        @if (User.IsInRole("System Administrator"))
+        {
+
+            @Html.ActionLink("View Logs", "GetLogs", "Manage", null, new { @class = "btn btn-default" })
+            <p>  </p>
+            @Html.ActionLink("Manage Roles", "Index", "Role", null, new { @class = "btn btn-default" })
+            <p>  </p>
+
+            @*
+            @Html.ActionLink("Register New Users", "SysAdminRegister", "Manage", null, new { @class = "btn btn-default" })
+                No need both of them anymore because they are ported into Manage Users
+            <p>  </p>
+            @Html.ActionLink("Assign Users To Roles", "AssignRoles", "Manage", null, new { @class = "btn btn-default" })
+            *@
+
+            @Html.ActionLink("Manage Users", "GetUsers", "Manage", null, new { @class = "btn btn-default" })
+
+
+
+            <p>  </p>
+            @Html.ActionLink("Configure Web Application Security Settings", "ConfigureSettings", "Manage", null, new { @class = "btn btn-default" })
+
+
+        }
+
+        else
+        {
+            <div>
+                <!--<p>No button for you</p>-->
+                <img src="@Url.Content(Model.Uimg)" width="150" height="150" />
+
+                <dl class="dl-horizontal">
+
+                    @*<p>the role of the model is @Model.RoleName</p>*@
+                    <dt>Upload Profile Picture:</dt>
+                    <dd>
+                        @using (Html.BeginForm("SetProfilePicture", "Manage", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                        {
+                            @Html.AntiForgeryToken()
+                            @Html.ValidationSummary(true)
+                            <div class="form-group">
+                                <i style="color:red">@TempData["FileErrorMessage"]</i>
+                                <input type="file" name="file" accept="image/jpeg,image/png" />
+                                @Html.ValidationMessageFor(model => model.Uimg, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="form-group">
+                                <input type="submit" data-confirm="Are you sure?" value="Update" class="btn btn-default" />
+                            </div>
+                        }
+                    </dd>
+
+                    <dt>PMD Test Status:</dt>
+                    <dd>
+                        @if (Model.isVerified == true)
+                        {
+                            <img src="@Url.Content("~/Images/IsVerified.png")" width="20" height="20" />
+
+                        }
+                        else
+                        {
+                            <img src="@Url.Content("~/Images/NotVerified.jpg")" width="40" height="40" />
+
+                        }
+
+                    </dd>
+
+                    <dt>Password:</dt>
+                    <dd>
+                        [
+                        @if (Model.HasPassword)
+                        {
+                            @Html.ActionLink("Change your password", "ChangePassword")
+                        }
+                        else
+                        {
+                            @Html.ActionLink("Create", "SetPassword")
+                        }
+                        ]
+                    </dd>
+                    <dt>External Logins:</dt>
+                    <dd>
+                        @Model.Logins.Count [
+                        @Html.ActionLink("Manage", "ManageLogins") ]
+                    </dd>
+                    @*
+                    Phone Numbers can used as a second factor of verification in a two-factor authentication system.
+
+                     See <a href="https://go.microsoft.com/fwlink/?LinkId=403804">this article</a>
+                        for details on setting up this ASP.NET application to support two-factor authentication using SMS.
+
+                     Uncomment the following block after you have set up two-factor authentication
+                    *@
+                    <dt>Phone Number:</dt>
+                    <dd>
+                        @(Model.PhoneNumber ?? "None") [
+                        @if (Model.PhoneNumber != null)
+                        {
+                            @Html.ActionLink("Change", "AddPhoneNumber")
+                            @:  |
+                            @Html.ActionLink("Remove", "RemovePhoneNumber")
+                        }
+                        else
+                        {
+                            @Html.ActionLink("Add", "AddPhoneNumber")
+                        }
+                        ]
+                    </dd>
+                    <dt>Two-Factor Authentication:</dt>
+                    <dd>
+                        @if (Model.TwoFactor)
+                        {
+                            using (Html.BeginForm("DisableTwoFactorAuthentication", "Manage",
+                            FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+                            {
+                                @Html.AntiForgeryToken()
+                                <text>Enabled
+                                    <input type="submit" value="Disable" class="btn btn-link" />
+                                </text>
+                            }
+                        }
+                        else
+                        {
+                            using (Html.BeginForm("EnableTwoFactorAuthentication", "Manage",
+                            FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+                            {
+                                @Html.AntiForgeryToken()
+                                <text>Disabled
+                                    <input type="submit" value="Enable" class="btn btn-link" />
+                                </text>
+                            }
+                        }
+                    </dd>
+                    <dt>Insurance:</dt>
+                    <dd>
+                        @Html.ActionLink("Claim Insurance", "SubmitInsurance", "Manage", null, new { @class = "btn btn-default" })
+                    </dd>
+                </dl>
+            </div>
+
+        }
+
+    </div>
+
+@section Scripts {
+
+    <script>
+        jQuery(document).ready(function () {
+            jQuery('[data-confirm]').click(function (e) {
+                if (!confirm(jQuery(this).attr("data-confirm"))) {
+                    e.preventDefault();
+                }
+            });
+        });
+    </script>
+}
+
+
+

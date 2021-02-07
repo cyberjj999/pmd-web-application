@@ -1,0 +1,107 @@
+﻿@using PMDWebApplication.Models.Home;
+@using PMDWebApplication.DB;
+@using PMDWebApplication.Repository;
+@using Microsoft.AspNet.Identity;
+@{
+    GenericUnitOfWork _unitOfWork = new GenericUnitOfWork();
+    Layout = "~/Views/Shared/Ecommerce.cshtml";
+    var userId = User.Identity.GetUserId();
+    List<AspNetCart> cart = _unitOfWork.GetRepositoryInstance<AspNetCart>().GetAllRecordsIQueryable().Where(x => x.MemberId.Equals(userId)).ToList();
+    decimal total = 0;
+    List<AspNetCartInsurance> CartInsurance = _unitOfWork.GetRepositoryInstance<AspNetCartInsurance>().GetAllRecordsIQueryable().Where(x => x.MemberId.Equals(userId)).ToList();
+}
+
+
+<div class="container">
+    <div class="container-fluid">
+
+        <div class="card-body">
+            <h2>Items</h2>
+            <hr />
+            @if (cart != null)
+            {
+                foreach (var item in cart)
+                {
+                    AspNetProduct product = _unitOfWork.GetRepositoryInstance<AspNetProduct>().GetFirstorDefault(Convert.ToInt32(item.ProductId));
+
+                    <div class="row">
+                        <div class="thumbnail product-item col-xs-6" style="height:150px; width:150px;">
+
+                            <img class="img-responsive" title="Click to View Product detail"
+                                 style="cursor:pointer;height:100%;width:100%"
+                                 src="~/ProductImg/@product.ProductImage" />
+                        </div>
+
+                        <div class="form-group col-xs-6">
+                            <label>Product Name: <span style="font-weight: normal;">@product.ProductName</span></label>
+                            <br />
+                            <label>Quantity: <span style="font-weight: normal;">@item.Quantity</span></label>
+                            <br />
+                            <label>Price: <span style="font-weight: normal;">@product.Price</span></label>
+                            @using (Html.BeginForm("CartDelete", "Home", new { cartId = item.CartId }))
+                            {
+                                <input type="submit" value="Remove" onclick="return confirm('Are you sure you want to delete this product?')" class="btn btn-danger pull-right" />
+                            }
+                        </div>
+                    </div>
+
+                    <hr />
+
+                    total += (decimal)(item.Quantity * product.Price);
+                }
+            }
+            <h2>Insurance</h2>
+            <hr />
+
+            @if (CartInsurance != null)
+            {
+                foreach (var item in CartInsurance)
+                {
+                    AspNetInsurance Insurance = _unitOfWork.GetRepositoryInstance<AspNetInsurance>().GetFirstorDefault(Convert.ToInt32(item.InsuranceId));
+
+                    <div class="row">
+                        <div class="thumbnail product-item col-xs-6" style="height:150px; width:150px;">
+
+                            <img class="img-responsive" title="Click to View Product detail"
+                                 style="cursor:pointer;height:100%;width:100%"
+                                 src="~/InsuranceImg/@Insurance.InsuranceImage" />
+                        </div>
+
+                        <div class="form-group col-xs-6">
+                            <label>Product Name: <span style="font-weight: normal;">@Insurance.InsuranceName</span></label>
+                            <br />
+                            <label>Company <span style="font-weight: normal;">@Insurance.Company</span></label>
+                            <br />
+                            <label>Price: <span style="font-weight: normal;">@Insurance.Price</span></label>
+                            @using (Html.BeginForm("CartDeleteInsurance", "Home", new { cartId = item.CartId }))
+                            {
+                                <input type="submit" value="Remove" onclick="return confirm('Are you sure you want to delete this product?')" class="btn btn-danger pull-right" />
+                            }
+                        </div>
+                    </div>
+
+                    <hr />
+
+                    total += (decimal)Insurance.Price;
+                }
+            }
+
+            <div>
+                <div class="container-fluid">
+                    <label>Total Price: @total</label>
+                    <br />
+                    @using (Html.BeginForm("PaymentWithPaypal", "PaymentWithPaypal"))
+                    {
+                        <input type="submit" value="Check Out" class="btn btn-primary" />
+                    }
+
+                    <div class="row pull-right form-group">
+                        <label>Promo Code</label>
+                        <input type="text" style="height: 20px; border-radius: 25px; border: 1px solid" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

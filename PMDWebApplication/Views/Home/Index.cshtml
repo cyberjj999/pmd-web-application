@@ -1,0 +1,290 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+<style>
+    .row {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .menu-display {
+        display: block;
+        max-width: 50%;
+        height: auto;
+        border: 0;
+        margin: 0 auto;
+    }
+    /* Create three equal columns that sits next to each other */
+    .column {
+        flex: 33.33%;
+        background-color: #0C3C60;
+        margin: 10px 13px 0px 13px;
+    }
+
+        .column > h4 {
+            color: white;
+            text-align: center;
+            font-family: Raleway;
+        }
+
+        .column > button {
+            background-color: #6EA4CA;
+            border: none;
+            margin-top: 10px;
+            width: 100%;
+            color: white;
+            padding: 15px 32px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+    #map {
+        height: 300px;
+        width: 300px;
+        margin-left: auto;
+    }
+
+    .contact-us > h2 {
+        font-size: 50px;
+        text-align: center;
+        color: black;
+    }
+
+
+    html {
+        min-width: 800px;
+        overflow: scroll;
+    }
+
+    .contact-us, .about-us {
+        width: 100%;
+    }
+
+        .contact-us > h2, .about-us > h2 {
+            font-size: 50px;
+            text-align: center;
+            color: black;
+            margin: 0;
+        }
+
+    .contact-form {
+        width: 500px;
+        float: right;
+        position: relative;
+        right: 100px;
+    }
+
+    @@media only screen and (max-width: 1000px) {
+        .contact-form {
+            width: 300px;
+        }
+    }
+
+    @@media only screen and (max-width: 600px) {
+        .contact-form {
+            width: 200px;
+        }
+    }
+</style>
+<div class=" container">
+<div id="themeSlider" class="carousel slide" data-ride="carousel">
+    <ol class="carousel-indicators">
+        <li data-target="#themeSlider" data-slide-to="0" class="active"></li>
+        <li data-target="#themeSlider" data-slide-to="1"></li>
+        <li data-target="#themeSlider" data-slide-to="2"></li>
+    </ol>
+    <div class="carousel-inner">
+        <div class="item active">
+            <div class="imgOverlay"></div>
+            <img style="height:400px;width:100%" src="../Images/PMDHome.jpg" alt="First slide">
+            <div class="carousel-caption">
+                <h3>Personal Mobility Device</h3>
+
+            </div>
+        </div>
+        <div class="item">
+            <div class="imgOverlay"></div>
+            <img style="height:400px;width:100%" src="../Images/PMDReport.jpg" alt="Second slide">
+            <div class="carousel-caption">
+                <h3>Report PMD Users</h3>
+
+            </div>
+        </div>
+        <div class="item">
+            <div class="imgOverlay"></div>
+            <img style="height:400px;width:100%" src="../Images/PMDLegalTips.png" alt="Third slide">
+            <div class="carousel-caption">
+                <h3>Latest Rules and Regulation</h3>
+
+            </div>
+        </div>
+    </div>
+    <a class="left carousel-control" href="#themeSlider" data-slide="prev">
+        <span class="fa fa-chevron-left"></span>
+    </a>
+    <a class="right carousel-control" href="#themeSlider" data-slide="next">
+        <span class="fa fa-chevron-right"></span>
+    </a>
+
+    </div>
+</div>
+<!---
+<div class="olContent f1"><h2 style="color:black">Search Product/Category</h2></div>
+<div class="olSearch fr">
+    <input type="text" placeholder="Enter Keyword" name="searchKey" class="inputComn houseText form-control" />
+    <div class="searchIcon">
+        <button type="button" class="searchBtn">
+            <img src="~/Images/searchIcon.png" />
+        </button>
+    </div>
+
+
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="page-header">
+            <h2>Our Products <small>trends products</small></h2>
+        </div>
+    </div>
+</div>
+
+<div class="row product-container">
+
+    <div class="col-md-3 col-sm-3 col-xs-6" style="margin-bottom:8px">
+        <div class="thumbnail product-item" style="height:300px">
+
+            <img class="img-responsive" title="Click to View Product detail"
+                 style="cursor:pointer;height:160px;width:100%"
+                 src="~/Images/81_12_24_2017_10_26_28.jpg" />
+
+            <div class="caption">
+                <h5>Product Name</h5>
+                <p>$500</p>
+                <p>Available</p>
+                <div class="product-item-badge">New</div>
+            </div>
+        </div>
+    </div>
+</div>
+    --->
+<div class="container">
+    <div class="row" style="padding-top: 10px">
+        <div class="column">
+            <h4>Insurance<br />Policy</h4>
+            <img class="menu-display" src="../Images/InsurancePolicy.png" alt="Insurance Policy">
+            @*<button type="submit" onclick="location.href='@Url.Action("InsuranceEcommerce", "Home")'">More Info</button>*@
+            <button type="submit" onclick="location.href='@Url.Action("BuyOrClaim", "Home")'">More Info</button>
+        </div>
+        <div class="column">
+            <h4>PMD<br /> Safety Test</h4>
+            <img class="menu-display" src="../Images/PMD-CheckList.png" alt="Exam">
+            <button type="submit" onclick="location.href='@Url.Action("Quizbank", "Home")'">More Info</button>
+            
+        </div>
+        <div class="column">
+            <h4>Report<br />PMD</h4>
+            <img class="menu-display" src="../Images/ReportPMD.png" alt="Report PMD">
+            <button type="submit" onclick="location.href='@Url.Action("ReportPMD", "Home")'">More Info</button>
+        </div>
+    </div>
+
+    <div class="row" style="padding-top: 10px">
+        <div class="column">
+            <h4>Webcam with<br />Doctor</h4>
+            <img class="menu-display" src="../Images/Nearest-Hospital.png" alt="Nearest Hospital">
+            <button type="submit" onclick="location.href='@Url.Action("WebRTC", "WebRTC")'">More Info</button>
+        </div>
+        <div class="column">
+            <h4>Legalized<br />PMD Models</h4>
+            <img class="menu-display" src="../Images/Legalized-PMD-Model.png" alt="Legalized PMD Model">
+            <button type="submit" onclick="location.href='@Url.Action("Ecommerce", "Home")'">More Info</button>
+        </div>
+        <div class="column">
+            <h4>General<br />Information</h4>
+            <img class="menu-display" src="../Images/General-Information.png" alt="General Information">
+            <button type="submit" onclick="location.href='@Url.Action("ForumHome", "Forum")'">More Info</button>
+        </div>
+    </div>
+</div>
+
+
+<div class="about-us" style="background-color:#D1E0EB; height: 300px; margin-top: 10px">
+    <h2 style="padding-top:70px">About Us</h2>
+    <div class="container">
+        <br />
+        <p style="text-align:center; font-family:'Open Sans'">
+            Vervoer - We believing in making Singapore a safer and better place for our family. We
+            will ensure that the pathway in Singapore is kept secure and safe.
+            <br />
+            Mission : To build a safer environment for both Riders and Pedestrians
+            <br />
+            Vision : A connected pathway for everyone to use safely
+            <br />
+            Values : Professionalism, Integrity, Excellence
+        </p>
+    </div>
+</div>
+
+
+<div class="contact-us" style="background-color:#0C3C60; height: 650px; margin-top:0;"> 
+    <h2 style="padding: 80px">Contact Us</h2>
+    <div class="container">
+        <div>
+            <div id="map" style="float:left"></div>
+            <form class="w3-container w3-light-grey w3-text-blue w3-margin contact-form">
+                <!---<h2 class="w3-center">Contact Us</h2>-->
+
+
+                <div class="w3-row w3-section">
+                    <div class="w3-col" style="width:50px"><i class="w3-xxlarge fa fa-user"></i></div>
+                    <div class="w3-rest">
+                        <input id="From" class="w3-input w3-border" name="From" type="text" placeholder="From">
+                    </div>
+                </div>
+
+                <div class="w3-row w3-section">
+                    <div class="w3-col" style="width:50px"><i class="w3-xxlarge fa fa-envelope-o"></i></div>
+                    <div class="w3-rest">
+                        <input id="Subject" class="w3-input w3-border" name="Subject" type="text" placeholder="Subject">
+                    </div>
+                </div>
+
+                <div class="w3-row w3-section">
+                    <div class="w3-col" style="width:50px"><i class="w3-xxlarge fa fa-pencil"></i></div>
+                    <div class="w3-rest">
+                        <textarea id="Message" class="w3-input w3-border" name="Message" rows="10" cols="4" placeholder="Message"></textarea>
+                    </div>
+                </div>
+                <p class="w3-center">
+                    <button class="w3-button w3-section w3-blue w3-ripple" type="button" onclick="SendEmail()"> Send </button>
+                </p>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+    var SendEmail = function () {
+        $.ajax({
+            type: "Post",
+            url: "/Home/SendMailToUser",
+            success: function (data) {
+                alert("Success");
+            }
+
+
+        })
+    }
+
+
+</script>
+
+
+
+
+

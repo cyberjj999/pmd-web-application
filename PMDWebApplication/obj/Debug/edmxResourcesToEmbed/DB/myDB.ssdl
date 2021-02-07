@@ -1,0 +1,598 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="__MigrationHistory">
+    <Key>
+      <PropertyRef Name="MigrationId" />
+      <PropertyRef Name="ContextKey" />
+    </Key>
+    <Property Name="MigrationId" Type="nvarchar" MaxLength="150" Nullable="false" />
+    <Property Name="ContextKey" Type="nvarchar" MaxLength="300" Nullable="false" />
+    <Property Name="Model" Type="varbinary(max)" Nullable="false" />
+    <Property Name="ProductVersion" Type="nvarchar" MaxLength="32" Nullable="false" />
+  </EntityType>
+  <EntityType Name="AdminExamQns">
+    <Key>
+      <PropertyRef Name="Qid" />
+    </Key>
+    <Property Name="Qid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Question" Type="nvarchar" MaxLength="150" />
+    <Property Name="option1" Type="nvarchar" MaxLength="150" />
+    <Property Name="option2" Type="nvarchar" MaxLength="150" />
+    <Property Name="option3" Type="nvarchar" MaxLength="150" />
+    <Property Name="option4" Type="nvarchar" MaxLength="150" />
+    <Property Name="StatusOfQuestion" Type="bit" />
+    <Property Name="NoOfQuestion" Type="int" />
+    <Property Name="QuestionCategoryID" Type="int" />
+  </EntityType>
+  <EntityType Name="AdminExamQnsAnswer">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="AnswerID" Type="int" />
+    <Property Name="CorrectAns" Type="nvarchar" MaxLength="150" />
+  </EntityType>
+  <EntityType Name="AdminExamQnsCategory">
+    <Key>
+      <PropertyRef Name="CategoryQnID" />
+    </Key>
+    <Property Name="CategoryQnID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CategoryQnName" Type="nvarchar" MaxLength="150" />
+  </EntityType>
+  <EntityType Name="AspNetCart">
+    <Key>
+      <PropertyRef Name="CartId" />
+    </Key>
+    <Property Name="CartId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ProductId" Type="int" Nullable="false" />
+    <Property Name="MemberId" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="CartStatusId" Type="int" Nullable="false" />
+    <Property Name="Quantity" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="AspNetCartInsurance">
+    <Key>
+      <PropertyRef Name="CartId" />
+    </Key>
+    <Property Name="CartId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="InsuranceId" Type="int" />
+    <Property Name="MemberId" Type="nvarchar" MaxLength="128" />
+    <Property Name="CartStatusId" Type="int" />
+    <Property Name="PolicyId" Type="uniqueidentifier" Nullable="false" />
+  </EntityType>
+  <EntityType Name="AspNetCartStatus">
+    <Key>
+      <PropertyRef Name="CartStatusId" />
+    </Key>
+    <Property Name="CartStatusId" Type="int" Nullable="false" />
+    <Property Name="CartStatus" Type="varchar" MaxLength="500" />
+  </EntityType>
+  <EntityType Name="AspNetCategory">
+    <Key>
+      <PropertyRef Name="CategoryId" />
+    </Key>
+    <Property Name="CategoryId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CategoryName" Type="varchar" MaxLength="500" />
+    <Property Name="IsActive" Type="int" />
+  </EntityType>
+  <EntityType Name="AspNetInsurance">
+    <Key>
+      <PropertyRef Name="InsuranceId" />
+    </Key>
+    <Property Name="InsuranceId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="InsuranceName" Type="varchar" MaxLength="50" />
+    <Property Name="Price" Type="decimal" Precision="18" Scale="0" />
+    <Property Name="CategoryId" Type="int" />
+    <Property Name="Company" Type="varchar" MaxLength="50" />
+    <Property Name="Description" Type="varchar(max)" />
+    <Property Name="InsuranceImage" Type="varchar(max)" />
+  </EntityType>
+  <EntityType Name="AspNetMessage">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Subject" Type="varchar" MaxLength="50" />
+    <Property Name="Message" Type="varchar(max)" />
+    <Property Name="FromUser" Type="varchar(max)" />
+    <Property Name="DatePosted" Type="datetime" />
+  </EntityType>
+  <EntityType Name="AspNetProduct">
+    <Key>
+      <PropertyRef Name="ProductId" />
+    </Key>
+    <Property Name="ProductId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ProductName" Type="varchar" MaxLength="500" />
+    <Property Name="CategoryId" Type="int" />
+    <Property Name="IsActive" Type="bit" />
+    <Property Name="CreatedDate" Type="datetime" />
+    <Property Name="ModifiedDate" Type="datetime" />
+    <Property Name="ProductImage" Type="varchar(max)" />
+    <Property Name="IsFeatured" Type="bit" />
+    <Property Name="Quantity" Type="int" />
+    <Property Name="Price" Type="decimal" Precision="18" Scale="0" />
+    <Property Name="Description" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="AspNetReplies">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="MessageId" Type="int" Nullable="false" />
+    <Property Name="ReplyFrom" Type="varchar(max)" Nullable="false" />
+    <Property Name="ReplyMessage" Type="varchar(max)" Nullable="false" />
+    <Property Name="ReplyDateTime" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="AspNetRoles">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="256" Nullable="false" />
+    <Property Name="Discriminator" Type="nvarchar" MaxLength="128" Nullable="false" />
+  </EntityType>
+  <EntityType Name="AspNetShippingDetails">
+    <Key>
+      <PropertyRef Name="ShippingDetailId" />
+    </Key>
+    <Property Name="ShippingDetailId" Type="int" Nullable="false" />
+    <Property Name="MemberId" Type="nvarchar" MaxLength="128" />
+    <Property Name="Adress" Type="varchar" MaxLength="500" />
+    <Property Name="City" Type="varchar" MaxLength="500" />
+    <Property Name="State" Type="varchar" MaxLength="500" />
+    <Property Name="Country" Type="varchar" MaxLength="50" />
+    <Property Name="ZipCode" Type="varchar" MaxLength="50" />
+    <Property Name="OrderId" Type="int" />
+    <Property Name="AmountPaid" Type="decimal" Precision="18" Scale="0" />
+    <Property Name="PaymentType" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="AspNetUserClaims">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="ClaimType" Type="nvarchar(max)" />
+    <Property Name="ClaimValue" Type="nvarchar(max)" />
+  </EntityType>
+  <EntityType Name="AspNetUserExam">
+    <Key>
+      <PropertyRef Name="ExamID" />
+    </Key>
+    <Property Name="ExamID" Type="int" Nullable="false" />
+    <Property Name="ExamUserID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ExamQuestionID" Type="int" />
+    <Property Name="ExamQuestion" Type="nvarchar" MaxLength="150" />
+    <Property Name="ExamAnswerID" Type="int" />
+    <Property Name="ExamAnswerSelected" Type="nvarchar" MaxLength="150" />
+    <Property Name="Marks" Type="int" />
+  </EntityType>
+  <EntityType Name="AspNetUserExamAttempt">
+    <Key>
+      <PropertyRef Name="ExamAttemptID" />
+    </Key>
+    <Property Name="ExamAttemptID" Type="int" Nullable="false" />
+    <Property Name="ExamUserID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="AttemptExamID" Type="int" />
+    <Property Name="ExamQuestion" Type="nvarchar" MaxLength="150" />
+    <Property Name="ExamAnswerSelected" Type="nvarchar" MaxLength="150" />
+    <Property Name="ExamMarksID" Type="int" />
+    <Property Name="ExamMarks" Type="int" />
+  </EntityType>
+  <EntityType Name="AspNetUserExamCertificate">
+    <Key>
+      <PropertyRef Name="CertificateID" />
+    </Key>
+    <Property Name="CertificateID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CertificateExamID" Type="nvarchar" MaxLength="128" />
+    <Property Name="CertificateMarks" Type="int" />
+  </EntityType>
+  <EntityType Name="AspNetUserLogins">
+    <Key>
+      <PropertyRef Name="LoginProvider" />
+      <PropertyRef Name="ProviderKey" />
+      <PropertyRef Name="UserId" />
+    </Key>
+    <Property Name="LoginProvider" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="ProviderKey" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+  </EntityType>
+  <EntityType Name="AspNetUserRoles">
+    <Key>
+      <PropertyRef Name="UserId" />
+      <PropertyRef Name="RoleId" />
+    </Key>
+    <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="RoleId" Type="nvarchar" MaxLength="128" Nullable="false" />
+  </EntityType>
+  <EntityType Name="AspNetUsers">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="Email" Type="nvarchar" MaxLength="256" />
+    <Property Name="EmailConfirmed" Type="bit" Nullable="false" />
+    <Property Name="PasswordHash" Type="nvarchar(max)" />
+    <Property Name="SecurityStamp" Type="nvarchar(max)" />
+    <Property Name="PhoneNumber" Type="nvarchar(max)" />
+    <Property Name="PhoneNumberConfirmed" Type="bit" Nullable="false" />
+    <Property Name="TwoFactorEnabled" Type="bit" Nullable="false" />
+    <Property Name="LockoutEndDateUtc" Type="datetime" />
+    <Property Name="LockoutEnabled" Type="bit" Nullable="false" />
+    <Property Name="AccessFailedCount" Type="int" Nullable="false" />
+    <Property Name="UserName" Type="nvarchar" MaxLength="256" Nullable="false" />
+    <Property Name="fullname" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="Uimg" Type="varchar(max)" />
+    <Property Name="AccessFailDate" Type="datetime" />
+    <Property Name="PasswordLastChangedDate" Type="datetime" Nullable="false" />
+    <Property Name="Age" Type="int" Nullable="false" />
+    <Property Name="isVerified" Type="bit" Nullable="false" />
+    <Property Name="PromoCode" Type="nvarchar(max)" />
+    <Property Name="PasswordGeneratedDate" Type="datetime" />
+  </EntityType>
+  <EntityType Name="FAQ">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="Category" Type="nvarchar(max)" />
+    <Property Name="Question" Type="nvarchar(max)" />
+    <Property Name="Answer" Type="nvarchar(max)" />
+  </EntityType>
+  <EntityType Name="InsuranceClaim">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="PolicyNo" Type="nvarchar" MaxLength="128" />
+    <Property Name="PlanType" Type="nchar" MaxLength="15" />
+    <Property Name="VictimName" Type="nvarchar" MaxLength="50" />
+    <Property Name="VictimNRIC" Type="nchar" MaxLength="10" />
+    <Property Name="NomineeName" Type="nvarchar" MaxLength="50" />
+    <Property Name="NomineeNRIC" Type="nchar" MaxLength="10" />
+    <Property Name="Relationship" Type="nvarchar" MaxLength="50" />
+    <Property Name="Address" Type="nvarchar(max)" />
+    <Property Name="ContactNo" Type="nchar" MaxLength="10" />
+    <Property Name="DateOfClaim" Type="datetime" />
+    <Property Name="UserID" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="Signature" Type="varbinary(max)" Nullable="false" />
+    <Property Name="ClaimNo" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="Status" Type="ntext" />
+    <Property Name="DenialMessage" Type="nvarchar" MaxLength="200" />
+  </EntityType>
+  <EntityType Name="Report">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="Month" Type="nchar" MaxLength="10" Nullable="false" />
+    <Property Name="Income" Type="float" Nullable="false" />
+  </EntityType>
+  <EntityType Name="SecurityConfigurations">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="Password_Length" Type="int" Nullable="false" />
+    <Property Name="RequireNonLetterOrDigit" Type="bit" Nullable="false" />
+    <Property Name="RequireDigit" Type="bit" Nullable="false" />
+    <Property Name="RequireLowercase" Type="bit" Nullable="false" />
+    <Property Name="RequireUppercase" Type="bit" Nullable="false" />
+    <Property Name="Password_Attempts" Type="int" Nullable="false" />
+    <Property Name="LockoutDuration" Type="int" Nullable="false" />
+    <Property Name="InactiveDuration" Type="int" Nullable="false" />
+    <Property Name="PasswordExpiry" Type="int" Nullable="false" />
+  </EntityType>
+  <Association Name="FK__AdminExam__Answe__5649C92D">
+    <End Role="AdminExamQns" Type="Self.AdminExamQns" Multiplicity="0..1" />
+    <End Role="AdminExamQnsAnswer" Type="Self.AdminExamQnsAnswer" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AdminExamQns">
+        <PropertyRef Name="Qid" />
+      </Principal>
+      <Dependent Role="AdminExamQnsAnswer">
+        <PropertyRef Name="AnswerID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__AdminExam__Quest__5555A4F4">
+    <End Role="AdminExamQnsCategory" Type="Self.AdminExamQnsCategory" Multiplicity="0..1" />
+    <End Role="AdminExamQns" Type="Self.AdminExamQns" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AdminExamQnsCategory">
+        <PropertyRef Name="CategoryQnID" />
+      </Principal>
+      <Dependent Role="AdminExamQns">
+        <PropertyRef Name="QuestionCategoryID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__AspNetUse__Attem__592635D8">
+    <End Role="AspNetUserExam" Type="Self.AspNetUserExam" Multiplicity="0..1" />
+    <End Role="AspNetUserExamAttempt" Type="Self.AspNetUserExamAttempt" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUserExam">
+        <PropertyRef Name="ExamID" />
+      </Principal>
+      <Dependent Role="AspNetUserExamAttempt">
+        <PropertyRef Name="AttemptExamID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__AspNetUse__Certi__5B0E7E4A">
+    <End Role="AspNetUserExamAttempt" Type="Self.AspNetUserExamAttempt" Multiplicity="0..1" />
+    <End Role="AspNetUserExamCertificate" Type="Self.AspNetUserExamCertificate" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUserExamAttempt">
+        <PropertyRef Name="ExamAttemptID" />
+      </Principal>
+      <Dependent Role="AspNetUserExamCertificate">
+        <PropertyRef Name="CertificateMarks" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__AspNetUse__Certi__5C02A283">
+    <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="0..1" />
+    <End Role="AspNetUserExamCertificate" Type="Self.AspNetUserExamCertificate" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="AspNetUserExamCertificate">
+        <PropertyRef Name="CertificateExamID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__AspNetUse__ExamA__573DED66">
+    <End Role="AdminExamQns" Type="Self.AdminExamQns" Multiplicity="0..1" />
+    <End Role="AspNetUserExam" Type="Self.AspNetUserExam" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AdminExamQns">
+        <PropertyRef Name="Qid" />
+      </Principal>
+      <Dependent Role="AspNetUserExam">
+        <PropertyRef Name="ExamAnswerID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__AspNetUse__ExamM__5A1A5A11">
+    <End Role="AspNetUserExam" Type="Self.AspNetUserExam" Multiplicity="0..1" />
+    <End Role="AspNetUserExamAttempt" Type="Self.AspNetUserExamAttempt" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUserExam">
+        <PropertyRef Name="ExamID" />
+      </Principal>
+      <Dependent Role="AspNetUserExamAttempt">
+        <PropertyRef Name="ExamMarksID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__AspNetUse__ExamQ__5832119F">
+    <End Role="AdminExamQns" Type="Self.AdminExamQns" Multiplicity="0..1" />
+    <End Role="AspNetUserExam" Type="Self.AspNetUserExam" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AdminExamQns">
+        <PropertyRef Name="Qid" />
+      </Principal>
+      <Dependent Role="AspNetUserExam">
+        <PropertyRef Name="ExamQuestionID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_AspNetCartInsurance_AspNetCartInsurance">
+    <End Role="AspNetCartInsurance" Type="Self.AspNetCartInsurance" Multiplicity="1" />
+    <End Role="AspNetCartInsurance1" Type="Self.AspNetCartInsurance" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetCartInsurance">
+        <PropertyRef Name="CartId" />
+      </Principal>
+      <Dependent Role="AspNetCartInsurance1">
+        <PropertyRef Name="CartId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_AspNetCartInsurance_AspNetCartInsurance1">
+    <End Role="AspNetCartInsurance" Type="Self.AspNetCartInsurance" Multiplicity="1" />
+    <End Role="AspNetCartInsurance1" Type="Self.AspNetCartInsurance" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetCartInsurance">
+        <PropertyRef Name="CartId" />
+      </Principal>
+      <Dependent Role="AspNetCartInsurance1">
+        <PropertyRef Name="CartId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_AspNetCategory_AspNetProduct">
+    <End Role="AspNetCategory" Type="Self.AspNetCategory" Multiplicity="0..1" />
+    <End Role="AspNetProduct" Type="Self.AspNetProduct" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetCategory">
+        <PropertyRef Name="CategoryId" />
+      </Principal>
+      <Dependent Role="AspNetProduct">
+        <PropertyRef Name="CategoryId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_AspNetProduct_AspNetCart">
+    <End Role="AspNetProduct" Type="Self.AspNetProduct" Multiplicity="1" />
+    <End Role="AspNetCart" Type="Self.AspNetCart" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetProduct">
+        <PropertyRef Name="ProductId" />
+      </Principal>
+      <Dependent Role="AspNetCart">
+        <PropertyRef Name="ProductId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+    <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="AspNetUserClaims" Type="Self.AspNetUserClaims" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="AspNetUserClaims">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+    <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="AspNetUserLogins" Type="Self.AspNetUserLogins" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="AspNetUserLogins">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId">
+    <End Role="AspNetRoles" Type="Self.AspNetRoles" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="AspNetUserRoles" Type="Self.AspNetUserRoles" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetRoles">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="AspNetUserRoles">
+        <PropertyRef Name="RoleId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId">
+    <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="AspNetUserRoles" Type="Self.AspNetUserRoles" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="AspNetUserRoles">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_InsuranceClaim_InsuranceClaim">
+    <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
+    <End Role="InsuranceClaim" Type="Self.InsuranceClaim" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="InsuranceClaim">
+        <PropertyRef Name="UserID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Function Name="GetBySearch" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="search" Type="nvarchar(max)" Mode="In" />
+  </Function>
+  <Function Name="GetBySearchInsurance" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="search" Type="nvarchar(max)" Mode="In" />
+  </Function>
+  <EntityContainer Name="ModelStoreContainer">
+    <EntitySet Name="__MigrationHistory" EntityType="Self.__MigrationHistory" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="AdminExamQns" EntityType="Self.AdminExamQns" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="AdminExamQnsAnswer" EntityType="Self.AdminExamQnsAnswer" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="AdminExamQnsCategory" EntityType="Self.AdminExamQnsCategory" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="AspNetCart" EntityType="Self.AspNetCart" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="AspNetCartInsurance" EntityType="Self.AspNetCartInsurance" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="AspNetCartStatus" EntityType="Self.AspNetCartStatus" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="AspNetCategory" EntityType="Self.AspNetCategory" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="AspNetInsurance" EntityType="Self.AspNetInsurance" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="AspNetMessage" EntityType="Self.AspNetMessage" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="AspNetProduct" EntityType="Self.AspNetProduct" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="AspNetReplies" EntityType="Self.AspNetReplies" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRoles" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="AspNetShippingDetails" EntityType="Self.AspNetShippingDetails" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="AspNetUserClaims" EntityType="Self.AspNetUserClaims" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="AspNetUserExam" EntityType="Self.AspNetUserExam" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="AspNetUserExamAttempt" EntityType="Self.AspNetUserExamAttempt" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="AspNetUserExamCertificate" EntityType="Self.AspNetUserExamCertificate" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="AspNetUserLogins" EntityType="Self.AspNetUserLogins" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="AspNetUserRoles" EntityType="Self.AspNetUserRoles" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="FAQ" EntityType="Self.FAQ" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="InsuranceClaim" EntityType="Self.InsuranceClaim" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Report" EntityType="Self.Report" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="SecurityConfigurations" EntityType="Self.SecurityConfigurations" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK__AdminExam__Answe__5649C92D" Association="Self.FK__AdminExam__Answe__5649C92D">
+      <End Role="AdminExamQns" EntitySet="AdminExamQns" />
+      <End Role="AdminExamQnsAnswer" EntitySet="AdminExamQnsAnswer" />
+    </AssociationSet>
+    <AssociationSet Name="FK__AdminExam__Quest__5555A4F4" Association="Self.FK__AdminExam__Quest__5555A4F4">
+      <End Role="AdminExamQnsCategory" EntitySet="AdminExamQnsCategory" />
+      <End Role="AdminExamQns" EntitySet="AdminExamQns" />
+    </AssociationSet>
+    <AssociationSet Name="FK__AspNetUse__Attem__592635D8" Association="Self.FK__AspNetUse__Attem__592635D8">
+      <End Role="AspNetUserExam" EntitySet="AspNetUserExam" />
+      <End Role="AspNetUserExamAttempt" EntitySet="AspNetUserExamAttempt" />
+    </AssociationSet>
+    <AssociationSet Name="FK__AspNetUse__Certi__5B0E7E4A" Association="Self.FK__AspNetUse__Certi__5B0E7E4A">
+      <End Role="AspNetUserExamAttempt" EntitySet="AspNetUserExamAttempt" />
+      <End Role="AspNetUserExamCertificate" EntitySet="AspNetUserExamCertificate" />
+    </AssociationSet>
+    <AssociationSet Name="FK__AspNetUse__Certi__5C02A283" Association="Self.FK__AspNetUse__Certi__5C02A283">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="AspNetUserExamCertificate" EntitySet="AspNetUserExamCertificate" />
+    </AssociationSet>
+    <AssociationSet Name="FK__AspNetUse__ExamA__573DED66" Association="Self.FK__AspNetUse__ExamA__573DED66">
+      <End Role="AdminExamQns" EntitySet="AdminExamQns" />
+      <End Role="AspNetUserExam" EntitySet="AspNetUserExam" />
+    </AssociationSet>
+    <AssociationSet Name="FK__AspNetUse__ExamM__5A1A5A11" Association="Self.FK__AspNetUse__ExamM__5A1A5A11">
+      <End Role="AspNetUserExam" EntitySet="AspNetUserExam" />
+      <End Role="AspNetUserExamAttempt" EntitySet="AspNetUserExamAttempt" />
+    </AssociationSet>
+    <AssociationSet Name="FK__AspNetUse__ExamQ__5832119F" Association="Self.FK__AspNetUse__ExamQ__5832119F">
+      <End Role="AdminExamQns" EntitySet="AdminExamQns" />
+      <End Role="AspNetUserExam" EntitySet="AspNetUserExam" />
+    </AssociationSet>
+    <AssociationSet Name="FK_AspNetCartInsurance_AspNetCartInsurance" Association="Self.FK_AspNetCartInsurance_AspNetCartInsurance">
+      <End Role="AspNetCartInsurance" EntitySet="AspNetCartInsurance" />
+      <End Role="AspNetCartInsurance1" EntitySet="AspNetCartInsurance" />
+    </AssociationSet>
+    <AssociationSet Name="FK_AspNetCartInsurance_AspNetCartInsurance1" Association="Self.FK_AspNetCartInsurance_AspNetCartInsurance1">
+      <End Role="AspNetCartInsurance" EntitySet="AspNetCartInsurance" />
+      <End Role="AspNetCartInsurance1" EntitySet="AspNetCartInsurance" />
+    </AssociationSet>
+    <AssociationSet Name="FK_AspNetCategory_AspNetProduct" Association="Self.FK_AspNetCategory_AspNetProduct">
+      <End Role="AspNetCategory" EntitySet="AspNetCategory" />
+      <End Role="AspNetProduct" EntitySet="AspNetProduct" />
+    </AssociationSet>
+    <AssociationSet Name="FK_AspNetProduct_AspNetCart" Association="Self.FK_AspNetProduct_AspNetCart">
+      <End Role="AspNetProduct" EntitySet="AspNetProduct" />
+      <End Role="AspNetCart" EntitySet="AspNetCart" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="AspNetUserClaims" EntitySet="AspNetUserClaims" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="AspNetUserLogins" EntitySet="AspNetUserLogins" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId" Association="Self.FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId">
+      <End Role="AspNetRoles" EntitySet="AspNetRoles" />
+      <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
+    </AssociationSet>
+    <AssociationSet Name="FK_InsuranceClaim_InsuranceClaim" Association="Self.FK_InsuranceClaim_InsuranceClaim">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="InsuranceClaim" EntitySet="InsuranceClaim" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

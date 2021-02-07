@@ -1,0 +1,63 @@
+﻿@model IEnumerable<PMDWebApplication.DB.DualDatabaseTestSchemeTest>
+
+
+@{
+
+    if (User.IsInRole("System Administrator"))
+    {
+        ViewBag.Title = "AllTests";
+        Layout = "~/Views/Shared/_AdminLayoutPage.cshtml";
+    }
+    else
+    {
+        ViewBag.Title = "AllTests";
+        Layout = "~/Views/Shared/_Layout.cshtml";
+    }
+}
+
+<div class="container">
+    <h2>List of Different Tests</h2>
+
+    @*authorize html buttons by user role*@
+
+    <a href="../DualDatabaseTestSchemeTests/Create" class="btn btn-outline-info pull-left "> Add Test Question</a> <br />
+
+
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Description)
+            </th>
+
+            @*<th>
+                    @Html.DisplayNameFor(model => model.ID)
+                </th>*@
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Description)
+                </td>
+                @*<td>
+                        @Html.DisplayFor(modelItem => item.ID)
+                    </td>*@
+                <td>
+                    @Html.ActionLink("Test Details", "CountQuestionsInTest", "DualDatabaseTestSchemeQuestions", new { id = item.ID }, new { @class = "btn btn-success" })
+                    @Html.ActionLink("Add new Question", "AddNewQuestion", new { id = item.ID }, new { @class = "btn btn-success" })
+                    @Html.ActionLink("Edit", "Edit", new { id = item.ID }, new { @class = "btn btn-success" })
+                    @Html.ActionLink("Delete", "Delete", new { id = item.ID }, new { @class = "btn btn-danger" })
+                </td>
+            </tr>
+        }
+
+    </table>
+</div>

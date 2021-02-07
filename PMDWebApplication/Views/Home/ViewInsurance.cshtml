@@ -1,0 +1,82 @@
+﻿@model PMDWebApplication.DB.AspNetInsurance
+@using PMDWebApplication.DB;
+@using PMDWebApplication.Repository;
+@using Microsoft.AspNet.Identity;
+@{
+    ViewBag.Title = "ViewInsurance";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    GenericUnitOfWork _unitOfWork = new GenericUnitOfWork();
+    AspNetCartInsurance existingCart = _unitOfWork.GetRepositoryInstance<AspNetCartInsurance>().GetFirstorDefaultByParameter(x => x.InsuranceId == Model.InsuranceId);
+    var user = User.Identity.GetUserId();
+
+}
+
+<div class="container">
+    <div class="container-fluid">
+
+        <div class="card-body">
+
+            @using (Html.BeginForm("AddToCartInsurance", "Home", FormMethod.Post))
+            {
+                @Html.AntiForgeryToken()
+
+                <div class="form-horizontal">
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                    @Html.HiddenFor(model => model.InsuranceId)
+
+                    <div class="thumbnail product-item" style="height:150px; width:150px;">
+
+                        <img class="img-responsive" title="Click to View Product detail"
+                             style="cursor:pointer;height:100%;width:100%"
+                             src="~/InsuranceImg/@Html.DisplayFor(model => model.InsuranceImage)" />
+                    </div>
+
+                    <div class="form-group">
+                        @Html.Label("Insurance Name", htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.InsuranceName, new { htmlAttributes = new { @readonly = true, @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.InsuranceName, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Price, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.Price, new { htmlAttributes = new { @readonly = true, @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Price, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    @Html.HiddenFor(model => model.CategoryId)
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Company, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.Company, new { htmlAttributes = new { @readonly = true, @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Company, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.Label("Description", htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.TextAreaFor(model => model.Description, new { @class = "form-control", @readonly = true, @rows = 10 })
+                            @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-md-offset-2 col-md-10">
+                            <input type="submit" value="Add to Cart" class="btn btn-default" />
+                        </div>
+                    </div>
+                </div>
+            }
+
+            <div>
+                @Html.ActionLink("Back to List", "InsuranceEcommerce")
+            </div>
+        </div>
+    </div>
+</div>

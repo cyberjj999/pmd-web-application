@@ -1,0 +1,107 @@
+﻿@model IEnumerable<PMDWebApplication.DB.FAQ>
+
+@{
+    ViewBag.Title = "FAQPage";
+}
+
+<style>
+    .FAQTable td {
+        overflow: hidden;
+    }
+
+    table {
+        border: 1px solid black;
+        table-layout: fixed;
+        width: 65%;
+        font-size: 0.9em;
+        margin: 25px 0;
+    }
+
+    .FAQTable thead tr {
+        background-color: #89BFF9;
+        color: #808080;
+        text-align: left;
+        font-weight: bold;
+    }
+
+    .FAQTable th,
+    .FAQTable td {
+        padding: 12px 15px;
+    }
+
+    .FAQTable tbody tr {
+        border-bottom: 1px solid #dddddd;
+    }
+
+        .FAQTable tbody tr:nth-of-type(even) {
+            background-color: #f3f3f3;
+        }
+
+        .FAQTable tbody tr:last-of-type {
+            border-bottom: 2px solid #0094ff;
+        }
+
+        .FAQTable tbody tr.active-row {
+            font-weight: bold;
+            color: #0094ff;
+        }
+</style>
+
+<div class="container">
+    <h2 style="text-align:center">FAQ Page</h2>
+
+    @using (Html.BeginForm("FAQPage", "Home", FormMethod.Get))
+    {
+        <text>Search :  </text> @Html.TextBox("searching")<input type="submit" values="Search" />
+    }
+
+    @if (Model.Count() == 0)
+    {
+        <tr>
+            <td colspan="2" style="color:red">Do not match any Question</td>
+        </tr>
+    }
+
+    else
+    {
+
+        <div id="according">
+            @{
+                foreach (var item in Model.Select(a => a.Category).Distinct())
+                {
+                    <h3>Category : @item</h3>
+                    <div>
+                        <table class="FAQTable">
+                            <thead>
+                                <tr>
+                                    <th>
+                                        Questions
+                                    </th>
+                                    <th>
+                                    </th>
+                                </tr>
+                            </thead>
+
+
+                            @foreach (var i in Model.Where(a => a.Category.Equals(@item)))
+                            {
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => i.Question)
+                                        </td>
+                                        <td>
+                                            @Html.ActionLink("Click Here to find your Answers !!", "FAQAnswers", new { id = i.Id })
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            }
+
+                        </table>
+                    </div>
+                }
+            }
+        </div>
+    }
+
+</div>

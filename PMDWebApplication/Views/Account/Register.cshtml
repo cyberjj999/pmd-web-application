@@ -1,0 +1,320 @@
+﻿@model PMDWebApplication.Models.RegisterViewModel
+@using Microsoft.AspNet.Identity
+@{
+    ViewBag.Title = "Register";
+    Layout = null;
+
+}
+
+
+<style>
+    .nav {
+        padding-left: 0;
+        margin-bottom: 0;
+        list-style: none
+    }
+
+        .nav > li {
+            position: relative;
+            display: block
+        }
+
+            .nav > li > a {
+                position: relative;
+                display: block;
+                padding: 10px 15px
+            }
+
+                .nav > li > a:focus, .nav > li > a:hover {
+                    text-decoration: none;
+                    background-color: #eee
+                }
+
+            .nav > li.disabled > a {
+                color: #777
+            }
+
+                .nav > li.disabled > a:focus, .nav > li.disabled > a:hover {
+                    color: #777;
+                    text-decoration: none;
+                    cursor: not-allowed;
+                    background-color: transparent
+                }
+
+        .nav .open > a, .nav .open > a:focus, .nav .open > a:hover {
+            background-color: #eee;
+            border-color: #337ab7
+        }
+
+        .nav .nav-divider {
+            height: 1px;
+            margin: 9px 0;
+            overflow: hidden;
+            background-color: #e5e5e5
+        }
+
+        .nav > li > a > img {
+            max-width: none
+        }
+
+    .nav-tabs {
+        border-bottom: 1px solid #ddd
+    }
+
+        .nav-tabs > li {
+            float: left;
+            margin-bottom: -1px
+        }
+
+            .nav-tabs > li > a {
+                margin-right: 2px;
+                line-height: 1.42857143;
+                border: 1px solid transparent;
+                border-radius: 4px 4px 0 0
+            }
+
+                .nav-tabs > li > a:hover {
+                    border-color: #eee #eee #ddd
+                }
+
+            .nav-tabs > li.active > a, .nav-tabs > li.active > a:focus, .nav-tabs > li.active > a:hover {
+                color: #555;
+                cursor: default;
+                background-color: #fff;
+                border: 1px solid #ddd;
+                border-bottom-color: transparent
+            }
+
+        .nav-tabs.nav-justified {
+            width: 100%;
+            border-bottom: 0
+        }
+
+            .nav-tabs.nav-justified > li {
+                float: none
+            }
+            .pull-right{padding-left:10px}
+            .pull-right{float:right!important}
+</style>
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Vervoer - Registeration</title>
+
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="~/Content/W3School.css">
+    <link href="~/Content/MyMainLayOut.css" rel="stylesheet" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    @Scripts.Render("~/bundles/modernizr")
+
+
+    <!-- Custom fonts for this template-->
+    <link href="../../startbootstrap-sb-admin-gh-pages/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!-- Custom styles for this template-->
+    <link href="../../startbootstrap-sb-admin-gh-pages/css/sb-admin.css" rel="stylesheet">
+
+</head>
+
+<body>
+
+
+    <div class="container">
+        <div class="row" style="background-color:#89BFF9">
+            <div class="col-md-6 col-sm-6 col-xs-6">
+                <div class="logo">
+                    <h1>
+                        <a href="@Url.Action("Index", "Home")" class="elements">
+                            Ver<span>voer</span>
+                        </a>
+                    </h1>
+                    <p>Transport</p>
+                </div>
+            </div>
+
+            <div class="col-md-6 col-sm-6 col-xs-6">
+                <div class="account">
+                    <ul>
+                        <li>
+                            <div class="hidden-xs">
+                                <h4><a>Call</a></h4>
+                                <p>1800 - 338 6622</p>
+                            </div>
+
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+
+            <div class="col-md-12">
+                <div class="nav-menus">
+
+                    @if (Request.IsAuthenticated)
+                    {
+                        using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm" }))
+                        {
+                            @Html.AntiForgeryToken()
+
+                            <ul class="nav nav-pills">
+                                <li class="active pull-left"><a style="border-radius:initial;" href="../Home/Index">Home</a></li>
+                                <li pull-left"><a style="border-radius:initial;" href="#">Location</a></li>
+                                <li pull-left"><a style="border-radius:initial;" href="#">About</a></li>
+                                <li class="pull-right">
+                                    @Html.ActionLink("Hello " + User.Identity.GetUserName() + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
+                                </li>
+                                <li class="pull-right"><a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
+                            </ul>
+
+                        }
+                    }
+                    else
+                    {
+                        <ul class="nav nav-pills">
+                            <li class="active"><a style="border-radius:initial;" href="../Home/Index">Home</a></li>
+                            <li><a style="border-radius:initial;" href="#">Location</a></li>
+                            <li><a style="border-radius:initial;" href="#">About</a></li>
+                            <li class="pull-right">@Html.ActionLink("Register", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
+                            <li class="pull-right">@Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
+                        </ul>
+
+
+
+                    }
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+    <div class="container">
+        <!--<div class="card card-register mx-auto mt-5">-->
+        <div class="card">
+            <div class="card-header">Register an Account</div>
+            <div class="card-body">
+                @using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+                {
+                    @Html.AntiForgeryToken()
+                    @Html.ValidationSummary("", new { @class = "text-danger" })
+
+                    <div class="form-group">
+                        <div class="form-row">
+                            <div class="col-md-6">
+                                <div class="form-label-group">
+                                    @Html.TextBoxFor(m => m.UserName, new { @class = "form-control", @id = "input-username", @placeholder = "Username" })
+                                    <label for="input-username">Username</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-label-group">
+                                    @Html.TextBoxFor(m => m.Age, new { @class = "form-control", @id = "input-age", @placeholder = "Age", @type = "number", @min = "18", @max = "99" })
+                                    <label for="input-age">Age</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="form-label-group">
+                            @Html.TextBoxFor(m => m.FullName, new { @class = "form-control", @id = "input-fullname", @placeholder = "Full Name" })
+                            <label for="input-fullname">Full Name</label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="form-label-group">
+                            @Html.TextBoxFor(m => m.Email, new { @class = "form-control", @id = "input-email", @placeholder = "Email Address" })
+                            <label for="input-email">Email Address</label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="form-row">
+                            <div class="col-md-6">
+                                <div class="form-label-group">
+                                    @Html.PasswordFor(m => m.Password, new { @class = "form-control", @id = "input-password", @placeholder = "Password" })
+                                    <label for="input-password">Password</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-label-group">
+                                    @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control", @id = "input-confirmPassword", @placeholder = "Confirm Password" })
+                                    <label for="input-confirmPassword">Confirm password</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+                    <div class="g-recaptcha" data-callback="recaptchaCallback" data-sitekey="6LcUo8YUAAAAALn05-TJqV1iJPn3fztoVbHTsl2T"></div>
+                    <br />
+
+                    <button type="submit" class="btn btn-primary btn-block">Register</button>
+
+                }
+
+                <br />
+                <div class="text-center">
+                    <p>
+                        @Html.ActionLink("Already have an account? Login here!", "Login")<br />
+
+                        @* Enable this once you have account confirmation enabled for password reset functionality *@
+
+                        @Html.ActionLink("Forgot your password?", "ForgotPassword")
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <div class="container" style="clear:right">
+        <hr />
+        <footer>
+            <div class="row">
+                <div class="col-md-12 copyright">
+
+                    <div class="col-md-6 col-sm-6 copyright-left">
+                        <p>&copy; @DateTime.Now.Year - Vervoer. All right reserved.</p>
+                    </div>
+
+                    <div class="col-md-6 col-sm-6 copyright-right">
+
+                        <ul class="list-unstyled list-social">
+                            <li><a href="#" target="_blank"><i class="fa fa-facebook-square"></i></a></li>
+                            <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                            <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
+
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+        </footer>
+    </div>
+
+    <!-- Bootstrap core JavaScript-->
+    <script src="../../startbootstrap-sb-admin-gh-pages/vendor/jquery/jquery.min.js"></script>
+    <script src="../../startbootstrap-sb-admin-gh-pages/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Core plugin JavaScript-->
+    <script src="../../startbootstrap-sb-admin-gh-pages/vendor/jquery-easing/jquery.easing.min.js"></script>
+
+</body>
+
+</html>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+
+}

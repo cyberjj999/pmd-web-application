@@ -1,0 +1,31 @@
+﻿
+@{
+    ViewBag.Title = "Mail";
+    Layout = "~/Views/Shared/_AdminLayoutPage.cshtml";
+}
+
+<div class="container-fluid">
+    <!---Breadcrumbs-->
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+            @Html.ActionLink("Collab", "Collab")
+
+        </li>
+        <li class="breadcrumb-item active">Overview</li>
+    </ol>
+
+
+    <div class="card mb-3">
+        <div class="card-header">
+            <i class="fas fa-table"></i>
+            Web Conference
+            <a href="../WebRtc/WebRTC" target="_blank" class="btn btn-info pull-right fa fa-plus">Web Conference</a>
+        </div>
+        <div class="card-body">
+            <label>Token</label>
+            <textarea class="form-control" name="Token" rows="2" cols="20" placeholder="Token">@ViewBag.Token</textarea>
+        </div>
+    </div>
+
+</div>
+

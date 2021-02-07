@@ -1,0 +1,484 @@
+﻿@model IEnumerable<PMDWebApplication.Models.LoggingViewModel>
+
+@{
+    ViewBag.Title = "List of Vervoer's Logs";
+    Layout = "~/Views/Shared/_AdminLayoutPage.cshtml";
+
+}
+
+<div class="container">
+
+    <h2>Logs in Vervoer</h2>
+
+    <div class="card mb-3">
+        <div class="card-header">
+            <i class="fas fa-table"></i>
+            <h3 style="text-align:center">Logs Data as of @DateTime.Now</h3>
+
+            <div style="text-align:center;margin:0 auto;display:inline-block;left:50%;padding-bottom:10px">
+                <select id="dropdown1">
+                    <option value="NULL">Show All Date-Range</option>
+                    <option value="1 day ago">1 day ago</option>
+                    <option value="7 days ago">7 days ago</option>
+                    <option value="2 weeks ago">2 weeks ago</option>
+                    <option value="1 month ago">1 month ago</option>
+
+                </select>
+                <select id="dropdown2">
+                    <option value="">Show All Types</option>
+                    <option value="WARN">Warn</option>
+                    <option value="INFO">Info</option>
+                    <option value="TRACE">Trace</option>
+                    <option value="ERROR">Error</option>
+                    <option value="FATAL">Fatal</option>
+                    <option value="DEBUG">Debug</option>
+
+                </select>
+                <select id="dropdown3">
+                    <option value="">Show All Roles</option>
+                    <option value="User">User</option>
+                    <option value="Clerk">Clerk</option>
+                    <option value="Doctor">Doctor</option>
+                    <option value="Admin">Admin</option>
+                    <option value="System Administrator">System Administrator</option>
+                </select>
+
+                <!--
+                <select id="dropdown4">
+                    <option value="">Select All Archive</option>
+                    <option value="Jan">January Archive</option>
+                    <option value="Feb">Februrary Archive</option>
+                    <option value="Mar">March Archive</option>
+                    <option value="Apr">April Archive</option>
+                    <option value="May">May Archive</option>
+                </select>
+                    -->
+            </div>
+
+            <br />
+            <table id="myTable">
+
+                <thead>
+                    <tr style="background-color:#B8DAFF">
+                        <th>#</th>
+                        <th>Date</th>
+                        <th>Type</th>
+                        <th>Username</th>
+                        <th>Roles</th> @*@Html.DisplayNameFor(model => model.RoleNames)*@
+                        <th>Message</th>
+                        <th>Controller</th>
+                    </tr>
+                </thead>
+                <!-- Include this if you want to have dropbox for each options
+                <tfoot>
+                    <tr>
+                        <th></th>
+                        <th>Date</th>
+                        <th>Type</th>
+                        <th></th>
+                        <th>Roles</th>
+                        <th></th>
+                        <th>Controller</th>
+                    </tr>
+                </tfoot> -->
+            </table>
+
+        </div>
+    </div>
+    <br />
+
+    @* @Html.ActionLink("Back", "Index", "Manage", null, new { @class = "btn btn-default" })*@
+
+
+
+</div>
+
+<style>
+    tr.even {
+        background-color: #F5F5F5 !important;
+    }
+</style>
+
+
+@* Load datatable css *@
+<link href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css" rel="stylesheet" />
+<link href="https://cdn.datatables.net/buttons/1.6.1/css/buttons.dataTables.min.css" rel="stylesheet" />
+
+
+@section Scripts{
+    <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/1.6.1/js/dataTables.buttons.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/1.6.1/js/buttons.flash.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+    <script src="https://cdn.datatables.net/buttons/1.6.1/js/buttons.html5.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/1.6.1/js/buttons.print.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.9/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.9/js/jquery.dataTables.min.js"></script>
+
+
+    <script>
+
+
+        $(document).ready(function () {
+            $('#myTable').DataTable({
+                dom: 'Bfrtip',
+                buttons: ['copy', 'csv', 'excel', 'pdf', 'print'],
+                "ajax": {
+                    "url": "/SystemAdmin/LoadLogs",
+                    "type": "GET",
+                    "datatype": "json"
+                },
+                "columns": [
+                    {
+                        "data": "Id",
+                        "autoWidth": true
+
+                    },
+                    {
+                        "data": "Date",
+                        "format": 'D/M/YYYY',
+                        "autoWidth": true
+                    },
+                    {
+                        "data": "Type",
+                        "autoWidth": true,
+                        //TOOK ME SUPER LONG
+                        "createdCell": function (td, cellData, rowData, row, col) {
+
+                            if (cellData == "WARN") {
+                                $(td).css('font-weight', 'bold')
+                                $(td).css('background-color', '#ebb0b3')
+                            }
+                            else if (cellData == "FATAL") {
+                                $(td).css('font-weight', 'bold')
+                                $(td).css('background-color', 'red')
+                            }
+                            else if (cellData == "ERROR") {
+                                $(td).css('font-weight', 'bold')
+                                $(td).css('background-color', '#fff699')
+                            }
+                            else if (cellData == "INFO") {
+                                $(td).css('font-weight', 'bold')
+                                $(td).css('background-color', '#b3e6fc')
+                            }
+                            else if (cellData == "TRACE") {
+                                $(td).css('font-weight', 'bold')
+                                $(td).css('background-color', '#DEF0D8')
+                            }
+                        }
+
+                    },
+                    {
+                        "data": "Username",
+                        "autoWidth": true,
+
+                    },
+                    {
+                        "data": "Roles",
+                        "autoWidth": true,
+
+                    },
+                    {
+                        "data": "Message",
+                        "autoWidth": true,
+
+                    },
+                    {
+                        "data": "ControllerName",
+                        "autoWidth": true,
+
+                    },
+
+
+                ],
+
+                /*    "rowCallback": function (node, data) {
+
+                        alert(node.val);
+                        if (data.className) $(node).addClass(data.className)
+                    },*/
+
+                initComplete: function () {
+
+                    var table = $('#myTable').DataTable();
+
+                    $('#dropdown2').on('change', function () {
+                        table.columns(2).search(this.value).draw();
+                    });
+
+                    $('#dropdown3').on('change', function () {
+                        table.columns(4).search(this.value).draw();
+                    });
+
+                    /*   $('#dropdown4').on('change', function () {
+                           table.columns(1).search(this.value).draw();
+                       });
+*/
+                    //TOOK ME LIKE SUPPPPPPPPPPPPPPPPPPPPPPPPPPPPPER LONG
+                    //THANK GOD TO THIS LINK https://stackoverflow.com/questions/42864090/datatables-filtering-with-dropdown-list
+                    $.fn.dataTable.ext.search.push(
+                        function (settings, data, dataIndex) {
+
+                            var now = new Date($.now());
+                            var row_date = new Date(data[1]);
+
+
+                            var testDate = new Date();
+                            var filter_value = $('#dropdown1').val();
+
+                            if (filter_value == 'NULL') {
+                                return true;
+                            }
+                            else if (filter_value == '1 day ago') {
+                                testDate.setDate(now.getDate() - 1);
+                            }
+                            else if (filter_value == '7 days ago') {
+                                testDate.setDate(now.getDate() - 7);
+                            }
+                            else if (filter_value == '2 weeks ago') {
+                                testDate.setDate(now.getDate() - 14);
+                            }
+                            else if (filter_value == '1 month ago') {
+                                testDate.setDate(now.getDate() - 30);
+                            }
+
+
+                            if ((testDate < row_date) && (now > row_date)) {
+
+                                // true means show
+                                return true;
+                            }
+
+                            return false;
+
+
+
+                        }
+                    );
+
+                    $('#dropdown1').change(function () {
+                        table.draw();
+                    });
+
+
+                }
+
+            });
+
+        });
+
+
+    </script>
+ 
+}
+
+@*
+    //Runs a function everytime user selects a dropdown
+    /*   $('#dropdown1').on('change', function () {
+
+
+         var testDate = "01-Dec-19 3:28:18 PM"
+           testDate = new Date(Date.parse(testDate));
+
+           var filterDate = new Date($.now());
+           if (this.value == "1 day ago") {
+               filterDate.setDate(filterDate.getDate() - 1);
+
+               alert(filterDate > testDate);
+               //alert(filteredTime);
+           }
+           else if (this.value == "7 days ago") {
+               filterDate.setDate(filterDate.getDate() - 7);
+           }
+
+           else if (this.value == "2 weeks ago") {
+               filterDate.setDate(filterDate.getDate() - 14);
+
+           }
+           else if (this.value == "1 month ago") {
+               filterDate.setDate(filterDate.getDate() - 30);
+           }
+
+           table.columns(1).search(this.value).draw();
+       });
+       $('#dropdown2').on('change', function () {
+           table.columns(2).search(this.value).draw();
+       });*/
+
+    /*
+                        $('#dropdown1').on('change', function () {
+                            //var min = new Date($.now());
+                            var selectedValue = this.value;
+                            var filteredDate = new Date($.now());
+                         //min.setDate(min.getDate() - 1000);
+                                //alert(min);
+                            if (selectedValue == "1 day ago") {
+                                filteredDate.setDate(filteredDate.getDate() - 1);
+                            }
+                            else if (selectedValue == "7 days ago") {
+                                filteredDate.setDate(filteredDate.getDate() - 7);
+                            }
+                            else if (selectedValue == "2 weeks ago") {
+                                filteredDate.setDate(filteredDate.getDate() - 14);
+                            }
+                            else if (selectedValue == "1 month ago") {
+                                filteredDate.setDate(filteredDate.getDate() - 30);
+                            }
+                            else {
+                                filteredDate.setDate(filteredDate.getDate() - 1000);
+                            }
+
+                            $.fn.dataTable.ext.search.push(
+                                function (settings, data, dataIndex) {
+                                    var min = filteredDate;
+                                    var max = new Date($.now());   ;
+                                    alert(data[1]);
+                                    var startDate = new Date(data[1]);
+
+
+                                    if (min == null && max == null) {
+                                        return true;
+                                    }                   //2010  //2020
+                                    if (min == null && startDate <= max) {
+                                        return true;
+                                    }
+                                    if (max == null && startDate >= min) {
+                                        return true;
+                                    }
+                                    if (startDate <= max && startDate >= min) {
+                                        return true;
+                                    }
+
+                                    return false;
+                                }
+                            );
+                            table.draw();
+                        });
+                    */
+
+*@
+
+@*
+
+     /*              $.fn.dataTable.ext.search.push(
+            function (settings, data, dataIndex) {
+                //var min = $('#min').datepicker('getDate');
+                //var max = $('#max').datepicker('getDate');
+                var max = new Date($.now());
+                var min = new Date($.now());
+                min.setDate(min.getDate() - 10);
+
+
+                var startDate = new Date(data[1]);
+                if (min == null && max == null) return true;
+                if (min == null && startDate <= max) return true;
+                if (max == null && startDate >= min) return true;
+                if (startDate <= max && startDate >= min) return true;
+                return false;
+            }
+                );
+
+                //$('#min').datepicker({ onSelect: function () { table.draw(); }, changeMonth: true, changeYear: true });
+                //$('#max').datepicker({ onSelect: function () { table.draw(); }, changeMonth: true, changeYear: true });
+
+                // Event listener to the two range filtering inputs to redraw on input
+                $('#min, #max').change(function () {
+                    table.draw();
+                });
+    */
+
+
+                  /*      $(function () {
+                            var start = moment("2017-01-01 12:34:16");
+                            var end = moment("2018-03-03 10:08:07");
+
+
+                            function cb(start, end) {
+                                $('#reportrange span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'));
+                            }
+
+                            $('#reportrange').daterangepicker({
+                                startDate: start,
+                                endDate: end,
+                                ranges: {
+                                    'Today': [moment(), moment()],
+                                    'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+                                    'Last 7 Days': [moment().subtract(6, 'days'), moment()],
+                                    'Last 30 Days': [moment().subtract(29, 'days'), moment()],
+                                    'This Month': [moment().startOf('month'), moment().endOf('month')],
+                                    'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
+                                }
+                            }, cb);
+
+                            cb(start, end);
+
+                        });
+
+
+                        $('#reportrange').on('apply.daterangepicker', function (ev, picker) {
+                            var start = picker.startDate.format('YYYY-MM-DD');
+                            var end = picker.endDate.format('YYYY-MM-DD');
+
+
+
+                            $.fn.dataTable.ext.search.push(
+                                function (settings, data, dataIndex) {
+                                    var min = start;
+                                    var max = end;
+                                    var startDate = new Date(data[1]);
+                                    if (min == null && max == null) {
+                                        return true;
+                                    }
+                                    if (min == null && startDate <= max) {
+                                        return true;
+                                    }
+                                    if (max == null && startDate >= min) {
+                                        return true;
+                                    }
+                                    if (startDate <= max && startDate >= min) {
+                                        return true;
+                                    }
+                                    return false;
+                                }
+                            );
+                            table.draw();
+                        });
+    */
+
+
+
+
+
+
+                        /*       $('<div>' +
+                               '<select>' +
+                               '<option value="Processing">Processing</option>' +
+                               '<option value="Error">Error</option>' +
+                               '<option value="Completed">Completed</option>' +
+                               '</select>' +
+                               '</div>').appendTo("#dropdownArea .customDropDown");
+               */
+
+
+                        /*          this.api().columns([1,2,4,6]).every(function () {
+                                      var column = this;
+                                      var select = $('<select><option value="">Show All'  + '</option></select>')
+                                          .appendTo($(column.footer()).empty())
+                                          //.appendTo( $(column.header()))
+                                          .on('change', function () {
+                                              var val = $.fn.dataTable.util.escapeRegex(
+                                                  $(this).val()
+                                              );
+
+                                              column
+                                                  .search(val ? '^' + val + '$' : '', true, false)
+                                                  .draw();
+                                          });
+
+                                      column.data().unique().sort().each(function (d, j) {
+                                          select.append('<option value="' + d + '">' + d + '</option>')
+                                      });
+                                  });*/
+*@

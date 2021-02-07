@@ -1,0 +1,37 @@
+﻿@model PMDWebApplication.Models.RoleViewModel
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_AdminLayoutPage.cshtml";
+
+}
+    <div class="container">
+
+        <h2>Roles in Vervoer</h2>
+        <div>
+
+            <div class="card mb-3">
+                <div class="card-header">
+                    <i class="fas fa-table"></i>
+                    <div>
+                        <h4>Details</h4>
+                        <hr />
+                        <dl class="dl-horizontal">
+                            <dt>
+                                @Html.DisplayNameFor(model => model.Name)
+                            </dt>
+
+                            <dd>
+                                @Html.DisplayFor(model => model.Name)
+                            </dd>
+
+                        </dl>
+                    </div>
+                    <p>
+                        @Html.ActionLink("Edit", "RoleEdit", new { id = Model.Id }) |
+                        @Html.ActionLink("Back to List", "RoleIndex")
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>

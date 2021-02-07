@@ -1,0 +1,196 @@
+﻿@using Microsoft.AspNet.Identity
+
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - My ASP.NET Application</title>
+    @*@Styles.Render("~/Content/css")*@
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="~/Content/W3School.css">
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Content/MyMainLayOut.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap-datetimepicker.min.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap-datetimepicker.css" rel="stylesheet" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    @Scripts.Render("~/bundles/modernizr")
+
+    <style>
+
+        html {
+            min-width: 800px;
+            overflow: scroll;
+        }
+
+        #map {
+            height: 300px;
+            width: 300px;
+            margin-left: auto;
+        }
+
+        .contact-us, .about-us {
+            width: 100%;
+        }
+
+            .contact-us > h2, .about-us > h2 {
+                font-size: 50px;
+                text-align: center;
+                color: black;
+                margin: 0;
+            }
+
+        .contact-form {
+            width: 500px;
+            float: right;
+            position: relative;
+            right: 100px;
+        }
+
+        @@media only screen and (max-width: 1000px) {
+            .contact-form {
+                width: 300px;
+            }
+        }
+
+        @@media only screen and (max-width: 600px) {
+            .contact-form {
+                width: 200px;
+            }
+        }
+    </style>
+    @*
+        <script>
+            var map;
+            function initMap() {
+                map = new google.maps.Map(document.getElementById('map'), {
+                    center: { lat: 1.380137, lng: 103.848950 },
+                    zoom: 16
+                });
+
+                var marker = new google.maps.Marker({
+                    position: { lat: 1.380137, lng: 103.848950 },
+                    map: map,
+                    animation: google.maps.Animation.BOUNCE,
+                    title: "NYP",
+                });
+            }
+        </script>
+        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCJxDDbTBGgcS6GcO9NktxI08ILemUPVGA&callback=initMap"></script>
+    *@
+</head>
+<body>
+
+    <div class="container">
+        <div class="row" style="background-color:#89BFF9">
+            <div class="col-md-6 col-sm-6 col-xs-6">
+                <div class="logo">
+                    <h1>
+                        <a href="@Url.Action("Index", "Home")" class="elements">
+                            Ver<span>voer</span>
+                        </a>
+                    </h1>
+                    <p>Transport</p>
+                </div>
+            </div>
+
+            <div class="col-md-6 col-sm-6 col-xs-6">
+                <div class="account">
+                    <ul>
+                        <li>
+                            <div class="hidden-xs">
+                                <h4><a>Call</a></h4>
+                                <p>1800 - 338 6622</p>
+                            </div>
+
+                            <div class="visible-xs">
+
+                                <p>1800 - 338 6622</p>
+                            </div>
+
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+
+            <div class="col-md-12">
+                <div class="nav-menus">
+
+                    @if (Request.IsAuthenticated)
+                    {
+                        using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm" }))
+                        {
+                            @Html.AntiForgeryToken()
+
+                    <ul class="nav nav-pills">
+                        <li class="active pull-left"><a style="border-radius:initial;" href="~/Home/Index">Home</a></li>
+                        @if (User.IsInRole("System Administrator"))
+                        {
+                            <li pull-left"><a style="border-radius:initial;" href="~/Admin/Dashboard">Dashboard</a></li>
+
+                        }
+
+                        <li pull-left"><a style="border-radius:initial;" href="~/Manage/Index">Manage</a></li>
+                        <li pull-left"><a style="border-radius:initial;" href="~/Home/FAQPage">FAQ Page</a></li>
+                        <li pull-left"><a style="border-radius:initial;" href="~/Home/OurPartners">Our Partners</a></li>
+
+                        <li class="pull-right">
+                            @Html.ActionLink("Hello " + User.Identity.GetUserName() + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
+                        </li>
+                        <li class="pull-right"><a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
+                    </ul>
+
+                        }
+                    }
+                    else
+                    {
+                        <ul class="nav nav-pills">
+                            <li class="active"><a style="border-radius:initial;" href="~/Home/Index">Home</a></li>
+        
+                            <li class="pull-right">@Html.ActionLink("Register", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
+                            <li class="pull-right">@Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
+                        </ul>
+
+
+
+                    }
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    @RenderBody()
+
+    <div class="container" style="clear:right">
+        <hr />
+        <footer>
+            <div class="row">
+                <div class="col-md-12 copyright">
+
+                    <div class="col-md-6 col-sm-6 copyright-left">
+                        <p>&copy; @DateTime.Now.Year - Vervoer. All right reserved.</p>
+                    </div>
+
+                    <div class="col-md-6 col-sm-6 copyright-right">
+
+                        <ul class="list-unstyled list-social">
+                            <li><a href="#" target="_blank"><i class="fa fa-facebook-square"></i></a></li>
+                            <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                            <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
+
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+        </footer>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

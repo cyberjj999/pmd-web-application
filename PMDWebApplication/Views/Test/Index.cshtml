@@ -1,0 +1,33 @@
+﻿@model PMDWebApplication.Models.TestViewModel
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+<div>
+    @using (Html.BeginForm("Index", "Test", FormMethod.Post))
+    {
+        @*<div class="g-recaptcha" data-sitekey="6LcUo8YUAAAAALn05-TJqV1iJPn3fztoVbHTsl2T"></div>*@
+
+        <div class="form-group">
+            @Html.LabelFor(m => m.testInput, new { @class = "col-md-2 control-label" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(model => model.testInput, new { @class = "form-control"})
+
+            </div>
+        </div>
+
+
+
+        <input type="submit" value="Submit" />
+    }
+</div>
+
+
+@*
+    <span style="display:inline-block; font-size:20px;margin:20px 0;padding:20px;border:1px solid #D3D3D3">
+        @ViewBag.Message
+    </span>
+    <script src='https://www.google.com/recaptcha/api.js' type="text/javascript"></script>
+*@

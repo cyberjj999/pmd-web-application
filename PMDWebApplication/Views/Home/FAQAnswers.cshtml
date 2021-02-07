@@ -1,0 +1,40 @@
+﻿@model PMDWebApplication.DB.FAQ
+
+@{
+    ViewBag.Title = "FAQAnswers";
+}
+
+<style>
+.dl-horizontal{
+    font-size:large;
+}
+</style>
+<div class="container">
+    <div>
+        <hr />
+        <dl class="dl-horizontal">
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Question)
+            </dt>
+            <dt>
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Question)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Answer)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Answer)
+            </dd>
+
+        </dl>
+    </div>
+    <p>
+        @Html.ActionLink("Back to FAQ Page", "FAQPage")
+    </p>
+</div>

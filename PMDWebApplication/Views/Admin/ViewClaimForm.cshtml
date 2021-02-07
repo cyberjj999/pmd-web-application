@@ -1,0 +1,224 @@
+﻿@model PMDWebApplication.DB.InsuranceClaim
+
+@{
+    ViewBag.Title = "ClaimInsurance";
+    Layout = "~/Views/Shared/_AdminLayoutPage.cshtml";
+    @*    @model PMDWebApplication.Models.ClaimFormViewModel
+    *@
+
+    var userId = Model.UserID;
+
+}
+
+<div class="container">
+    <div class="card mb-3">
+        <div class="card-header">
+            <h2 style="text-align:center">Insurance Claim submitted on @Model.DateOfClaim</h2>
+        </div>
+        <div class="card-body">
+            <h3 style="text-align:center">Claim submitted by : @Model.AspNetUser.fullname</h3>
+            <br />
+            <div class="form-group">
+                <div class="form-row">
+                    <div class="col-md-4">
+                        <div class="form-label-group">
+                            @Html.HiddenFor(model => model.UserID)
+
+                            @Html.TextBoxFor(m => m.PolicyNo, new { @class = "form-control", @id = "input-InsuranceNo", disabled = true })
+                            <label for="input-InsuranceNo">Policy number(s)</label>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-label-group">
+                            @Html.TextBoxFor(m => m.PlanType, new { @class = "form-control", @id = "input-PlanType", disabled = true })
+                            <label for="input-PlanType">Plan type</label>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-label-group">
+                            @Html.TextBoxFor(m => m.ClaimNo, new { @class = "form-control", @id = "input-date", disabled = true })
+                            <label for="input-date">Claim Number</label>
+                        </div>
+                    </div>
+                </div>
+                <br />
+                <div class="form-group">
+                    <div class="form-row">
+                        <div class="col-md-6">
+                            <div class="form-label-group">
+                                @Html.TextBoxFor(m => m.VictimName, new { @class = "form-control", @id = "input-FullName", disabled = true })
+                                <label for="input-FullName">Name of victim (as shown in NRIC) NRIC/Passport/Birth Certificate number</label>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-label-group">
+                                @Html.TextBoxFor(m => m.VictimNRIC, new { @class = "form-control", @id = "input-NRIC", disabled = true })
+                                <label for="input-NRIC">NRIC/Passport/Birth Certificate number</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="form-row">
+                        <div class="col-md-6">
+                            <div class="form-label-group">
+                                @Html.TextBoxFor(m => m.NomineeName, new { @class = "form-control", @id = "input-nominee", disabled = true })
+                                <label for="input-nominee">Name of nominee/claimant/the legal personal representative of the policyholder</label>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-label-group">
+                                @Html.TextBoxFor(m => m.NomineeNRIC, new { @class = "form-control", @id = "input-NomineeNRIC", disabled = true })
+                                <label for="input-NomineeNRIC">NRIC/Passport number</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="form-row">
+                        <div class="col-md-12">
+                            <div class="form-label-group">
+                                @Html.TextBoxFor(m => m.Relationship, new { @class = "form-control", @id = "input-Relationship", disabled = true })
+                                <label for="input-Relationship">Relationship to victim</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="form-row">
+                        <div class="col-md-12">
+                            <div class="form-label-group">
+                                @Html.TextBoxFor(m => m.Address, new { @class = "form-control", @id = "input-Address", disabled = true })
+                                <label for="input-Address">Address</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="form-row">
+                        <div class="col-md-12">
+                            <div class="form-label-group">
+                                @Html.TextBoxFor(m => m.ContactNo, new { @class = "form-control", @id = "input-PhoneNumber", disabled = true })
+                                <label for="input-PhoneNumber">Contact Number</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                @**@
+                <div class="form-group" style="text-align:center">
+                    <div class="signature-pad">
+                        <canvas class="panel panel-default"></canvas>
+                        @Html.HiddenFor(model => model.Signature, new { @disabled = "disabled" })
+                    </div>
+                    <label for="input-Singature"><strong>Claimant's Signature</strong></label>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="form-row">
+                    <div class="col-md-2">
+                        &nbsp
+                    </div>
+                    <div class="col-md-4">
+                        @using (Html.BeginForm("ApproveInsurance", "Admin", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+                        {
+                            @Html.HiddenFor(model => model.UserID)
+                            <input type="submit" class="btn btn-primary" style="width:200px" onclick="return confirm('Are you sure you want to approve this claim?')" value="Approve" />
+                        }
+
+                        @*     @using (Html.BeginForm("ApproveInsurance", "Admin", new { UID = Model.UserID }))
+        {
+            <input type="submit" class="btn btn-primary" style="width:200px" onclick="return confirm('Are you sure you want to approve this claim?')" value="Approve" />
+        }
+                        *@
+                    </div>
+                    <div class="col-md-1">
+                        &nbsp
+                    </div>
+                    <div class="col-md-4">
+                        <input type="submit" class="btn btn-danger" style="width:200px" data-toggle="modal" data-target="#exampleModal" value="Deny" />
+                    </div>
+                </div>
+            </div>
+            @Html.ActionLink("Back to List", "ManageInsurance")
+
+        </div>
+
+    </div>
+</div>
+
+
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Reason for denial</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+
+            @using (Html.BeginForm("DenyInsurance", "Admin", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+            {
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="message-text" class="col-form-label">Message:</label>
+                        @Html.HiddenFor(model => model.UserID)
+                        @Html.TextAreaFor(m => m.DenialMessage, new { @class = "form-control"})
+
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <input type="submit" ,value="Deny" class="btn btn-danger" />
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+
+
+
+<div class="modal fade" id="myModal3" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Register New User</h5>
+                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body" id="myModalBodyDiv3"> </div>
+
+        </div>
+    </div>
+</div>
+
+
+<style>
+    .signature-pad > canvas {
+        display: block;
+        width: 300px;
+        height: 150px;
+        margin: 0 auto;
+        border: solid
+    }
+</style>
+
+@section Scripts {
+    <script src="~/Scripts/signature_pad.min.js"></script>
+    <script src="~/Scripts/SignaturePadInit.js"></script>
+    <script>
+        var DeleteUser = function (UserName, Message) {
+
+            var url = "/Admin/DenyInsurance?UserName=" + UserName + "&Message=" + Message
+
+            $("#myModalBodyDiv3").load(url, function () {
+                $("#myModal3").modal("show");
+
+            })
+        }
+    </script>
+}

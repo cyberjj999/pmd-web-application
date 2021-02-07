@@ -1,0 +1,73 @@
+﻿@model IEnumerable<PMDWebApplication.DB.ReportPMD>
+
+@{
+    ViewBag.Title = "ReportPMDAdmin";
+    Layout = "~/Views/Shared/_AdminLayoutPage.cshtml";
+}
+    <div class="container">
+        @*<h2>View Reports</h2>*@
+
+        <div class="container">
+            <ol class="breadcrumb">
+
+                <li class="breadcrumb-item active">Reports</li>
+            </ol>
+
+            <div class="card mb-3">
+                <div class="card-header">
+
+
+                    <div class="card-body">
+
+                        <table class="table">
+                            <tr>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.Date)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.Title)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.Description)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.Image)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.Name)
+                                </th>
+                                <th></th>
+                            </tr>
+
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Date)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Title)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Description)
+                                    </td>
+                                    <td>
+                                        <img src="@Url.Content(item.Image)" alt="Not found" width="120" height="120" />
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Name)
+                                    </td>
+                                    @*<td>
+                                        @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
+                                        @Html.ActionLink("Details", "Details", new { id=item.Id }) |
+                                        @Html.ActionLink("Delete", "Delete", new { id=item.Id })
+                                    </td>*@
+                                </tr>
+                            }
+
+                        </table>
+                    </div>
+                </div>
+</div>
+</div>
+</div>

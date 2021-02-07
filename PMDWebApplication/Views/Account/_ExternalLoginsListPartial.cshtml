@@ -1,0 +1,56 @@
+﻿@model PMDWebApplication.Models.ExternalLoginListViewModel
+@using Microsoft.Owin.Security
+
+<hr />
+@{
+    var loginProviders = Context.GetOwinContext().Authentication.GetExternalAuthenticationTypes();
+    if (loginProviders.Count() == 0)
+    {
+        <div>
+            <p>
+                There are no external authentication services configured. See <a href="https://go.microsoft.com/fwlink/?LinkId=403804">this article</a>
+                for details on setting up this ASP.NET application to support logging in via external services.
+            </p>
+        </div>
+    }
+    else
+    {
+        using (Html.BeginForm("ExternalLogin", "Account", new { ReturnUrl = Model.ReturnUrl }))
+        {
+            @Html.AntiForgeryToken()
+            <div class="social-auth-links text-center">
+                <p>- OR -</p>
+                <p>
+                    @foreach (AuthenticationDescription p in loginProviders)
+                    {
+
+                        if (p.AuthenticationType == "Google")
+                        {
+                            <button type="submit" class="btn btn-block btn-social btn-google btn-flat" id="@p.AuthenticationType" name="provider" value="@p.AuthenticationType">
+                                <i class="fa fa-google-plus"></i> Sign in using Google+
+                            </button>
+                        }
+                        else if (p.AuthenticationType == "Facebook")
+                        {
+                            @*
+                <button type="submit" class="btn btn-block btn-social btn-facebook btn-flat" id="@p.AuthenticationType" name="provider" value="@p.AuthenticationType">
+                    <i class="fa fa-facebook"></i> Sign in using
+                    Facebook
+                </button>*@
+
+                            <button style="background-color: #3B5998;" type="submit" class="btn btn-block btn-social btn-facebook btn-flat" id="@p.AuthenticationType" name="provider" value="@p.AuthenticationType">
+                                <i class="fa fa-facebook fa-fw" style="color:white"></i>
+                                <text style="color:white">   Sign in using Facebook </text>
+                            </button>
+                        }
+                    }
+                </p>
+            </div>
+        }
+    }
+}
+
+<!-- <a href="#" class="btn btn-block btn-social btn-facebook btn-flat">
+<i class="fa fa-facebook"></i> Sign in using
+Facebook
+       </a>-->

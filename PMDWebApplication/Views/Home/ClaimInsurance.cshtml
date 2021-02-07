@@ -1,0 +1,199 @@
+﻿@model PMDWebApplication.Models.ClaimInsuranceViewModel
+@using PMDWebApplication.DB
+@using PMDWebApplication.Repository
+@using Microsoft.AspNet.Identity
+
+@{
+    ViewBag.Title = "ClaimInsurance";
+    GenericUnitOfWork _unitOfWork = new GenericUnitOfWork();
+    string userId = User.Identity.GetUserId();
+    var haveInsurance = _unitOfWork.GetRepositoryInstance<AspNetCartInsurance>().GetAllRecordsIQueryable().Any(x => x.MemberId == userId);
+
+
+}
+
+@if (haveInsurance)
+{
+
+    if (Model.Status == "Approved")
+    {
+        <h1 style="color:green;text-align:center">Your insurance claim has been approved successfully!</h1>
+    }
+
+    else if (Model.Status == "Pending")
+    {
+        <h1 style="color:#f5d442;text-align:center">Your insurance claim is still pending! Please wait for approval!</h1>
+
+    }
+
+    else
+    {
+        <div class="container">
+            <div style="text-align:center">
+                <h2>Upload your pre-filled Insurance Document here</h2>
+                @using (Html.BeginForm("UploadInsuranceClaimFile", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                {
+                    @Html.AntiForgeryToken()
+                    <div class="form-group">
+
+                        <i style="color:red">@TempData["FileErrorMessage"]</i>
+                        <input type="file" name="file" accept=".pdf" style="display:inline-block" />
+                    </div>
+                    <input type="submit" data-confirm="Are you sure?" value="Select Form" />
+
+                }
+
+                <p style="color:green">@TempData["Message"]</p>
+            </div>
+            @if (Model.DenialMessage != null)
+            {
+
+                <h2 style="color:red;text-align:center;">
+                    Your Insurance Claim has been rejected! <br />
+                    Please refer to the message below before re-submitting your claim.
+                </h2>
+
+                <p style="color:red;text-align:center;">
+                    @Model.DenialMessage
+                </p>
+            }
+
+            <h2>Insurance Form</h2>
+            @using (Html.BeginForm("ClaimInsurance", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
+            {
+                @Html.AntiForgeryToken()
+                @Html.ValidationSummary("", new { @class = "text-danger" })
+
+                <div class="form-group">
+                    <div class="form-row">
+                        <div class="col-md-4">
+                            <div class="form-label-group">
+                                @Html.TextBoxFor(m => m.InsuranceNo, new { @class = "form-control", @id = "input-InsuranceNo", @Value = Model.InsuranceNo, disabled = true })
+                                <label for="input-InsuranceNo">Policy number(s)</label>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-label-group">
+                                @Html.TextBoxFor(m => m.PlanType, new { @class = "form-control", @id = "input-PlanType", @Value = Model.PlanType, disabled = true })
+                                <label for="input-PlanType">Plan type</label>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-label-group">
+                                @Html.TextBoxFor(m => m.Date, new { @class = "form-control", @id = "input-date", @Value = DateTime.Now, disabled = true })
+                                <label for="input-date">Date of Claim</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="form-row">
+                            <div class="col-md-6">
+                                <div class="form-label-group">
+                                    @Html.TextBoxFor(m => m.FullName, new { @class = "form-control", @id = "input-FullName", @value = Model.FullName, disabled = true })
+                                    <label for="input-FullName">Name of victim (as shown in NRIC) NRIC/Passport/Birth Certificate number</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-label-group">
+                                    @Html.TextBoxFor(m => m.VictimNRIC, new { @class = "form-control", @id = "input-VictimNRIC", @maxlength = "10", required = true })
+                                    <label for="input-VictimNRIC">NRIC/Passport/Birth Certificate number</label>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="form-group">
+                            <div class="form-row">
+                                <div class="col-md-6">
+                                    <div class="form-label-group">
+                                        @Html.TextBoxFor(m => m.Nominee, new { @class = "form-control", @id = "input-nominee", required = true })
+                                        <label for="input-nominee">Name of nominee/claimant/the legal personal representative of the policyholder</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-label-group">
+                                        @Html.TextBoxFor(m => m.NomineeNRIC, new { @class = "form-control", @id = "input-NomineeNRIC", @maxlength = "10", required = true })
+                                        <label for="input-NomineeNRIC">NRIC/Passport number</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-12">
+                                <div class="form-label-group">
+                                    @Html.TextBoxFor(m => m.Relationship, new { @class = "form-control", @id = "input-Relationship", required = true })
+                                    <label for="input-Relationship">Relationship to victim</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-12">
+                                <div class="form-label-group">
+                                    @Html.TextBoxFor(m => m.Address, new { @class = "form-control", @id = "input-Address", required = true })
+                                    <label for="input-Address">Address</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-12">
+                                <div class="form-label-group">
+                                    @Html.TextBoxFor(m => m.PhoneNumber, new { @class = "form-control", @id = "input-PhoneNumber", @maxlength = "10", required = true })
+                                    <label for="input-PhoneNumber">Contact Number</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group" style="text-align:center">
+
+                            <div class="signature-pad">
+                                <canvas class="panel panel-default"></canvas>
+                                <label>Signature/thumbprint</label><br />
+                                @Html.EditorFor(model => model.Signature)
+                                <button type="button" class="btn btn-default btn-sm btn-clear-canvas">Clear</button>
+                                @Html.HiddenFor(model => model.Signature, ViewData["htmlAttributes"])
+                            </div>
+                        </div>
+
+                        <div class="form-group" style="text-align:center">
+                            <input type="submit" class="btn btn-default" data-confirm="Are you sure?" value="Submit Claim" />
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+
+    }
+}
+
+
+else
+{
+    <div class="container">
+        <h3>You have yet to purchase a insurance, please @Html.ActionLink("purchase a insurance", "InsuranceEcommerce") before submitting your claim</h3>
+    </div>
+}
+
+<style>
+    .signature-pad > canvas {
+        display: block;
+        margin: 0 auto;
+        width: 300px;
+        height: 150px;
+        margin-bottom: 5px;
+    }
+</style>
+
+@section Scripts {
+    <script src="~/Scripts/signature_pad.min.js"></script>
+    <script src="~/Scripts/SignaturePadInit.js"></script>
+
+    <script>
+        jQuery(document).ready(function () {
+            jQuery('[data-confirm]').click(function (e) {
+                if (!confirm(jQuery(this).attr("data-confirm"))) {
+                    e.preventDefault();
+                }
+            });
+        });
+    </script>
+}

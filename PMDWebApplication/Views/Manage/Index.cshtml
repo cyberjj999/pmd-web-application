@@ -1,0 +1,354 @@
+﻿@using PMDWebApplication.Models
+@using Microsoft.AspNet.Identity
+@using PMDWebApplication.DB
+
+@{
+    ViewBag.Title = "Manage";
+    dbVervoerEntities db = new dbVervoerEntities();
+    string userId = User.Identity.GetUserId();
+    string username = User.Identity.GetUserName();
+    string userImage = db.AspNetUsers.Where(i => i.Id == userId).Select(i => i.Uimg).SingleOrDefault();
+    string email = db.AspNetUsers.Where(i => i.Id == userId).Select(i => i.Email).SingleOrDefault();
+    string fullname = db.AspNetUsers.Where(i => i.Id == userId).Select(i => i.fullname).SingleOrDefault();
+    int age = db.AspNetUsers.Where(i => i.Id == userId).Select(i => i.Age).SingleOrDefault();
+    string phonenumber = db.AspNetUsers.Where(i => i.Id == userId).Select(i => i.PhoneNumber).SingleOrDefault();
+    bool twofactorenabled = db.AspNetUsers.Where(i => i.Id == userId).Select(i => i.TwoFactorEnabled).SingleOrDefault();
+    Guid claimtoken = db.InsuranceClaims.Where(i => i.UserID == userId).Select(i => i.ClaimNo).SingleOrDefault();
+}
+
+@*
+
+        <link href="~/startbootstrap-sb-admin-gh-pages/css/sb-admin.min.css" rel="stylesheet">
+
+                    <div class="container">
+                        <div class="card card-login mx-auto mt-5">
+                            <div class="card-header">Login</div>
+                            <div class="card-body">
+
+                            </div>
+                        </div>
+                    </div>
+        <style>
+        .card{position:relative;display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-orient:vertical;-webkit-box-direction:normal;-ms-flex-direction:column;flex-direction:column;min-width:0;word-wrap:break-word;background-color:#fff;background-clip:border-box;border:1px solid rgba(0,0,0,.125);border-radius:.25rem}.card>hr{margin-right:0;margin-left:0}.card>.list-group:first-child .list-group-item:first-child{border-top-left-radius:.25rem;border-top-right-radius:.25rem}
+    .card-header{padding:.75rem 1.25rem;margin-bottom:0;background-color:rgba(0,0,0,.03);border-bottom:1px solid rgba(0,0,0,.125)}.card-header:first-child{border-radius:calc(.25rem - 1px) calc(.25rem - 1px) 0 0}.card-header+.list-group .list-group-item:first-child{border-top:0}.card-footer{padding:.75rem 1.25rem;background-color:rgba(0,0,0,.03);border-top:1px solid rgba(0,0,0,.125)}.card-footer:last-child{border-radius:0 0 calc(.25rem - 1px) calc(.25rem - 1px)}.card-header-tabs{margin-right:-.625rem;margin-bottom:-.75rem;margin-left:-.625rem;border-bottom:0}
+    </style>
+
+                    <div class="container2" style="text-align:center;">
+                    <div class="card2">
+                        <img src="@Url.Content(userImage)" alt="Avatar" style="width:100%">
+                        <h4><b>@username</b></h4>
+                        <p>Architect & Engineer</p>
+
+                    </div>
+                </div>
+*@
+
+<style>
+
+.container2 {
+  padding: 2px 16px;
+}
+
+.card2 {
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  transition: 0.3s;
+  width: 20%;
+}
+
+.card2:hover {
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+}
+
+</style>
+
+<div class="container">
+    <h2>Manage Your Account</h2>
+    <h4 style="color:green">@TempData["Message"]</h4>
+    <h4 style="color:red">@TempData["ErrorMessage"]</h4>
+
+    <div class="row my-2">
+
+        <div class="order-lg-1 text-center card2" style="float:left">
+            
+            <div class="container2" style="text-align:center;">
+                <div>
+                    <img src="@Url.Content(userImage)" class="mx-auto img-fluid img-circle d-block" width="150" height="200" style="width:100%">
+                    <h4><b>@username</b></h4>
+                    <p>@TempData["Roles"]</p>
+
+                </div>
+            </div>
+
+
+            @*
+        <img src="//placehold.it/150" class="mx-auto img-fluid img-circle d-block" alt="avatar">
+        <h6 class="mt-2">Upload a different photo</h6>
+        <label class="custom-file">
+            <input type="file" id="file" class="custom-file-input">
+            <span class="custom-file-control">Choose file</span>
+        </label>*@
+        </div>
+
+        <div class="col-lg-8">
+
+            <ul class="nav nav-tabs">
+                <li class="nav-item">
+                    <a href="" data-target="#personalInfo" data-toggle="tab" class="nav-link active">Personal Info</a>
+                </li>
+                <li class="nav-item">
+                    <a href="" data-target="#changeAvatar" data-toggle="tab" class="nav-link">Change Avatar</a>
+                </li>
+                <li class="nav-item">
+                    <a href="" data-target="#ChangePassword" data-toggle="tab" class="nav-link">Change Password</a>
+                </li>
+                @*
+                <li class="nav-item">
+                    <a href="" data-target="#messages" data-toggle="tab" class="nav-link">Messages</a>
+                </li>*@
+
+            </ul>
+            <div class="tab-content py-4">
+                <div class="tab-pane active" id="personalInfo">
+                    <br />
+                    <h4>Account Details</h4>
+                    <hr />
+                    <div>
+                        <div class="form-group row">
+                            <label class="col-lg-3 col-form-label form-control-label">Username</label>
+                            <div class="col-lg-9">
+                                @Html.TextBox("modelUsername    ", username, new { @class = "form-control", disabled = true })
+                               @* <input class="form-control" type="text" value=@username disabled>*@
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-lg-3 col-form-label form-control-label">Email</label>
+                            <div class="col-lg-9">
+                                <input class="form-control" type="email" value=@email disabled>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label class="col-lg-3 col-form-label form-control-label">Full Name</label>
+                            <div class="col-lg-4">
+                                @Html.TextBox("modelFullName", fullname,new { @class = "form-control" , disabled = true })
+                                @*<input class="form-control" type="text" value=@fullname disabled>*@
+                            </div>
+                            <label class="col-lg-1 col-form-label form-control-label">Age</label>
+                            <div class="col-lg-3">
+                                <input class="form-control" type="text" value=@age disabled>
+                            </div>
+                        </div>
+                        @if (claimtoken != Guid.Empty)
+                        {
+                        <br />
+                        <div class="form-group row">
+                            <label class="col-lg-3 col-form-label form-control-label">Claim Token</label>
+                            <div class="col-lg-9">
+                                <input class="form-control" value=@claimtoken disabled>
+                            </div>
+                        </div>
+                        }
+                        <br />
+                        <div class="form-group row">
+                            <label class="col-lg-3 col-form-label form-control-label">Phone Number</label>
+                            <div class="col-lg-9">
+
+                                @(phonenumber ?? "None") [
+                                @if (phonenumber != null)
+                                {
+                                    @Html.ActionLink("Change", "AddPhoneNumber")
+                                    @:  |
+                                    @Html.ActionLink("Remove", "RemovePhoneNumber")
+                                }
+                                else
+                                {
+                                    @Html.ActionLink("Add", "AddPhoneNumber")
+                                }
+                                ]
+                            </div>
+                        </div>
+                        <br />
+                        <div class="form-group row">
+                            <label class="col-lg-3 col-form-label form-control-label">2-Factor Authentication</label>
+
+                            <div class="col-lg-9">
+                                @if (phonenumber != null)
+                                {
+                                    if (twofactorenabled)
+                                    {
+                                        using (Html.BeginForm("DisableTwoFactorAuthentication", "Manage",
+                                        FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+                                        {
+                                            @Html.AntiForgeryToken()
+                                            <text>[ Enabled ]
+                                                <input type="submit" value="[ Disable ]" class="btn btn-link" />
+                                            </text>
+                                        }
+                                    }
+                                    else
+                                    {
+                                        using (Html.BeginForm("EnableTwoFactorAuthentication", "Manage",
+                                        FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+                                        {
+                                            @Html.AntiForgeryToken()
+                                            <text>[ Disabled ]
+                                                <input type="submit" value="[ Enable ]" class="btn btn-link" />
+                                            </text>
+                                        }
+                                    }
+                                }
+                                else
+                                {
+                                    <text>Please add your phone number to enable 2 factor authentication!</text>
+                                }
+
+                            </div>
+                        </div>
+                        @*
+        <div class="form-group row">
+            <label class="col-lg-3 col-form-label form-control-label"></label>
+            <div class="col-lg-9">
+                <input type="reset" class="btn btn-secondary" value="Cancel">
+                <input type="button" class="btn btn-primary" value="Save Changes">
+            </div>
+        </div> *@
+                    </div>
+                </div>
+
+                <div class="tab-pane" id="changeAvatar">
+                    <br />
+                    <div style="text-align:center">
+                        <img src="@Url.Content(userImage)" class="mx-auto img-fluid img-circle d-block" alt="avatar" width="150" height="150">
+                        <h6 class="mt-2">Upload a different photo</h6>
+
+
+                        @using (Html.BeginForm("SetProfilePicture", "Manage", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                        {
+                            @Html.AntiForgeryToken()
+                            <div class="form-group">
+
+                                <i style="color:red">@TempData["FileErrorMessage"]</i>
+                                <input type="file" name="file" accept="image/jpeg,image/png" style="display:inline-block" />
+                            </div>
+                            <input type="submit" onclick="return confirm('Are you sure?')" value="Change Avatar" />
+
+                        }
+                    </div>
+                </div>
+                <div class="tab-pane" id="ChangePassword">
+                    <br />
+                    @Html.Partial("ChangePasswordPartial", new ChangePasswordViewModel())
+
+                </div>
+                @*
+                <div class="tab-pane" id="messages">
+                    <div class="alert alert-info alert-dismissable">
+                        <a class="panel-close close" data-dismiss="alert">×</a> This is an <strong>.alert</strong>. Use this to show important messages to the user.
+                    </div>
+                    <table class="table table-hover table-striped">
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <span class="float-right font-weight-bold">3 hrs ago</span> Here is your a link to the latest summary report from the..
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <span class="float-right font-weight-bold">Yesterday</span> There has been a request on your account since that was..
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <span class="float-right font-weight-bold">9/10</span> Porttitor vitae ultrices quis, dapibus id dolor. Morbi venenatis lacinia rhoncus.
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <span class="float-right font-weight-bold">9/4</span> Vestibulum tincidunt ullamcorper eros eget luctus.
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <span class="float-right font-weight-bold">9/4</span> Maxamillion ais the fix for tibulum tincidunt ullamcorper eros.
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                </div>*@
+                <h3>Recent Activities</h3>
+                <table class="table table-hover table-striped" style="border:solid">
+                    <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>Activity</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var activity in ViewBag.RecentActivities)
+                        {
+                            var a = activity.Split(new[] { "|" }, StringSplitOptions.None);
+                            <tr>
+                                <td>
+                                    <span class="float-right font-weight-bold">@a[0]</span>
+                                </td>
+                                <td>
+                                    <span class="font-weight-bold">@a[1]</span>
+                                </td>
+                            </tr>
+                        }
+
+                        <!--
+        <tr>
+            <td>
+                <span class="float-right font-weight-bold">Yesterday</span>
+            </td>
+        </tr>-->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </div>
+    </div>
+
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+    }
+    <script src="~/Scripts/jquery-3.4.1.min.js" type="text/javascript"></script>
+
+    <script>
+    $(document).ready(function () {
+        var ErrorCode = 0;
+
+        if (@TempData["ErrorCode"] != null) {
+            ErrorCode = @TempData["ErrorCode"];
+        }
+
+        if (ErrorCode == 0) {
+            $('.nav-tabs li:nth-child(1) a').tab('show');
+        }
+        else if (ErrorCode == 1) {
+        $('.nav-tabs li:nth-child(2) a').tab('show');
+        }
+
+        else if (ErrorCode == 2) {
+        $('.nav-tabs li:nth-child(3) a').tab('show');
+        }
+
+    });
+
+@*    $(document).ready(function () {
+
+        if (*/@ViewBag.PasswordIncorrect/* == 2) {
+            $(document).ready(function () {
+                $('.nav-tabs li:nth-child(2) a').tab('show');
+            });
+        }
+        else {
+            $(document).ready(function () {
+                $('.nav-tabs li:nth-child(1) a').tab('show');
+            });
+        }
+    }); *@
+    </script>

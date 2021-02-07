@@ -1,0 +1,203 @@
+﻿@model PMDWebApplication.Models.RoleViewModel
+
+@*
+    IMPORTANT!
+    The way this partial view and modal work is that, whenever you got a mistake somewhere, I.E your DropDownList have a empty SelectList, or wrong name etc
+    The whole modal will not load, the error are not displayed as well.
+    Hence if at any point of time you found an error, revert back to this original copy (Inside Desktop middle of screen)
+*@
+
+
+@using (Html.BeginForm("AssignRole", "SystemAdmin", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+{
+    
+    @Html.AntiForgeryToken()
+    <h4>Assign roles to users.</h4>
+    @Html.ValidationSummary("", new { @class = "text-danger" })
+    <div class="form-group">
+        @Html.LabelFor(m => m.UserName, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(model => model.UserName, new { @class = "form-control", @placeholder = "Name", disabled = "disable" })
+            <!-- Require this additional textbox because when you disable the textbox, the value cannot be passed in the POST form
+            So you hide this particular field so that the value can still be passed-->
+            @Html.HiddenFor(model => model.UserName)
+
+        </div>
+    </div>
+
+    @Html.ValidationSummary("", new { @class = "text-danger" })
+    <div class="form-group">
+        @Html.LabelFor(m => m.RoleNames, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.DropDownListFor(m => m.Name, new SelectList(ViewBag.RemainingRoles, "Value", "Text"), new { @class = "form-control" })
+        </div>
+    </div>
+
+
+
+
+
+    @*
+        <div class="form-group">
+            @Html.LabelFor(m => m.RoleNames, new { @class = "col-md-2 control-label" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(m => m.RoleNames, new SelectList(ViewBag.Roles, "Value", "Text"), new { @class = "form-control" })
+            </div>
+        </div> *@
+
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" class="btn btn-default" value="Assign Role" />
+        </div>
+    </div>
+}
+
+@using (Html.BeginForm("RevokeRole", "SystemAdmin", FormMethod.Post, new { @class = "form-horizontal", @id = "revokeForm", role = "form" }))
+{
+
+    @Html.AntiForgeryToken()
+    <h4>Revoke roles of users.</h4>
+    @Html.ValidationSummary("", new { @class = "text-danger" })
+    <div class="form-group">
+        @Html.LabelFor(m => m.UserName, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(model => model.UserName, new { @class = "form-control", @placeholder = "Name", disabled = "disable" })
+            @Html.HiddenFor(model => model.UserName)
+
+
+        </div>
+    </div>
+
+    @Html.ValidationSummary("", new { @class = "text-danger" })
+    <div class="form-group">
+        @Html.LabelFor(m => m.RoleNames, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.DropDownListFor(m => m.Name, new SelectList(ViewBag.UserRoles, "Value", "Text"), new { @class = "form-control", @id = "currentRoles" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" class="btn btn-default" id="revokeBtn" value="Revoke Role" />
+        </div>
+    </div>
+}
+<hr />
+@using (Html.BeginForm("LockUserAccount", "SystemAdmin", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+{
+    <h4>Unlock/Lock User Account</h4>
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+    if (ViewBag.IsLockedOut != null)
+    {
+        <p style="color:red">The user's account is currently <strong>locked</strong> until @ViewBag.LockedOutEndDate</p>
+    }
+    else
+    {
+        <p style="color:red">The user's account is currently <strong>not locked out</strong></p>
+    }
+
+
+<div class="form-group">
+    <text class="col-md-2 control-label"><strong>Lockout End Date</strong></text>
+    <div class="col-md-10">
+
+        <input type="datetime-local" id="LockoutEndDate" name="LockoutEndDate" class="form-control" required min=@DateTime.Now.ToString("yyyy-MM-ddTHH:mm:ss")>
+        <p style="color:red">The user's account will be locked out until this datetime</p>
+        </div>
+        @Html.HiddenFor(model => model.UserName)
+    </div>
+
+    if (ViewBag.IsLockedOut != null)
+    {
+    <div class="form-group">
+        <div class="col-md-10">
+            <input type="submit" onsubmit="alert(" wow")" class="btn btn-default" id="LockoutUser" value="Change Lockout End Date" />
+
+        </div>
+    </div>
+    }
+    else
+    {
+    <div class="form-group">
+        <div class="col-md-10">
+            <input type="submit" class="btn btn-default" id="LockoutUser" value="Lock" />
+        </div>
+    </div>
+    }
+
+
+
+
+
+    }
+
+    @if (ViewBag.IsLockedOut != null)
+    {
+        using (Html.BeginForm("UnlockUserAccount", "SystemAdmin", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+        {
+            @Html.HiddenFor(model => model.UserName)
+
+            <input type="submit" class="btn btn-default" value="Unlock" />
+
+        }
+    }
+
+    <hr />
+    <h4>Reset User's Password</h4>
+    @using (Html.BeginForm("ResetUserPassword", "SystemAdmin", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+    {
+        @Html.HiddenFor(model => model.UserName)
+        <p style="color:red">The user's password is last changed on @ViewBag.PasswordLastChanged</p>
+        <p style="color:red">Please reset the user password upon valid request.  </p>
+        <p style="color:red">The system generated password will be sent to their email.</p>
+
+        <input type="submit" class="btn btn-default" value="Reset Password" />
+
+    }
+
+
+
+<script>
+
+    //get the number of options in the dropdownlist
+    var length = $('#currentRoles').children('option').length;
+
+    //If the user only has 1 role, you cannot revoke any roles, you can only delete
+    if (length == 1) {
+
+        //Hide the entire form
+        $('#revokeForm').hide();
+        //disable the selection and revoke button, not necessary if i hide but just to put it here
+        $("#currentRoles").prop("disabled", true);
+        $("#revokeBtn").prop("disabled", true);
+
+    }
+</script>
+
+    @*
+
+        The issue is that, the minimum time property is declared when u click "Edit"
+        So if you leave the modal on from 1pm to 3pm.
+        You can still set the timing to 2pm.
+    $(function updateDateTime() {
+        if (~~newMonoReading < ~~initialMonoReading) {
+         $("#LockoutEndDate").prop("min",@DateTime.Now.ToString("yyyy-MM-ddTHH:mm:ss"));
+            event.preventDefault();
+    }
+    else {
+        $('#MonoErrorMessage').hide();
+    }
+    });
+
+
+    function updateDateTime() {
+        document.getElementById("LockoutEndDate").min = @DateTime.Now.ToString("yyyy-MM-ddTHH:mm:ss");
+        alert("updated successfully!");
+    }
+
+*@
+
+
+  

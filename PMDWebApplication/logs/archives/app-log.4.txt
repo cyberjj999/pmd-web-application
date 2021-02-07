@@ -1,0 +1,9 @@
+2020-01-13 11:14:21.1706|INFO|PMDWebApplication.Controllers.ManageController|Sysadmin deleted user hohoho|System Administrator|sysadmin|===
+2020-01-13 11:16:34.9971|INFO|PMDWebApplication.Controllers.ManageController|Sysadmin deleted user hohoho|System Administrator|sysadmin|===
+2020-01-13 17:22:29.9202|INFO|PMDWebApplication.Controllers.ManageController|Sysadmin assigned role of Doctor to 321|System Administrator|sysadmin|===
+2020-01-13 21:32:09.6054|INFO|PMDWebApplication.Controllers.SystemAdminController|Sysadmin registered a new user : afa with the role User|System Administrator|sysadmin|===
+2020-01-13 21:32:18.1672|INFO|PMDWebApplication.Controllers.ManageController|Sysadmin deleted user yoyo|System Administrator|sysadmin|===
+2020-01-13 21:32:24.1314|INFO|PMDWebApplication.Controllers.ManageController|Sysadmin assigned role of NewRole to afa|System Administrator|sysadmin|===
+2020-01-13 21:36:35.7328|INFO|PMDWebApplication.Controllers.SystemAdminController|Sysadmin deleted user afa|System Administrator|sysadmin|===
+2020-01-13 21:37:41.4684|INFO|PMDWebApplication.Controllers.SystemAdminController|Sysadmin locked user : 321 with the role |System Administrator|sysadmin|===
+2020-01-13 21:38:00.1180|INFO|PMDWebApplication.Controllers.SystemAdminController|Sysadmin unlocked user : 321 with the role |System Administrator|sysadmin|===

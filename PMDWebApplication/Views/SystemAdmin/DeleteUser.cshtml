@@ -1,0 +1,83 @@
+﻿@model PMDWebApplication.Models.RoleViewModel
+
+
+
+
+@using (Html.BeginForm("DeleteUser", "SystemAdmin", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+{
+
+    @Html.AntiForgeryToken()
+    @Html.TextBoxFor(model => model.UserName, new { @class = "form-control", @placeholder = "Name", style = "display:none;" })
+
+    @*<button type="button" class="btn btn-default" id="modal-btn-si">Yes</button>
+        <button type="button" class="btn btn-primary" id="modal-btn-no">No</button> *@
+    
+    <div style="margin:auto;text-align:center">
+        <h3>Are you sure you want to delete user: "@TempData["Username"]"?</h3>
+        <br />
+        <input type="submit" class="btn btn-danger" id="modal-btn-no" style="width:200px" value="Yes" />
+        <button type="button" class="btn btn-primary" id="modal-btn-no" style="width:200px" data-dismiss="modal">No</button>
+    </div>
+    <br />
+
+}
+
+
+
+
+
+
+
+
+@*
+    <div style="margin:auto;text-align:center">
+        <h2>Are you sure?</h2>
+        <button class="buttonYes">Yes</button>
+        <button class="buttonNo">No</button>
+    </div>
+
+    <div class="split">
+        <input id="bs-contact-no" type="radio" name="bs_contact" value="No" checked="checked">
+        <label for="bs-contact-no">No</label>
+    </div>
+    <div class="split">
+        <input id="bs-contact-yes" type="radio" name="bs_contact" value="Yes">
+        <label for="bs-contact-yes">Yes</label>
+    </div>
+
+    <style>
+        .am-form input[type="radio"] + label:hover, .am-form input[type="radio"]:checked + label {
+            background: rgb(239,58,65);
+        }
+
+
+        .buttonNo {
+            background-color: #4CAF50;
+            border: none;
+            color: white;
+            padding: 15px 32px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+            width: auto;
+        }
+
+        .buttonYes {
+            background-color: red;
+            border: none;
+            color: white;
+            padding: 15px 32px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+        }
+    </style>
+
+
+*@

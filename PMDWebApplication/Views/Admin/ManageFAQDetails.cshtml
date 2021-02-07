@@ -1,0 +1,45 @@
+﻿@model PMDWebApplication.DB.FAQ
+
+@{
+    ViewBag.Title = "ManageFAQDetails";
+    Layout = "~/Views/Shared/_AdminLayoutPage.cshtml";
+}
+
+    <div class="container">
+        <h2>ManageFAQDetails</h2>
+
+        <div>
+            <h4>FAQ</h4>
+            <hr />
+            <dl class="dl-horizontal">
+                <dt>
+                    @Html.DisplayNameFor(model => model.Category)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Category)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Question)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Question)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Answer)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Answer)
+                </dd>
+
+            </dl>
+        </div>
+        <p>
+            @Html.ActionLink("Edit", "ManageFAQEdit", new { id = Model.Id }) |
+            @Html.ActionLink("Back to List", "ManageFAQ")
+        </p>
+    </div>

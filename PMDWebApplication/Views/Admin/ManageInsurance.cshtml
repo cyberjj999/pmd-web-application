@@ -1,0 +1,153 @@
+﻿@model IEnumerable<PMDWebApplication.DB.InsuranceClaim>
+@using PMDWebApplication.Repository;
+@using PMDWebApplication.DB;
+
+
+@{
+    ViewBag.Title = "ManageInsurance";
+    Layout = "~/Views/Shared/_AdminLayoutPage.cshtml";
+
+    GenericUnitOfWork _unitOfWork = new GenericUnitOfWork();
+    var myInsuranceClaim = _unitOfWork.GetRepositoryInstance<InsuranceClaim>().GetAllRecords();
+    var aspNetUsers = _unitOfWork.GetRepositoryInstance<AspNetUser>().GetAllRecords();
+    //IEnumerable<AspNetUser> userWithClaims = Enumerable.Empty<AspNetUser>();
+    //@model IEnumerable<PMDWebApplication.Models.ManageInsuranceViewModel>
+
+    var userWithClaims = new List<AspNetUser>();
+
+    foreach (var user in aspNetUsers)
+    {
+        if (myInsuranceClaim.Any(x => x.UserID == user.Id))
+        {
+
+            userWithClaims.Add(user);
+        }
+
+    }
+  
+
+}
+
+
+
+<div class="container">
+    <div class="card mb-3">
+        <div class="card-header">
+            <i class="fas fa-table"></i>
+            Manage Claim Insurance Request
+            <br /><br />
+            <div style="text-align:center;margin:0 auto;display:inline-block;left:50%">
+                <select id="statusFilter">
+                    <option value="">Show All Status</option>
+                    <option value="Pending">Pending</option>
+                    <option value="Denied">Denied</option>
+                    <option value="Approved">Approved</option>
+                </select>
+            </div>
+            <br />
+            <h4 style="color:red">@TempData["RedMessage"]</h4>
+            <h4 style="color:green">@TempData["GreenMessage"]</h4>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+
+                    <thead>
+                        <tr>
+                            <th>Username</th>
+                            <th>Email</th>
+                            <th>Status</th>
+                            <th>Claim Number</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    @*<tfoot>
+                            <tr>
+                                <th>No.</th>
+                                <th>Category</th>
+                                <th>Question</th>
+                            </tr>
+                        </tfoot>*@
+                    <tbody>
+                        @foreach (var claim in Model)
+                        {
+
+                        <tr>
+                            <td>@claim.AspNetUser.UserName</td>
+                            <td>@claim.AspNetUser.Email</td>
+                            @if (claim.Status.Contains("Approved"))
+                            {
+                                <td style="background-color:#42f59b">@claim.Status</td>
+                            }
+                            else if (claim.Status.Contains("Denied"))
+                            {
+                                <td style="background-color:#ebb0b3">@claim.Status</td>
+
+                            }
+                            else
+                            {
+                                <td style="background-color:#fff699">@claim.Status</td>
+                            }
+                            <td>@claim.ClaimNo</td>
+                            <td>
+                                @using (Html.BeginForm("ViewClaimForm", "Admin", new { UID = claim.UserID }))
+                                {
+                                    <input type="submit" , value="View Claim Form" class="btn btn-primary" />
+                                    @*onclick="return confirm('Are you sure you want to delete this question?')"*@
+                                }
+                            </td>
+
+                            @*
+        <td>@(Model.IndexOf(item) + 1)</td>
+        <td style="@(item.StatusOfQuestion == true ? "Background-color: green" : "Background-color: red" )"></td>
+        <td>@item.Question</td>
+
+        <td>
+            @using (Html.BeginForm("OnlineTestDelete", "Admin", new { Qid = item.Qid }))
+            {
+                <input type="submit" , value="View Claim Form" onclick="return confirm('Are you sure you want to delete this question?')" class="btn btn-primary" />
+            }
+        </td>*@
+                        </tr>
+
+                        }
+
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<script src="~/Scripts/jquery-3.4.1.min.js"></script>
+
+
+@*
+    <script>
+        $(document).ready(function () {
+            var table = $('#myTable');
+            /*   $('#store-list').dataTable({
+              "x": "full_numbers"
+              });
+      */
+            $('#myTable').DataTable({
+                initComplete: function () {
+                    /* var table = $('#dataTable');*/
+
+                    $('#statusFilter').on('change', function () {
+                        table.columns(2).search(this.value).draw();
+                    });
+
+                    $('#statusFilter').on('change', function () {
+
+                        //$('#store-list').dataTable().fnFilter(this.value);
+                        //table.search(this.value);
+                        table.columns(0).search(this.value).draw();
+                    });
+                }
+            })
+        });
+
+    </script>
+*@

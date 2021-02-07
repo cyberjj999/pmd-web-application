@@ -1,0 +1,62 @@
+﻿@model IEnumerable<PMDWebApplication.DB.DualDatabaseTestSchemeQuestion>
+
+
+
+    @{
+
+        ViewBag.Title = "ViewQuestions";
+        Layout = "~/Views/Shared/_AdminLayoutPage.cshtml";
+
+    }
+    <div class="container">
+        <ol class="breadcrumb">
+
+            <li class="breadcrumb-item active">Lists of Questions</li>
+        </ol>
+
+        <div class="card mb-3">
+            <div class="card-header">
+
+
+                <div class="card-body">
+
+
+                    <table class="table">
+                        <tr>
+                            <th>
+                                @Html.DisplayName("Questions")
+                            </th>
+                            <th>
+                                @Html.DisplayName("No")
+                            </th>
+
+
+                            <th></th>
+                        </tr>
+
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.QuestionDescription)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.ID)
+                                </td>
+
+
+                                <td>
+                                    @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
+                                    @Html.ActionLink("Details", "Details", new { id = item.ID }) |
+                                    @Html.ActionLink("Delete", "Delete", new { id = item.ID })
+                                </td>
+                            </tr>
+                        }
+                    </table>
+
+
+
+                </div>
+            </div>
+        </div>
+    </div>

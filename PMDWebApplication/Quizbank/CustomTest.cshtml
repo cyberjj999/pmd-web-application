@@ -1,0 +1,43 @@
+﻿@model PMDWebApplication.DB.DualDatabaseTestSchemeQuestion
+
+@{
+    ViewBag.Title = "CustomTest";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container">
+
+<h4><em>Custom Test</em></h4>
+
+<h3>Question @ViewBag.count: @Model.QuestionDescription? </h3> <br /><br />
+
+@using (Html.BeginForm("CustomTestCheckAnswers", "Quizbank"))
+{
+    <fieldset>
+        <input type="radio" name="answer" value=@ViewBag.correctincorrectstatusa /> @ViewBag.A. <br />
+        <input type="radio" name="answer" value=@ViewBag.correctincorrectstatusb /> @ViewBag.B.<br />
+        <input type="radio" name="answer" value=@ViewBag.correctincorrectstatusc /> @ViewBag.C.<br />
+        <input type="radio" name="answer" value=@ViewBag.correctincorrectstatusd /> @ViewBag.D.<br />
+        <br /><br />
+        <input type="submit" value="Submit Answer" required="required" />
+    </fieldset>
+}
+
+<br />
+</div>
+
+@*<script type="text/javascript">
+    window.onbeforeunload = function() {
+        return "Dude, are you sure you want to leave? Think of the kittens!";
+    }
+</script>*@
+
+
+
+
+
+
+
+
+
+

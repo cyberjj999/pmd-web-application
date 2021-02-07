@@ -1,0 +1,1268 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="DB.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="__MigrationHistory">
+          <Key>
+            <PropertyRef Name="MigrationId" />
+            <PropertyRef Name="ContextKey" />
+          </Key>
+          <Property Name="MigrationId" Type="nvarchar" MaxLength="150" Nullable="false" />
+          <Property Name="ContextKey" Type="nvarchar" MaxLength="300" Nullable="false" />
+          <Property Name="Model" Type="varbinary(max)" Nullable="false" />
+          <Property Name="ProductVersion" Type="nvarchar" MaxLength="32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AspNetCart">
+          <Key>
+            <PropertyRef Name="CartId" />
+          </Key>
+          <Property Name="CartId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ProductId" Type="int" Nullable="false" />
+          <Property Name="MemberId" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="CartStatusId" Type="int" Nullable="false" />
+          <Property Name="Quantity" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AspNetCartInsurance">
+          <Key>
+            <PropertyRef Name="CartId" />
+          </Key>
+          <Property Name="CartId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="InsuranceId" Type="int" />
+          <Property Name="MemberId" Type="nvarchar" MaxLength="128" />
+          <Property Name="CartStatusId" Type="int" />
+          <Property Name="PolicyId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="PlanType" Type="nvarchar" MaxLength="15" />
+        </EntityType>
+        <EntityType Name="AspNetCartStatus">
+          <Key>
+            <PropertyRef Name="CartStatusId" />
+          </Key>
+          <Property Name="CartStatusId" Type="int" Nullable="false" />
+          <Property Name="CartStatus" Type="varchar" MaxLength="500" />
+        </EntityType>
+        <EntityType Name="AspNetCategory">
+          <Key>
+            <PropertyRef Name="CategoryId" />
+          </Key>
+          <Property Name="CategoryId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CategoryName" Type="varchar" MaxLength="500" />
+          <Property Name="IsActive" Type="int" />
+        </EntityType>
+        <EntityType Name="AspNetInsurance">
+          <Key>
+            <PropertyRef Name="InsuranceId" />
+          </Key>
+          <Property Name="InsuranceId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="InsuranceName" Type="varchar" MaxLength="50" />
+          <Property Name="Price" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="CategoryId" Type="int" />
+          <Property Name="Company" Type="varchar" MaxLength="50" />
+          <Property Name="Description" Type="varchar(max)" />
+          <Property Name="InsuranceImage" Type="varchar(max)" />
+        </EntityType>
+        <EntityType Name="AspNetMessage">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Subject" Type="varchar" MaxLength="50" />
+          <Property Name="Message" Type="varchar(max)" />
+          <Property Name="FromUser" Type="varchar(max)" />
+          <Property Name="DatePosted" Type="datetime" />
+        </EntityType>
+        <EntityType Name="AspNetProduct">
+          <Key>
+            <PropertyRef Name="ProductId" />
+          </Key>
+          <Property Name="ProductId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ProductName" Type="varchar" MaxLength="500" />
+          <Property Name="CategoryId" Type="int" />
+          <Property Name="IsActive" Type="bit" />
+          <Property Name="CreatedDate" Type="datetime" />
+          <Property Name="ModifiedDate" Type="datetime" />
+          <Property Name="ProductImage" Type="varchar(max)" />
+          <Property Name="IsFeatured" Type="bit" />
+          <Property Name="Quantity" Type="int" />
+          <Property Name="Price" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="Description" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="AspNetReplies">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MessageId" Type="int" Nullable="false" />
+          <Property Name="ReplyFrom" Type="varchar(max)" Nullable="false" />
+          <Property Name="ReplyMessage" Type="varchar(max)" Nullable="false" />
+          <Property Name="ReplyDateTime" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AspNetRoles">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="256" Nullable="false" />
+          <Property Name="Discriminator" Type="nvarchar" MaxLength="128" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AspNetShippingDetails">
+          <Key>
+            <PropertyRef Name="ShippingDetailId" />
+          </Key>
+          <Property Name="ShippingDetailId" Type="int" Nullable="false" />
+          <Property Name="MemberId" Type="nvarchar" MaxLength="128" />
+          <Property Name="Adress" Type="varchar" MaxLength="500" />
+          <Property Name="City" Type="varchar" MaxLength="500" />
+          <Property Name="State" Type="varchar" MaxLength="500" />
+          <Property Name="Country" Type="varchar" MaxLength="50" />
+          <Property Name="ZipCode" Type="varchar" MaxLength="50" />
+          <Property Name="OrderId" Type="int" />
+          <Property Name="AmountPaid" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="PaymentType" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="AspNetUserClaims">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="ClaimType" Type="nvarchar(max)" />
+          <Property Name="ClaimValue" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="AspNetUserLogins">
+          <Key>
+            <PropertyRef Name="LoginProvider" />
+            <PropertyRef Name="ProviderKey" />
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="LoginProvider" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="ProviderKey" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AspNetUserRoles">
+          <Key>
+            <PropertyRef Name="UserId" />
+            <PropertyRef Name="RoleId" />
+          </Key>
+          <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="RoleId" Type="nvarchar" MaxLength="128" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AspNetUsers">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="256" />
+          <Property Name="EmailConfirmed" Type="bit" Nullable="false" />
+          <Property Name="PasswordHash" Type="nvarchar(max)" />
+          <Property Name="SecurityStamp" Type="nvarchar(max)" />
+          <Property Name="PhoneNumber" Type="nvarchar(max)" />
+          <Property Name="PhoneNumberConfirmed" Type="bit" Nullable="false" />
+          <Property Name="TwoFactorEnabled" Type="bit" Nullable="false" />
+          <Property Name="LockoutEndDateUtc" Type="datetime" />
+          <Property Name="LockoutEnabled" Type="bit" Nullable="false" />
+          <Property Name="AccessFailedCount" Type="int" Nullable="false" />
+          <Property Name="UserName" Type="nvarchar" MaxLength="256" Nullable="false" />
+          <Property Name="fullname" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Uimg" Type="varchar(max)" />
+          <Property Name="AccessFailDate" Type="datetime" />
+          <Property Name="PasswordLastChangedDate" Type="datetime" Nullable="false" />
+          <Property Name="Age" Type="int" Nullable="false" />
+          <Property Name="isVerified" Type="bit" Nullable="false" />
+          <Property Name="PromoCode" Type="nvarchar(max)" />
+          <Property Name="PasswordGeneratedDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="DualDatabaseTestSchemeQuestions">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="GroupingId" Type="int" Nullable="false" />
+          <Property Name="QuestionDescription" Type="nvarchar(max)" />
+          <Property Name="MultipleChoiceCorrect" Type="nvarchar(max)" />
+          <Property Name="MultipleChoiceB" Type="nvarchar(max)" />
+          <Property Name="MultipleChoiceC" Type="nvarchar(max)" />
+          <Property Name="MultipleChoiceD" Type="nvarchar(max)" />
+          <Property Name="Answerexplanation" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="DualDatabaseTestSchemeTests">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar(max)" />
+          <Property Name="Description" Type="nvarchar(max)" />
+          <Property Name="Status" Type="bit" />
+          <Property Name="Genre" Type="nvarchar(max)" />
+          <Property Name="DateModified" Type="nvarchar(max)" />
+          <Property Name="GroupingId" Type="int" Nullable="false" />
+          <Property Name="TimesTaken" Type="int" Nullable="false" />
+          <Property Name="Owner" Type="nvarchar(max)" />
+          <Property Name="Upvotes" Type="nvarchar(max)" />
+          <Property Name="IsAdvanced" Type="bit" Nullable="false" />
+          <Property Name="TestFinishedDefaultMessage" Type="nvarchar(max)" />
+          <Property Name="MessagesArrayAsSingleString" Type="nvarchar(max)" />
+          <Property Name="AmountCorrectArrayAsSingleString" Type="nvarchar(max)" />
+          <Property Name="AdditionalConditionsArrayAsSingleString" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="FAQ">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Category" Type="nvarchar(max)" />
+          <Property Name="Question" Type="nvarchar(max)" />
+          <Property Name="Answer" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="InsuranceClaim">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PolicyNo" Type="nvarchar" MaxLength="128" />
+          <Property Name="PlanType" Type="nchar" MaxLength="15" />
+          <Property Name="VictimName" Type="nvarchar" MaxLength="50" />
+          <Property Name="VictimNRIC" Type="nchar" MaxLength="10" />
+          <Property Name="NomineeName" Type="nvarchar" MaxLength="50" />
+          <Property Name="NomineeNRIC" Type="nchar" MaxLength="10" />
+          <Property Name="Relationship" Type="nvarchar" MaxLength="50" />
+          <Property Name="Address" Type="nvarchar(max)" />
+          <Property Name="ContactNo" Type="nchar" MaxLength="10" />
+          <Property Name="DateOfClaim" Type="datetime" />
+          <Property Name="UserID" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="Signature" Type="varbinary(max)" Nullable="false" />
+          <Property Name="ClaimNo" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Status" Type="ntext" />
+          <Property Name="DenialMessage" Type="nvarchar" MaxLength="200" />
+        </EntityType>
+        <EntityType Name="Report">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="ProductName" Type="nchar" MaxLength="100" Nullable="false" />
+          <Property Name="Quantity" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ReportPMD">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Date" Type="datetime" Nullable="false" />
+          <Property Name="Title" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Description" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Image" Type="varchar(max)" />
+          <Property Name="Name" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="SecurityConfigurations">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Password_Length" Type="int" Nullable="false" />
+          <Property Name="RequireNonLetterOrDigit" Type="bit" Nullable="false" />
+          <Property Name="RequireDigit" Type="bit" Nullable="false" />
+          <Property Name="RequireLowercase" Type="bit" Nullable="false" />
+          <Property Name="RequireUppercase" Type="bit" Nullable="false" />
+          <Property Name="Password_Attempts" Type="int" Nullable="false" />
+          <Property Name="LockoutDuration" Type="int" Nullable="false" />
+          <Property Name="InactiveDuration" Type="int" Nullable="false" />
+          <Property Name="PasswordExpiry" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_AspNetCartInsurance_AspNetCartInsurance">
+          <End Role="AspNetCartInsurance" Type="Self.AspNetCartInsurance" Multiplicity="1" />
+          <End Role="AspNetCartInsurance1" Type="Self.AspNetCartInsurance" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetCartInsurance">
+              <PropertyRef Name="CartId" />
+            </Principal>
+            <Dependent Role="AspNetCartInsurance1">
+              <PropertyRef Name="CartId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AspNetCartInsurance_AspNetCartInsurance1">
+          <End Role="AspNetCartInsurance" Type="Self.AspNetCartInsurance" Multiplicity="1" />
+          <End Role="AspNetCartInsurance1" Type="Self.AspNetCartInsurance" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetCartInsurance">
+              <PropertyRef Name="CartId" />
+            </Principal>
+            <Dependent Role="AspNetCartInsurance1">
+              <PropertyRef Name="CartId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AspNetCategory_AspNetProduct">
+          <End Role="AspNetCategory" Type="Self.AspNetCategory" Multiplicity="0..1" />
+          <End Role="AspNetProduct" Type="Self.AspNetProduct" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetCategory">
+              <PropertyRef Name="CategoryId" />
+            </Principal>
+            <Dependent Role="AspNetProduct">
+              <PropertyRef Name="CategoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AspNetProduct_AspNetCart">
+          <End Role="AspNetProduct" Type="Self.AspNetProduct" Multiplicity="1" />
+          <End Role="AspNetCart" Type="Self.AspNetCart" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetProduct">
+              <PropertyRef Name="ProductId" />
+            </Principal>
+            <Dependent Role="AspNetCart">
+              <PropertyRef Name="ProductId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserClaims" Type="Self.AspNetUserClaims" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserClaims">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserLogins" Type="Self.AspNetUserLogins" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserLogins">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId">
+          <End Role="AspNetRoles" Type="Self.AspNetRoles" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserRoles" Type="Self.AspNetUserRoles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetRoles">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserRoles">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserRoles" Type="Self.AspNetUserRoles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserRoles">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_InsuranceClaim_InsuranceClaim">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="InsuranceClaim" Type="Self.InsuranceClaim" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="InsuranceClaim">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="GetBySearch" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="search" Type="nvarchar(max)" Mode="In" />
+        </Function>
+        <Function Name="GetBySearchInsurance" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="search" Type="nvarchar(max)" Mode="In" />
+        </Function>
+        <EntityContainer Name="DBStoreContainer">
+          <EntitySet Name="__MigrationHistory" EntityType="Self.__MigrationHistory" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetCart" EntityType="Self.AspNetCart" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetCartInsurance" EntityType="Self.AspNetCartInsurance" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetCartStatus" EntityType="Self.AspNetCartStatus" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetCategory" EntityType="Self.AspNetCategory" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetInsurance" EntityType="Self.AspNetInsurance" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetMessage" EntityType="Self.AspNetMessage" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetProduct" EntityType="Self.AspNetProduct" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetReplies" EntityType="Self.AspNetReplies" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRoles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetShippingDetails" EntityType="Self.AspNetShippingDetails" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetUserClaims" EntityType="Self.AspNetUserClaims" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetUserLogins" EntityType="Self.AspNetUserLogins" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetUserRoles" EntityType="Self.AspNetUserRoles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DualDatabaseTestSchemeQuestions" EntityType="Self.DualDatabaseTestSchemeQuestions" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DualDatabaseTestSchemeTests" EntityType="Self.DualDatabaseTestSchemeTests" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="FAQ" EntityType="Self.FAQ" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="InsuranceClaim" EntityType="Self.InsuranceClaim" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Report" EntityType="Self.Report" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ReportPMD" EntityType="Self.ReportPMD" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SecurityConfigurations" EntityType="Self.SecurityConfigurations" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_AspNetCartInsurance_AspNetCartInsurance" Association="Self.FK_AspNetCartInsurance_AspNetCartInsurance">
+            <End Role="AspNetCartInsurance" EntitySet="AspNetCartInsurance" />
+            <End Role="AspNetCartInsurance1" EntitySet="AspNetCartInsurance" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AspNetCartInsurance_AspNetCartInsurance1" Association="Self.FK_AspNetCartInsurance_AspNetCartInsurance1">
+            <End Role="AspNetCartInsurance" EntitySet="AspNetCartInsurance" />
+            <End Role="AspNetCartInsurance1" EntitySet="AspNetCartInsurance" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AspNetCategory_AspNetProduct" Association="Self.FK_AspNetCategory_AspNetProduct">
+            <End Role="AspNetCategory" EntitySet="AspNetCategory" />
+            <End Role="AspNetProduct" EntitySet="AspNetProduct" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AspNetProduct_AspNetCart" Association="Self.FK_AspNetProduct_AspNetCart">
+            <End Role="AspNetProduct" EntitySet="AspNetProduct" />
+            <End Role="AspNetCart" EntitySet="AspNetCart" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserClaims" EntitySet="AspNetUserClaims" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserLogins" EntitySet="AspNetUserLogins" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId" Association="Self.FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId">
+            <End Role="AspNetRoles" EntitySet="AspNetRoles" />
+            <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_InsuranceClaim_InsuranceClaim" Association="Self.FK_InsuranceClaim_InsuranceClaim">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="InsuranceClaim" EntitySet="InsuranceClaim" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="DB" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="C__MigrationHistory">
+          <Key>
+            <PropertyRef Name="MigrationId" />
+            <PropertyRef Name="ContextKey" />
+          </Key>
+          <Property Name="MigrationId" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ContextKey" Type="String" MaxLength="300" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Model" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
+          <Property Name="ProductVersion" Type="String" MaxLength="32" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AspNetCart">
+          <Key>
+            <PropertyRef Name="CartId" />
+          </Key>
+          <Property Name="CartId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ProductId" Type="Int32" Nullable="false" />
+          <Property Name="MemberId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CartStatusId" Type="Int32" Nullable="false" />
+          <Property Name="Quantity" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="AspNetProduct" Relationship="Self.FK_AspNetProduct_AspNetCart" FromRole="AspNetCart" ToRole="AspNetProduct" />
+        </EntityType>
+        <EntityType Name="AspNetCartInsurance">
+          <Key>
+            <PropertyRef Name="CartId" />
+          </Key>
+          <Property Name="CartId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="InsuranceId" Type="Int32" />
+          <Property Name="MemberId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="CartStatusId" Type="Int32" />
+          <Property Name="PolicyId" Type="Guid" Nullable="false" />
+          <Property Name="PlanType" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AspNetCartInsurance1" Relationship="Self.FK_AspNetCartInsurance_AspNetCartInsurance" FromRole="AspNetCartInsurance" ToRole="AspNetCartInsurance1" />
+          <NavigationProperty Name="AspNetCartInsurance2" Relationship="Self.FK_AspNetCartInsurance_AspNetCartInsurance" FromRole="AspNetCartInsurance1" ToRole="AspNetCartInsurance" />
+          <NavigationProperty Name="AspNetCartInsurance11" Relationship="Self.FK_AspNetCartInsurance_AspNetCartInsurance1" FromRole="AspNetCartInsurance" ToRole="AspNetCartInsurance1" />
+          <NavigationProperty Name="AspNetCartInsurance3" Relationship="Self.FK_AspNetCartInsurance_AspNetCartInsurance1" FromRole="AspNetCartInsurance1" ToRole="AspNetCartInsurance" />
+        </EntityType>
+        <EntityType Name="AspNetCartStatu">
+          <Key>
+            <PropertyRef Name="CartStatusId" />
+          </Key>
+          <Property Name="CartStatusId" Type="Int32" Nullable="false" />
+          <Property Name="CartStatus" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="AspNetCategory">
+          <Key>
+            <PropertyRef Name="CategoryId" />
+          </Key>
+          <Property Name="CategoryId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CategoryName" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="IsActive" Type="Int32" />
+          <NavigationProperty Name="AspNetProducts" Relationship="Self.FK_AspNetCategory_AspNetProduct" FromRole="AspNetCategory" ToRole="AspNetProduct" />
+        </EntityType>
+        <EntityType Name="AspNetInsurance">
+          <Key>
+            <PropertyRef Name="InsuranceId" />
+          </Key>
+          <Property Name="InsuranceId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="InsuranceName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Price" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="CategoryId" Type="Int32" />
+          <Property Name="Company" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="InsuranceImage" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="AspNetMessage">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Subject" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Message" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="FromUser" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="DatePosted" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="AspNetProduct">
+          <Key>
+            <PropertyRef Name="ProductId" />
+          </Key>
+          <Property Name="ProductId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ProductName" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="CategoryId" Type="Int32" />
+          <Property Name="IsActive" Type="Boolean" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
+          <Property Name="ProductImage" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="IsFeatured" Type="Boolean" />
+          <Property Name="Quantity" Type="Int32" />
+          <Property Name="Price" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="Description" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AspNetCarts" Relationship="Self.FK_AspNetProduct_AspNetCart" FromRole="AspNetProduct" ToRole="AspNetCart" />
+          <NavigationProperty Name="AspNetCategory" Relationship="Self.FK_AspNetCategory_AspNetProduct" FromRole="AspNetProduct" ToRole="AspNetCategory" />
+        </EntityType>
+        <EntityType Name="AspNetReply">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MessageId" Type="Int32" Nullable="false" />
+          <Property Name="ReplyFrom" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ReplyMessage" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ReplyDateTime" Type="DateTime" Nullable="false" Precision="3" />
+        </EntityType>
+        <EntityType Name="AspNetRole">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Discriminator" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="AspNetUsers" Relationship="Self.AspNetUserRoles" FromRole="AspNetRoles" ToRole="AspNetUsers" />
+        </EntityType>
+        <EntityType Name="AspNetShippingDetail">
+          <Key>
+            <PropertyRef Name="ShippingDetailId" />
+          </Key>
+          <Property Name="ShippingDetailId" Type="Int32" Nullable="false" />
+          <Property Name="MemberId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="Adress" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="City" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="State" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Country" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ZipCode" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="OrderId" Type="Int32" />
+          <Property Name="AmountPaid" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="PaymentType" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="AspNetUserClaim">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ClaimType" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ClaimValue" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AspNetUser" Relationship="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUserClaims" ToRole="AspNetUsers" />
+        </EntityType>
+        <EntityType Name="AspNetUserLogin">
+          <Key>
+            <PropertyRef Name="LoginProvider" />
+            <PropertyRef Name="ProviderKey" />
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="LoginProvider" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ProviderKey" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="AspNetUser" Relationship="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUserLogins" ToRole="AspNetUsers" />
+        </EntityType>
+        <EntityType Name="AspNetUser">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="EmailConfirmed" Type="Boolean" Nullable="false" />
+          <Property Name="PasswordHash" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="SecurityStamp" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneNumberConfirmed" Type="Boolean" Nullable="false" />
+          <Property Name="TwoFactorEnabled" Type="Boolean" Nullable="false" />
+          <Property Name="LockoutEndDateUtc" Type="DateTime" Precision="3" />
+          <Property Name="LockoutEnabled" Type="Boolean" Nullable="false" />
+          <Property Name="AccessFailedCount" Type="Int32" Nullable="false" />
+          <Property Name="UserName" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="fullname" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Uimg" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="AccessFailDate" Type="DateTime" Precision="3" />
+          <Property Name="PasswordLastChangedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Age" Type="Int32" Nullable="false" />
+          <Property Name="isVerified" Type="Boolean" Nullable="false" />
+          <Property Name="PromoCode" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PasswordGeneratedDate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="AspNetUserClaims" Relationship="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUsers" ToRole="AspNetUserClaims" />
+          <NavigationProperty Name="AspNetUserLogins" Relationship="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUsers" ToRole="AspNetUserLogins" />
+          <NavigationProperty Name="InsuranceClaims" Relationship="Self.FK_InsuranceClaim_InsuranceClaim" FromRole="AspNetUsers" ToRole="InsuranceClaim" />
+          <NavigationProperty Name="AspNetRoles" Relationship="Self.AspNetUserRoles" FromRole="AspNetUsers" ToRole="AspNetRoles" />
+        </EntityType>
+        <EntityType Name="DualDatabaseTestSchemeQuestion">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="GroupingId" Type="Int32" Nullable="false" />
+          <Property Name="QuestionDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="MultipleChoiceCorrect" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="MultipleChoiceB" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="MultipleChoiceC" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="MultipleChoiceD" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Answerexplanation" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="DualDatabaseTestSchemeTest">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Status" Type="Boolean" />
+          <Property Name="Genre" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="DateModified" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="GroupingId" Type="Int32" Nullable="false" />
+          <Property Name="TimesTaken" Type="Int32" Nullable="false" />
+          <Property Name="Owner" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Upvotes" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="IsAdvanced" Type="Boolean" Nullable="false" />
+          <Property Name="TestFinishedDefaultMessage" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="MessagesArrayAsSingleString" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="AmountCorrectArrayAsSingleString" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="AdditionalConditionsArrayAsSingleString" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="FAQ">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Category" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Question" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Answer" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="InsuranceClaim">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PolicyNo" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="PlanType" Type="String" MaxLength="15" FixedLength="true" Unicode="true" />
+          <Property Name="VictimName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="VictimNRIC" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="NomineeName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="NomineeNRIC" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="Relationship" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Address" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ContactNo" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="DateOfClaim" Type="DateTime" Precision="3" />
+          <Property Name="UserID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Signature" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
+          <Property Name="ClaimNo" Type="Guid" Nullable="false" />
+          <Property Name="Status" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="DenialMessage" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AspNetUser" Relationship="Self.FK_InsuranceClaim_InsuranceClaim" FromRole="InsuranceClaim" ToRole="AspNetUsers" />
+        </EntityType>
+        <EntityType Name="Report">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="ProductName" Type="String" MaxLength="100" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="Quantity" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ReportPMD">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Title" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Image" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="SecurityConfiguration">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Password_Length" Type="Int32" Nullable="false" />
+          <Property Name="RequireNonLetterOrDigit" Type="Boolean" Nullable="false" />
+          <Property Name="RequireDigit" Type="Boolean" Nullable="false" />
+          <Property Name="RequireLowercase" Type="Boolean" Nullable="false" />
+          <Property Name="RequireUppercase" Type="Boolean" Nullable="false" />
+          <Property Name="Password_Attempts" Type="Int32" Nullable="false" />
+          <Property Name="LockoutDuration" Type="Int32" Nullable="false" />
+          <Property Name="InactiveDuration" Type="Int32" Nullable="false" />
+          <Property Name="PasswordExpiry" Type="Int32" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_AspNetProduct_AspNetCart">
+          <End Role="AspNetProduct" Type="Self.AspNetProduct" Multiplicity="1" />
+          <End Role="AspNetCart" Type="Self.AspNetCart" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetProduct">
+              <PropertyRef Name="ProductId" />
+            </Principal>
+            <Dependent Role="AspNetCart">
+              <PropertyRef Name="ProductId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AspNetCartInsurance_AspNetCartInsurance">
+          <End Role="AspNetCartInsurance" Type="Self.AspNetCartInsurance" Multiplicity="1" />
+          <End Role="AspNetCartInsurance1" Type="Self.AspNetCartInsurance" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetCartInsurance">
+              <PropertyRef Name="CartId" />
+            </Principal>
+            <Dependent Role="AspNetCartInsurance1">
+              <PropertyRef Name="CartId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AspNetCartInsurance_AspNetCartInsurance1">
+          <End Role="AspNetCartInsurance" Type="Self.AspNetCartInsurance" Multiplicity="1" />
+          <End Role="AspNetCartInsurance1" Type="Self.AspNetCartInsurance" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetCartInsurance">
+              <PropertyRef Name="CartId" />
+            </Principal>
+            <Dependent Role="AspNetCartInsurance1">
+              <PropertyRef Name="CartId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AspNetCategory_AspNetProduct">
+          <End Role="AspNetCategory" Type="Self.AspNetCategory" Multiplicity="0..1" />
+          <End Role="AspNetProduct" Type="Self.AspNetProduct" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetCategory">
+              <PropertyRef Name="CategoryId" />
+            </Principal>
+            <Dependent Role="AspNetProduct">
+              <PropertyRef Name="CategoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+          <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserClaims" Type="Self.AspNetUserClaim" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserClaims">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+          <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserLogins" Type="Self.AspNetUserLogin" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserLogins">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_InsuranceClaim_InsuranceClaim">
+          <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="InsuranceClaim" Type="Self.InsuranceClaim" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="InsuranceClaim">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="AspNetUserRoles">
+          <End Role="AspNetRoles" Type="Self.AspNetRole" Multiplicity="*" />
+          <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="*" />
+        </Association>
+        <EntityContainer Name="dbVervoerEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="C__MigrationHistory" EntityType="Self.C__MigrationHistory" />
+          <EntitySet Name="AspNetCarts" EntityType="Self.AspNetCart" />
+          <EntitySet Name="AspNetCartInsurances" EntityType="Self.AspNetCartInsurance" />
+          <EntitySet Name="AspNetCartStatus" EntityType="Self.AspNetCartStatu" />
+          <EntitySet Name="AspNetCategories" EntityType="Self.AspNetCategory" />
+          <EntitySet Name="AspNetInsurances" EntityType="Self.AspNetInsurance" />
+          <EntitySet Name="AspNetMessages" EntityType="Self.AspNetMessage" />
+          <EntitySet Name="AspNetProducts" EntityType="Self.AspNetProduct" />
+          <EntitySet Name="AspNetReplies" EntityType="Self.AspNetReply" />
+          <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRole" />
+          <EntitySet Name="AspNetShippingDetails" EntityType="Self.AspNetShippingDetail" />
+          <EntitySet Name="AspNetUserClaims" EntityType="Self.AspNetUserClaim" />
+          <EntitySet Name="AspNetUserLogins" EntityType="Self.AspNetUserLogin" />
+          <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUser" />
+          <EntitySet Name="DualDatabaseTestSchemeQuestions" EntityType="Self.DualDatabaseTestSchemeQuestion" />
+          <EntitySet Name="DualDatabaseTestSchemeTests" EntityType="Self.DualDatabaseTestSchemeTest" />
+          <EntitySet Name="FAQs" EntityType="Self.FAQ" />
+          <EntitySet Name="InsuranceClaims" EntityType="Self.InsuranceClaim" />
+          <EntitySet Name="Reports" EntityType="Self.Report" />
+          <EntitySet Name="ReportPMDs" EntityType="Self.ReportPMD" />
+          <EntitySet Name="SecurityConfigurations" EntityType="Self.SecurityConfiguration" />
+          <AssociationSet Name="FK_AspNetProduct_AspNetCart" Association="Self.FK_AspNetProduct_AspNetCart">
+            <End Role="AspNetProduct" EntitySet="AspNetProducts" />
+            <End Role="AspNetCart" EntitySet="AspNetCarts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AspNetCartInsurance_AspNetCartInsurance" Association="Self.FK_AspNetCartInsurance_AspNetCartInsurance">
+            <End Role="AspNetCartInsurance" EntitySet="AspNetCartInsurances" />
+            <End Role="AspNetCartInsurance1" EntitySet="AspNetCartInsurances" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AspNetCartInsurance_AspNetCartInsurance1" Association="Self.FK_AspNetCartInsurance_AspNetCartInsurance1">
+            <End Role="AspNetCartInsurance" EntitySet="AspNetCartInsurances" />
+            <End Role="AspNetCartInsurance1" EntitySet="AspNetCartInsurances" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AspNetCategory_AspNetProduct" Association="Self.FK_AspNetCategory_AspNetProduct">
+            <End Role="AspNetCategory" EntitySet="AspNetCategories" />
+            <End Role="AspNetProduct" EntitySet="AspNetProducts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserClaims" EntitySet="AspNetUserClaims" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserLogins" EntitySet="AspNetUserLogins" />
+          </AssociationSet>
+          <AssociationSet Name="FK_InsuranceClaim_InsuranceClaim" Association="Self.FK_InsuranceClaim_InsuranceClaim">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="InsuranceClaim" EntitySet="InsuranceClaims" />
+          </AssociationSet>
+          <AssociationSet Name="AspNetUserRoles" Association="Self.AspNetUserRoles">
+            <End Role="AspNetRoles" EntitySet="AspNetRoles" />
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+          </AssociationSet>
+          <FunctionImport Name="GetBySearch" ReturnType="Collection(DB.GetBySearch_Result)">
+          <Parameter Name="search" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="GetBySearchInsurance" ReturnType="Collection(DB.GetBySearchInsurance_Result)">
+          <Parameter Name="search" Mode="In" Type="String" />
+          </FunctionImport>
+        </EntityContainer>
+        <ComplexType Name="GetBySearch_Result">
+          <Property Type="Int32" Name="ProductId" Nullable="false" />
+          <Property Type="String" Name="ProductName" Nullable="true" MaxLength="500" />
+          <Property Type="Int32" Name="CategoryId" Nullable="true" />
+          <Property Type="Boolean" Name="IsActive" Nullable="true" />
+          <Property Type="DateTime" Name="CreatedDate" Nullable="true" Precision="23" />
+          <Property Type="DateTime" Name="ModifiedDate" Nullable="true" Precision="23" />
+          <Property Type="String" Name="ProductImage" Nullable="true" />
+          <Property Type="Boolean" Name="IsFeatured" Nullable="true" />
+          <Property Type="Int32" Name="Quantity" Nullable="true" />
+          <Property Type="Decimal" Name="Price" Nullable="true" Precision="18" Scale="0" />
+          <Property Type="String" Name="Description" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="CategoryId1" Nullable="true" />
+          <Property Type="String" Name="CategoryName" Nullable="true" MaxLength="500" />
+          <Property Type="Int32" Name="IsActive1" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="GetBySearchInsurance_Result">
+          <Property Type="Int32" Name="InsuranceId" Nullable="false" />
+          <Property Type="String" Name="InsuranceName" Nullable="true" MaxLength="50" />
+          <Property Type="Decimal" Name="Price" Nullable="true" Precision="18" Scale="0" />
+          <Property Type="Int32" Name="CategoryId" Nullable="true" />
+          <Property Type="String" Name="Company" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Description" Nullable="true" />
+          <Property Type="String" Name="InsuranceImage" Nullable="true" />
+          <Property Type="Int32" Name="CategoryId1" Nullable="true" />
+          <Property Type="String" Name="CategoryName" Nullable="true" MaxLength="500" />
+          <Property Type="Int32" Name="IsActive" Nullable="true" />
+        </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="DBStoreContainer" CdmEntityContainer="dbVervoerEntities">
+          <EntitySetMapping Name="C__MigrationHistory">
+            <EntityTypeMapping TypeName="DB.C__MigrationHistory">
+              <MappingFragment StoreEntitySet="__MigrationHistory">
+                <ScalarProperty Name="MigrationId" ColumnName="MigrationId" />
+                <ScalarProperty Name="ContextKey" ColumnName="ContextKey" />
+                <ScalarProperty Name="Model" ColumnName="Model" />
+                <ScalarProperty Name="ProductVersion" ColumnName="ProductVersion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AspNetCarts">
+            <EntityTypeMapping TypeName="DB.AspNetCart">
+              <MappingFragment StoreEntitySet="AspNetCart">
+                <ScalarProperty Name="CartId" ColumnName="CartId" />
+                <ScalarProperty Name="ProductId" ColumnName="ProductId" />
+                <ScalarProperty Name="MemberId" ColumnName="MemberId" />
+                <ScalarProperty Name="CartStatusId" ColumnName="CartStatusId" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AspNetCartInsurances">
+            <EntityTypeMapping TypeName="DB.AspNetCartInsurance">
+              <MappingFragment StoreEntitySet="AspNetCartInsurance">
+                <ScalarProperty Name="CartId" ColumnName="CartId" />
+                <ScalarProperty Name="InsuranceId" ColumnName="InsuranceId" />
+                <ScalarProperty Name="MemberId" ColumnName="MemberId" />
+                <ScalarProperty Name="CartStatusId" ColumnName="CartStatusId" />
+                <ScalarProperty Name="PolicyId" ColumnName="PolicyId" />
+                <ScalarProperty Name="PlanType" ColumnName="PlanType" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AspNetCartStatus">
+            <EntityTypeMapping TypeName="DB.AspNetCartStatu">
+              <MappingFragment StoreEntitySet="AspNetCartStatus">
+                <ScalarProperty Name="CartStatusId" ColumnName="CartStatusId" />
+                <ScalarProperty Name="CartStatus" ColumnName="CartStatus" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AspNetCategories">
+            <EntityTypeMapping TypeName="DB.AspNetCategory">
+              <MappingFragment StoreEntitySet="AspNetCategory">
+                <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
+                <ScalarProperty Name="CategoryName" ColumnName="CategoryName" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AspNetInsurances">
+            <EntityTypeMapping TypeName="DB.AspNetInsurance">
+              <MappingFragment StoreEntitySet="AspNetInsurance">
+                <ScalarProperty Name="InsuranceId" ColumnName="InsuranceId" />
+                <ScalarProperty Name="InsuranceName" ColumnName="InsuranceName" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
+                <ScalarProperty Name="Company" ColumnName="Company" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="InsuranceImage" ColumnName="InsuranceImage" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AspNetMessages">
+            <EntityTypeMapping TypeName="DB.AspNetMessage">
+              <MappingFragment StoreEntitySet="AspNetMessage">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Subject" ColumnName="Subject" />
+                <ScalarProperty Name="Message" ColumnName="Message" />
+                <ScalarProperty Name="FromUser" ColumnName="FromUser" />
+                <ScalarProperty Name="DatePosted" ColumnName="DatePosted" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AspNetProducts">
+            <EntityTypeMapping TypeName="DB.AspNetProduct">
+              <MappingFragment StoreEntitySet="AspNetProduct">
+                <ScalarProperty Name="ProductId" ColumnName="ProductId" />
+                <ScalarProperty Name="ProductName" ColumnName="ProductName" />
+                <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+                <ScalarProperty Name="ProductImage" ColumnName="ProductImage" />
+                <ScalarProperty Name="IsFeatured" ColumnName="IsFeatured" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AspNetReplies">
+            <EntityTypeMapping TypeName="DB.AspNetReply">
+              <MappingFragment StoreEntitySet="AspNetReplies">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="MessageId" ColumnName="MessageId" />
+                <ScalarProperty Name="ReplyFrom" ColumnName="ReplyFrom" />
+                <ScalarProperty Name="ReplyMessage" ColumnName="ReplyMessage" />
+                <ScalarProperty Name="ReplyDateTime" ColumnName="ReplyDateTime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AspNetRoles">
+            <EntityTypeMapping TypeName="DB.AspNetRole">
+              <MappingFragment StoreEntitySet="AspNetRoles">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Discriminator" ColumnName="Discriminator" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AspNetShippingDetails">
+            <EntityTypeMapping TypeName="DB.AspNetShippingDetail">
+              <MappingFragment StoreEntitySet="AspNetShippingDetails">
+                <ScalarProperty Name="ShippingDetailId" ColumnName="ShippingDetailId" />
+                <ScalarProperty Name="MemberId" ColumnName="MemberId" />
+                <ScalarProperty Name="Adress" ColumnName="Adress" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="Country" ColumnName="Country" />
+                <ScalarProperty Name="ZipCode" ColumnName="ZipCode" />
+                <ScalarProperty Name="OrderId" ColumnName="OrderId" />
+                <ScalarProperty Name="AmountPaid" ColumnName="AmountPaid" />
+                <ScalarProperty Name="PaymentType" ColumnName="PaymentType" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AspNetUserClaims">
+            <EntityTypeMapping TypeName="DB.AspNetUserClaim">
+              <MappingFragment StoreEntitySet="AspNetUserClaims">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="ClaimType" ColumnName="ClaimType" />
+                <ScalarProperty Name="ClaimValue" ColumnName="ClaimValue" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AspNetUserLogins">
+            <EntityTypeMapping TypeName="DB.AspNetUserLogin">
+              <MappingFragment StoreEntitySet="AspNetUserLogins">
+                <ScalarProperty Name="LoginProvider" ColumnName="LoginProvider" />
+                <ScalarProperty Name="ProviderKey" ColumnName="ProviderKey" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AspNetUsers">
+            <EntityTypeMapping TypeName="DB.AspNetUser">
+              <MappingFragment StoreEntitySet="AspNetUsers">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="EmailConfirmed" ColumnName="EmailConfirmed" />
+                <ScalarProperty Name="PasswordHash" ColumnName="PasswordHash" />
+                <ScalarProperty Name="SecurityStamp" ColumnName="SecurityStamp" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="PhoneNumberConfirmed" ColumnName="PhoneNumberConfirmed" />
+                <ScalarProperty Name="TwoFactorEnabled" ColumnName="TwoFactorEnabled" />
+                <ScalarProperty Name="LockoutEndDateUtc" ColumnName="LockoutEndDateUtc" />
+                <ScalarProperty Name="LockoutEnabled" ColumnName="LockoutEnabled" />
+                <ScalarProperty Name="AccessFailedCount" ColumnName="AccessFailedCount" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="fullname" ColumnName="fullname" />
+                <ScalarProperty Name="Uimg" ColumnName="Uimg" />
+                <ScalarProperty Name="AccessFailDate" ColumnName="AccessFailDate" />
+                <ScalarProperty Name="PasswordLastChangedDate" ColumnName="PasswordLastChangedDate" />
+                <ScalarProperty Name="Age" ColumnName="Age" />
+                <ScalarProperty Name="isVerified" ColumnName="isVerified" />
+                <ScalarProperty Name="PromoCode" ColumnName="PromoCode" />
+                <ScalarProperty Name="PasswordGeneratedDate" ColumnName="PasswordGeneratedDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DualDatabaseTestSchemeQuestions">
+            <EntityTypeMapping TypeName="DB.DualDatabaseTestSchemeQuestion">
+              <MappingFragment StoreEntitySet="DualDatabaseTestSchemeQuestions">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="GroupingId" ColumnName="GroupingId" />
+                <ScalarProperty Name="QuestionDescription" ColumnName="QuestionDescription" />
+                <ScalarProperty Name="MultipleChoiceCorrect" ColumnName="MultipleChoiceCorrect" />
+                <ScalarProperty Name="MultipleChoiceB" ColumnName="MultipleChoiceB" />
+                <ScalarProperty Name="MultipleChoiceC" ColumnName="MultipleChoiceC" />
+                <ScalarProperty Name="MultipleChoiceD" ColumnName="MultipleChoiceD" />
+                <ScalarProperty Name="Answerexplanation" ColumnName="Answerexplanation" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DualDatabaseTestSchemeTests">
+            <EntityTypeMapping TypeName="DB.DualDatabaseTestSchemeTest">
+              <MappingFragment StoreEntitySet="DualDatabaseTestSchemeTests">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Genre" ColumnName="Genre" />
+                <ScalarProperty Name="DateModified" ColumnName="DateModified" />
+                <ScalarProperty Name="GroupingId" ColumnName="GroupingId" />
+                <ScalarProperty Name="TimesTaken" ColumnName="TimesTaken" />
+                <ScalarProperty Name="Owner" ColumnName="Owner" />
+                <ScalarProperty Name="Upvotes" ColumnName="Upvotes" />
+                <ScalarProperty Name="IsAdvanced" ColumnName="IsAdvanced" />
+                <ScalarProperty Name="TestFinishedDefaultMessage" ColumnName="TestFinishedDefaultMessage" />
+                <ScalarProperty Name="MessagesArrayAsSingleString" ColumnName="MessagesArrayAsSingleString" />
+                <ScalarProperty Name="AmountCorrectArrayAsSingleString" ColumnName="AmountCorrectArrayAsSingleString" />
+                <ScalarProperty Name="AdditionalConditionsArrayAsSingleString" ColumnName="AdditionalConditionsArrayAsSingleString" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FAQs">
+            <EntityTypeMapping TypeName="DB.FAQ">
+              <MappingFragment StoreEntitySet="FAQ">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Category" ColumnName="Category" />
+                <ScalarProperty Name="Question" ColumnName="Question" />
+                <ScalarProperty Name="Answer" ColumnName="Answer" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="InsuranceClaims">
+            <EntityTypeMapping TypeName="DB.InsuranceClaim">
+              <MappingFragment StoreEntitySet="InsuranceClaim">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="PolicyNo" ColumnName="PolicyNo" />
+                <ScalarProperty Name="PlanType" ColumnName="PlanType" />
+                <ScalarProperty Name="VictimName" ColumnName="VictimName" />
+                <ScalarProperty Name="VictimNRIC" ColumnName="VictimNRIC" />
+                <ScalarProperty Name="NomineeName" ColumnName="NomineeName" />
+                <ScalarProperty Name="NomineeNRIC" ColumnName="NomineeNRIC" />
+                <ScalarProperty Name="Relationship" ColumnName="Relationship" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="ContactNo" ColumnName="ContactNo" />
+                <ScalarProperty Name="DateOfClaim" ColumnName="DateOfClaim" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="Signature" ColumnName="Signature" />
+                <ScalarProperty Name="ClaimNo" ColumnName="ClaimNo" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="DenialMessage" ColumnName="DenialMessage" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Reports">
+            <EntityTypeMapping TypeName="DB.Report">
+              <MappingFragment StoreEntitySet="Report">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="ProductName" ColumnName="ProductName" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ReportPMDs">
+            <EntityTypeMapping TypeName="DB.ReportPMD">
+              <MappingFragment StoreEntitySet="ReportPMD">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Image" ColumnName="Image" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SecurityConfigurations">
+            <EntityTypeMapping TypeName="DB.SecurityConfiguration">
+              <MappingFragment StoreEntitySet="SecurityConfigurations">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Password_Length" ColumnName="Password_Length" />
+                <ScalarProperty Name="RequireNonLetterOrDigit" ColumnName="RequireNonLetterOrDigit" />
+                <ScalarProperty Name="RequireDigit" ColumnName="RequireDigit" />
+                <ScalarProperty Name="RequireLowercase" ColumnName="RequireLowercase" />
+                <ScalarProperty Name="RequireUppercase" ColumnName="RequireUppercase" />
+                <ScalarProperty Name="Password_Attempts" ColumnName="Password_Attempts" />
+                <ScalarProperty Name="LockoutDuration" ColumnName="LockoutDuration" />
+                <ScalarProperty Name="InactiveDuration" ColumnName="InactiveDuration" />
+                <ScalarProperty Name="PasswordExpiry" ColumnName="PasswordExpiry" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="AspNetUserRoles" TypeName="DB.AspNetUserRoles" StoreEntitySet="AspNetUserRoles">
+            <EndProperty Name="AspNetRoles">
+              <ScalarProperty Name="Id" ColumnName="RoleId" />
+            </EndProperty>
+            <EndProperty Name="AspNetUsers">
+              <ScalarProperty Name="Id" ColumnName="UserId" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <FunctionImportMapping FunctionImportName="GetBySearch" FunctionName="DB.Store.GetBySearch">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DB.GetBySearch_Result">
+                <ScalarProperty Name="ProductId" ColumnName="ProductId" />
+                <ScalarProperty Name="ProductName" ColumnName="ProductName" />
+                <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+                <ScalarProperty Name="ProductImage" ColumnName="ProductImage" />
+                <ScalarProperty Name="IsFeatured" ColumnName="IsFeatured" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="CategoryId1" ColumnName="CategoryId1" />
+                <ScalarProperty Name="CategoryName" ColumnName="CategoryName" />
+                <ScalarProperty Name="IsActive1" ColumnName="IsActive1" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetBySearchInsurance" FunctionName="DB.Store.GetBySearchInsurance">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DB.GetBySearchInsurance_Result">
+                <ScalarProperty Name="InsuranceId" ColumnName="InsuranceId" />
+                <ScalarProperty Name="InsuranceName" ColumnName="InsuranceName" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
+                <ScalarProperty Name="Company" ColumnName="Company" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="InsuranceImage" ColumnName="InsuranceImage" />
+                <ScalarProperty Name="CategoryId1" ColumnName="CategoryId1" />
+                <ScalarProperty Name="CategoryName" ColumnName="CategoryName" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

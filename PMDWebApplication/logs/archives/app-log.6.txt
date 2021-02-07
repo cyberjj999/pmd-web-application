@@ -1,0 +1,1 @@
+2020-01-11 18:41:55.5538|INFO|PMDWebApplication.Controllers.ManageController|Sysadmin registered a new user : hello with the role Admin|System Administrator|sysadmin|===

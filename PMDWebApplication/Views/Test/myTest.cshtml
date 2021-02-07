@@ -1,0 +1,51 @@
+﻿@model IEnumerable<PMDWebApplication.Models.UserClass>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Uname)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Uemail)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Upwd)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Repwd)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Uimg)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Uname)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Uemail)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Upwd)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Repwd)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Uimg)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.ID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.ID })
+        </td>
+    </tr>
+}
+
+</table>

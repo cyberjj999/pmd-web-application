@@ -1,0 +1,25 @@
+﻿@model PMDWebApplication.DB.AdminExamQn
+
+@{
+    ViewBag.Title = "PMDTestPrompt";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container">
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+
+            <h2>Are you sure you would like to take the test now?</h2>
+
+            @Html.ActionLink("Yes, I'm ready to kick ass! ", "QuizStart", new { }, new { @class = "btn btn-success" })
+
+            @Html.ActionLink("No, I'm not ready for this yet :(", "Index", null, new { @class = "btn btn-danger" })
+
+        </div>
+    }
+
+</div>

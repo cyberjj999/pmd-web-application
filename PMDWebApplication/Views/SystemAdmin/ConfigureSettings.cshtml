@@ -1,0 +1,236 @@
+﻿@model PMDWebApplication.Models.SecurityConfigurationsViewModel
+@{
+    ViewBag.Title = "ConfigureSettings";
+    Layout = "~/Views/Shared/_AdminLayoutPage.cshtml";
+
+}
+    <div class="container">
+
+        <h2>Configure Web Application Security Settings</h2>
+        <div>
+
+            <div class="card mb-3">
+                <div class="card-header">
+                    <i class="fa fa-book-reader"></i>
+
+                    <h4 style="color:green">@TempData["Message"]</h4>
+                    <h4 style="color:red">@TempData["RedMessage"]</h4>
+
+                    @using (Html.BeginForm("ConfigureSettings", "SystemAdmin", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+                    {
+                        @Html.AntiForgeryToken()
+
+                        @Html.ValidationSummary("", new { @class = "text-danger" })
+                        <h3>Password Policy</h3>
+                        <div class="form-group">
+                            <div class="form-row">
+                                <div class="col-md-5">
+                                    @Html.LabelFor(m => m.Password_Length, new { @class = "control-label" })
+                                    @Html.EditorFor(model => model.Password_Length, new { htmlAttributes = new { @type = "number", @min = "5", @max = "99999", @class = "form-control" } })
+                                </div>
+
+                                <div class="col-md-2">
+                                    <label class="control-label">Current Values : </label>
+                                    <text class="form-control">@TempData["Current_Password_Length"] </text>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="form-row">
+                                <div class="col-md-5">
+                                    @Html.LabelFor(m => m.PasswordExpiry, new { @class = "control-label" })
+                                    @Html.EditorFor(model => model.PasswordExpiry, new { htmlAttributes = new { @type = "number", @min = "0", @max = "99999", @class = "form-control" } })
+                                </div>
+
+                                <div class="col-md-2">
+                                    <label class="control-label">&nbsp</label>
+                                    <text class="form-control">@TempData["Current_Password_Expiry"] </text>
+                                </div>
+                                @*<div class="col-md-2">
+                        <label class="control-label">&nbsp</label>
+                        <input type="submit" class="form-control btn btn-primary" value="Reset Password" />
+                    </div> *@
+                            </div>
+                        </div>
+
+                        @*
+            <div class="form-group">
+                <div class="form-row">
+                    <div class="col-md-5">
+                        @Html.LabelFor(m => m.RequireNonLetterOrDigit, new { @class = "control-label" })
+                        @Html.DropDownListFor(model => model.RequireNonLetterOrDigit, new[] { new SelectListItem { Text = "True", Value = "True" }, new SelectListItem { Text = "False", Value = "False" } })
+                    </div>
+                    <div class="col-md-2">
+                        <label class="control-label">&nbsp</label>
+                        <text class="form-control">@TempData["Current_RequireNonLetterOrDigit"]</text>
+                    </div>
+                </div>
+            </div> *@
+
+                        <div class="form-group">
+                            <div class="form-row">
+                                <div class="col-md-3">
+                                    @Html.LabelFor(m => m.RequireNonLetterOrDigit, new { @class = "control-label" })
+                                    @Html.DropDownListFor(model => model.RequireNonLetterOrDigit, new[] { new SelectListItem { Text = "True", Value = "True" }, new SelectListItem { Text = "False", Value = "False" } }, new { @class = "form-control" })
+                                </div>
+                                <div class="col-md-2">
+                                    &nbsp
+                                </div>
+                                <div class="col-md-2">
+                                    <label class="control-label">&nbsp</label>
+                                    <text class="form-control">@TempData["Current_RequireNonLetterOrDigit"]</text>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="form-row">
+                                <div class="col-md-3">
+                                    @Html.LabelFor(m => m.RequireDigit, new { @class = "control-label" })
+                                    @Html.DropDownListFor(model => model.RequireDigit, new[] { new SelectListItem { Text = "True", Value = "True" }, new SelectListItem { Text = "False", Value = "False" } }, new { @class = "form-control" })
+                                </div>
+                                <div class="col-md-2">
+                                    &nbsp
+                                </div>
+                                <div class="col-md-2">
+                                    <label class="control-label">&nbsp</label>
+                                    <text class="form-control">@TempData["Current_RequireDigit"]</text>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="form-row">
+                                <div class="col-md-3">
+                                    @Html.LabelFor(m => m.RequireLowercase, new { @class = "control-label" })
+                                    @Html.DropDownListFor(model => model.RequireLowercase, new[] { new SelectListItem { Text = "True", Value = "True" }, new SelectListItem { Text = "False", Value = "False" } }, new { @class = "form-control" })
+                                </div>
+                                <div class="col-md-2">
+                                    &nbsp
+                                </div>
+                                <div class="col-md-2">
+                                    <label class="control-label">&nbsp</label>
+                                    <text class="form-control">@TempData["Current_RequireLowercase"]</text>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="form-row">
+                                <div class="col-md-3">
+                                    @Html.LabelFor(m => m.RequireUppercase, new { @class = "control-label" })
+                                    @Html.DropDownListFor(model => model.RequireUppercase, new[] { new SelectListItem { Text = "True", Value = "True" }, new SelectListItem { Text = "False", Value = "False" } }, new { @class = "form-control" })
+                                </div>
+                                <div class="col-md-2">
+                                    &nbsp
+                                </div>
+                                <div class="col-md-2">
+                                    <label class="control-label">&nbsp</label>
+                                    <text class="form-control">@TempData["Current_RequireUppercase"]</text>
+                                </div>
+                            </div>
+                        </div>
+
+                        <hr />
+
+                        <h3>Other Configurations</h3>
+
+                        <div class="form-group">
+                            <div class="form-row">
+                                <div class="col-md-5">
+                                    @Html.LabelFor(m => m.Password_Attempts, new { @class = "control-label" })
+                                    @Html.EditorFor(model => model.Password_Attempts, new { htmlAttributes = new { @type = "number", @min = "0", @max = "99999", @class = "form-control", @value = "0", @placeholder = "Number of attempts before locked out" } })
+                                </div>
+                                <div class="col-md-2">
+                                    <label class="control-label">Current Values :</label>
+                                    <text class="form-control">@TempData["Current_Password_Attempts"] </text>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="form-row">
+                                <div class="col-md-5">
+                                    @Html.LabelFor(m => m.LockoutDuration, new { @class = "control-label" })
+                                    @Html.EditorFor(model => model.LockoutDuration, new { htmlAttributes = new { @type = "number", @min = "0", @max = "99999", @class = "form-control", @value = "0", @placeholder = "Enter 0 to disable lockout" } })
+                                </div>
+                                <div class="col-md-2">
+                                    <label class="control-label">&nbsp</label>
+                                    <text class="form-control">@TempData["Current_Lockout_Duration"] </text>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="form-row">
+                                <div class="col-md-5">
+                                    @Html.LabelFor(m => m.InactiveDuration, new { @class = "control-label" })
+                                    @Html.EditorFor(model => model.InactiveDuration, new { htmlAttributes = new { @type = "number", @min = "0", @max = "99999", @class = "form-control", @value = "0", @placeholder = "Enter 0 to disable inactive kickout" } })
+                                </div>
+                                <div class="col-md-2">
+                                    <label class="control-label">&nbsp</label>
+                                    <text class="form-control">@TempData["Current_Inactive_Duration"] </text>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="form-group">
+                            <div class="col-md-offset-2 col-md-10">
+                                <input type="submit" data-confirm="Are you sure?" class="btn btn-primary" value="Update" />
+                            </div>
+                        </div>
+
+                    }
+
+
+                    @using (Html.BeginForm("ResetAllUsersPassword", "SystemAdmin", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+                    {
+                        @Html.AntiForgeryToken()
+
+                        @Html.ValidationSummary("", new { @class = "text-danger" })
+                        <hr />
+                        <h3>Reset All User's Password</h3>
+                        <p style="color:red">
+                            This will reset all user's password, forcing them to change it upon login. It is very useful in the context where
+                            there has been a compromise in the system.
+                        </p>
+                        <p style="color:red">
+                            WARNING! Use this ONLY when necessary!
+                        </p>
+                        <input type="submit" data-confirm="Are you sure?" class="btn btn-primary" value="Reset Password" />
+                    }
+
+                    @*
+        <h3>Default Values</h3>
+        <div class="form-group">
+            Current_Password_Length = @TempData["Current_Password_Length"] <br />
+            Current_Password_Expiry = @TempData["Current_Password_Expiry"] <br />
+            Current_RequireNonLetterOrDigit = @TempData["Current_RequireNonLetterOrDigit"] <br />
+            Current_RequireDigit = @TempData["Current_RequireDigit"] <br />
+            Current_RequireLowercase = @TempData["Current_RequireLowercase"] <br />
+            Current_RequireUppercase = @TempData["Current_RequireUppercase"] <br />
+            Current_Password_Attempts = @TempData["Current_Password_Attempts"] <br />
+            Current_Lockout_Duration = @TempData["Current_Lockout_Duration"] <br />
+            Current_Inactive_Duration = @TempData["Current_Inactive_Duration"]
+        </div>
+                    *@
+
+                </div>
+            </div>
+        </div>
+
+                </div>
+                @section Scripts {
+
+                    <script>
+                        jQuery(document).ready(function () {
+                            jQuery('[data-confirm]').click(function (e) {
+                                if (!confirm(jQuery(this).attr("data-confirm"))) {
+                                    e.preventDefault();
+                                }
+                            });
+                        });
+                    </script>
+                }
